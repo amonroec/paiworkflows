@@ -37,6 +37,8 @@
                   this.$router.push({name: 'dashboard'})
                 })
             }
+          }, (response) => {
+            window.alert('Username and/or Password is Incorrect. Please Try Again.')
           })
       }
     }
@@ -56,14 +58,14 @@
     <center>
       <form v-on:submit.prevent="handleLoginFormSubmit()">
         <div class="login-user-box">
-          <div class="login-emblems"><i class="icon-mail"></i></div>
+          <div class="login-emblems"><img src="../assets/dark50/Email.png"></img></div>
           <input id="login-textbox" type="text" name="email" value="" placeholder="E-mail.."
             class="form-control"
             v-model="login.email"
           >
         </div>
         <div class="login-user-box">
-          <div class="login-emblems"><i class="icon-key"></i></div>
+          <div class="login-emblems"><img src="../assets/dark50/Key Filled.png"></div>
           <input id="login-textbox" type="password" name="password" value="" placeholder="Password.."
             class="form-control"
             v-model="login.password"
@@ -71,7 +73,17 @@
         </div>
         <input type="submit" name="submitLogin" value="Login" id="login-button"></input>
         <div style="width:100%;">
-          <a href="forgot.php" style="float:left;margin:15px;">Forgot Password?</a><a href="new-user-request.php" style="float:right;margin:15px;">Request Access</a>
+          <router-link
+            to="/forgot-password"
+            style="float:left;margin:15px;">
+            Forgot Password?
+          </router-link>
+          <router-link 
+            to="/request-user"
+            style="float:right;margin:15px;"
+          >
+            Request Access
+          </router-link>
         </div>
       </form>
 
@@ -89,9 +101,10 @@
   width:100%;
   height:100%;
   background-image: url(./../assets/login-background.png);
+  background-size: cover;
 }
 .login-box {
-  margin-top:80px;width:400px;height:400px;position:relative;background-color:#e0e0e0;border:1px solid black;box-shadow:6px 6px 0px 0px #303030;
+  margin-top:80px;width:400px;height:400px;position:relative;background-color:#e0e0e0;border:1px solid black;box-shadow:6px 6px 0px 0px rgba(48,48,48,.5);
 }
 .login-header {
   position:relative;width:100%;float:left;text-align:center;margin-bottom:25px;
@@ -103,13 +116,17 @@
   position:relative;width:100%;float:left;text-align:center;
 }
 .login-user-box {
-  width:330px;background-color:white;padding:2px;height:40px;border:1px solid black;margin-bottom:20px;
+  width:330px;background-color:white;padding:2px;height:35px;border:1px solid black;margin-bottom:20px;
 }
 .login-emblems {
-  height:100%;width:40px;float:left;background-color:white;font-size:25px;line-height:35px;
+  height:100%;width:40px;float:left;background-color:white;font-size:25px;line-height:45px;
+}
+.login-emblems img {
+  width:60%;
+  margin-top:5px;
 }
 #login-textbox {
-  width:280px;height:100%;font-size:23px;line-height:23px;margin-left:0px;border:none;float:left;outline:none;
+  width:280px;height:100%;font-size:17px;line-height:17px;margin-left:0px;border:none;float:left;outline:none;padding-left:5px;
 }
 #login-button {
   width:140px;height:40px;background-color:#779c4c;color:white;font-family:verdana;font-size:23px;border:1px solid black;

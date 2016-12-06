@@ -6,6 +6,14 @@ import App from './App'
 
 import LoginPage from './pages/LoginPage'
 import DashboardPage from './pages/DashboardPage'
+import ProfilePage from './pages/ProfilePage'
+import TasksPage from './pages/TasksPage'
+import CalendarPage from './pages/CalendarPage'
+import GroupPage from './pages/GroupPage'
+import WorkflowPage from './pages/WorkflowPage'
+import SettingsPage from './pages/SettingsPage'
+import MessagesPage from './pages/MessagesPage'
+import RequestUser from './pages/RequestUser'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
@@ -16,7 +24,15 @@ Vue.component('app', App)
 
 const routes = [
   {path: '/', component: LoginPage, name: 'home'},
-  {path: '/dashboard', component: DashboardPage, name: 'dashboard', meta: { requiresAuth: true }}
+  {path: '/dashboard', component: DashboardPage, name: 'dashboard', meta: { requiresAuth: true }},
+  {path: '/profile', component: ProfilePage, name: 'profile', meta: { requiresAuth: true }},
+  {path: '/tasks', component: TasksPage, name: 'tasks', meta: { requiresAuth: true }},
+  {path: '/calendar', component: CalendarPage, name: 'calendar', meta: { requiresAuth: true }},
+  {path: '/group', component: GroupPage, name: 'group', meta: { requiresAuth: true }},
+  {path: '/workflow', component: WorkflowPage, name: 'workflow', meta: { requiresAuth: true }},
+  {path: '/settings', component: SettingsPage, name: 'settings', meta: { requiresAuth: true }},
+  {path: '/messages', component: MessagesPage, name: 'messages', meta: { requiresAuth: true }},
+  {path: '/request-user', component: RequestUser, name: 'request-user'}
 ]
 
 const router = new VueRouter({
