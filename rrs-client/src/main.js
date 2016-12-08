@@ -14,6 +14,7 @@ import WorkflowPage from './pages/WorkflowPage'
 import SettingsPage from './pages/SettingsPage'
 import MessagesPage from './pages/MessagesPage'
 import RequestUser from './pages/RequestUser'
+import RequestForm from './pages/RequestForm'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
@@ -32,7 +33,8 @@ const routes = [
   {path: '/workflow', component: WorkflowPage, name: 'workflow', meta: { requiresAuth: true }},
   {path: '/settings', component: SettingsPage, name: 'settings', meta: { requiresAuth: true }},
   {path: '/messages', component: MessagesPage, name: 'messages', meta: { requiresAuth: true }},
-  {path: '/request-user', component: RequestUser, name: 'request-user'}
+  {path: '/request-user', component: RequestUser, name: 'request-user'},
+  {path: '/request-form', component: RequestForm, name: 'request-form'}
 ]
 
 const router = new VueRouter({

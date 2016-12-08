@@ -13,7 +13,9 @@
 <div>
   <top-menu></top-menu>
   <center>
-  <router-view></router-view>
+  <div class="routerView">
+    <router-view></router-view>
+  </div>
   </center>
 </div>
 </template>
@@ -22,5 +24,11 @@ body {
   margin:0px;
   padding:0px;
   background-color: #e0e0e0;
+}
+.routerView {
+  position:absolute;
+  left:10%;
+  right:10%;
+  width:80%;
 }
 </style>

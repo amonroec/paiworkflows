@@ -116,13 +116,14 @@ export default {
 </template>
 <style>
 #link-box {
-	width:1160px;
-	height: 500px;
+  position:absolute;
+	width:96%;
 	border-radius: 5px;
 	margin-top:10px;
 	padding-top:40px;
-	padding-left:20px;
-	padding-right:20px;
+  padding-bottom:40px;
+	padding-left:2%;
+	padding-right:2%;
 	background-color: #282828;
 }
 .link {
@@ -132,8 +133,8 @@ export default {
 	border-radius: 5px;
 	margin-left:30px;
 	margin-right:30px;
-	margin-top:60px;
-	margin-bottom:0px;
+	margin-top:30px;
+	margin-bottom:30px;
 	float:left;
 	overflow:none;
 }
