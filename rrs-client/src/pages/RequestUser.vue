@@ -1,9 +1,14 @@
 <script>
-  import {requestUrl} from './../config'
-  import {clientId, clientSecret} from './../env'
+  import {requestUrl, getHeader} from './../config'
   export default {
     data () {
       return {
+        selected: 'nike',
+        options: [
+          { text: 'ASI', value: 'asi' },
+          { text: 'Imperial', value: 'imp' },
+          { text: 'Nike', value: 'nike' }
+        ],
         user_request: {
           first_name: '',
           last_name: '',
@@ -17,19 +22,20 @@
     methods: {
       handleRequestUser () {
         const postData = {
-          client_id: clientId,
-          client_secret: clientSecret,
+          grant_type: 'password',
+          _token: {headers: getHeader()},
           first_name: this.user_request.first_name,
           last_name: this.user_request.last_name,
           phone_number: this.user_request.phone_number,
           phone_extension: this.user_request.phone_extension,
-          division: this.user_request.division,
+          division: this.selected,
           email: this.user_request.email
         }
-        console.log('before user', postData)
         this.$http.post(requestUrl, postData)
           .then(response => {
-            console.log('user request', response)
+            if (response.status === 200) {
+              this.$router.push({name: 'dashboard'})
+            }
           })
       }
     }
@@ -71,11 +77,11 @@
               />
             </td>
           </tr>
-          <tr style="margin-top:-10px;">
+          <tr>
             <td>
               <div class="phone-boxes">
                 <input
-                  style="float:left;width:70%;"
+                  style="float:left;margin-left:-3px;width:70%;"
                   type="text"
                   name="phone_number"
                   value=""
@@ -93,12 +99,10 @@
               </div>
             </td>
             <td>
-                <select name="division" value="">
-                  <option value="" disabled selected>Select Division</option>
-                  <option value="asi">ASI</option>
-                  <option value="imperial">Imperial</option>
-                  <option value="nike">Nike</option>
-                  <option value="other">Other</option>
+                <select v-model="selected">
+                  <option v-for="option in options">
+                    {{ option.text }}
+                  </option>
                 </select>
             </td>
           </tr>
@@ -119,6 +123,7 @@
             <td colspan="2"><textarea name="reason_for_request" placeholder="Reason For Requesting..."></textarea></td>
           </tr>
         </table> 
+        <input type="hidden" name="_token" v-bind:value="'' + getHeader + ''">
         <input type="submit" name="submit_request" value="Request Access" id="request-button"></input>
       </form>
     </center>
@@ -156,31 +161,36 @@
 }
 .request-form tr td {
   padding: 0px;
-}
-.request-form td {
+  margin-top: 10px;
   text-align:center;
   width: 50%;
 }
 .request-form textarea {
   width:97%;
   height:80px;
-  margin-top:-15px;
+  margin-top:5px;
   resize: none;
   font-size:17px;
 }
-.request-form input, select {
+.request-form input {
   width:95%;
   height:25px;
   font-size: 18px;
-  margin-top:-15px;
-  vertical-align: 35px;
+  margin-top:5px;
+  vertical-align: 25px;
+}
+.request-form select {
+  width:95%;
+  height:25px;
+  font-size: 18px;
+  margin-top:15px;
 }
 #request-button {
   width:200px;height:40px;background-color:#779c4c;color:white;font-family:verdana;font-size:23px;border:1px solid black;margin-top:10px;
 }
 .phone-boxes {
   width:100%;
-  margin-top:-22px;
+  margin-top: 10px;
   margin-left:4px;
 }
 </style>

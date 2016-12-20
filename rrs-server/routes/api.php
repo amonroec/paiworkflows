@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use app\Http\Controllers;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -12,14 +13,30 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('test', function() {
-    return response([1,2,3,4], 200);
-});
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::post('/requestuser', function (Request $request) {
+/*Route::post('/request-user/submit', function (Request $request) {
+	return redirect()->action('RequestUsersController@insertRequest', $request->input());
+});*/
+Route::post('/requestuser/submit', function (Request $request) {
 	return redirect()->action('RequestUsersController@insertRequest', $request->input());
 });
+Route::resource('/requestuser/submit', 'RequestUsersController@insertRequest');
+/*
+Route::get('/artpack/list', function (Request $request) {
+	return redirect()->action()
+});*/
+
+Route::post('/request-form/artpack/submit', function (Request $request) {
+	return redirect()->action('SubmitForm@artpackSubmit', $request->input());
+});
+Route::resource('/request-form/artpack/submit', 'SubmitForm@artpackSubmit');
+
+Route::post('/request-form/embroidery/submit', function (Request $request) {
+	return redirect()->action('SubmitForm@embroiderySubmit', $request->input());
+});
+Route::resource('/request-form/embroidery/submit', 'SubmitForm@embroiderySubmit');

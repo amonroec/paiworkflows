@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,4 +14,8 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::post('/requestuser/submit', function (Request $request) {
+	return redirect()->action('RequestUsersController@insertRequest', $request->input());
 });

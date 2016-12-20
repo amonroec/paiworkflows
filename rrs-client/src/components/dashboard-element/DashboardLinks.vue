@@ -146,7 +146,6 @@ export default {
 }
 
 .link div:hover {
-	box-shadow: 1px 1px 4px 4px #6b6b6b;
 	color:black;
 }
 

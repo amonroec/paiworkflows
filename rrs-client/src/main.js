@@ -14,7 +14,8 @@ import WorkflowPage from './pages/WorkflowPage'
 import SettingsPage from './pages/SettingsPage'
 import MessagesPage from './pages/MessagesPage'
 import RequestUser from './pages/RequestUser'
-import RequestForm from './pages/RequestForm'
+import EmbroideryForm from './forms/EmbroideryForm'
+import ArtpackForm from './forms/ArtpackForm'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
@@ -34,7 +35,8 @@ const routes = [
   {path: '/settings', component: SettingsPage, name: 'settings', meta: { requiresAuth: true }},
   {path: '/messages', component: MessagesPage, name: 'messages', meta: { requiresAuth: true }},
   {path: '/request-user', component: RequestUser, name: 'request-user'},
-  {path: '/request-form', component: RequestForm, name: 'request-form'}
+  {path: '/request-form/embroidery', component: EmbroideryForm, name: 'embroideryForm'},
+  {path: '/request-form/artpack', component: ArtpackForm, name: 'artpackForm'}
 ]
 
 const router = new VueRouter({
