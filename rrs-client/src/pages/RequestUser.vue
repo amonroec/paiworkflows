@@ -1,5 +1,5 @@
 <script>
-  import {requestUrl, getHeader} from './../config'
+  import {requestUrl} from './../config'
   export default {
     data () {
       return {
@@ -22,8 +22,6 @@
     methods: {
       handleRequestUser () {
         const postData = {
-          grant_type: 'password',
-          _token: {headers: getHeader()},
           first_name: this.user_request.first_name,
           last_name: this.user_request.last_name,
           phone_number: this.user_request.phone_number,

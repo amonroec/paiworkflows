@@ -40,3 +40,9 @@ Route::post('/request-form/embroidery/submit', function (Request $request) {
 	return redirect()->action('SubmitForm@embroiderySubmit', $request->input());
 });
 Route::resource('/request-form/embroidery/submit', 'SubmitForm@embroiderySubmit');
+
+Route::get('/tasks/load', function (Request $request) {
+	return redirect()->action('TasksController@loadTasks');
+});
+
+Route::resource('/tasks/load', 'TasksController@loadTasks');
