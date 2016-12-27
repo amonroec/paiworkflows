@@ -1,6 +1,10 @@
 <script>
   import {tasksUrl} from './../config'
+  import LiveOrders from './../components/tasks-elements/LiveOrders'
   export default {
+    components: {
+      LiveOrders
+    },
     data () {
       return {
         tasks: []
@@ -24,12 +28,7 @@
 <template>
 <div id="tasksPage">
   <div id="overview-box"></div>
-  <button v-on:click="loadTasks()" value="Click!"></button>
-  <div id="tasks-holder">
-    <div class="task" v-for="task in tasks">
-    {{ task.order_id }} - {{ task.table_name }}
-    </div>
-  </div>
+  <live-orders></live-orders>
 </div>
 </template>
 <style>
@@ -43,11 +42,5 @@
 #tasks-holder {
   width:100%;
   background-color:green;
-}
-.task {
-  width:100%;
-  height:100px;
-  background-color: grey;
-  margin-top: 5px;
 }
 </style>
