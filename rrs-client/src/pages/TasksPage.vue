@@ -30,16 +30,3 @@
   <live-orders></live-orders>
 </div>
 </template>
-<style>
-#overview-box {
-  width:100%;
-  height:160px;
-  border-radius: 5px;
-  background-color:grey;
-  margin-top:10px;
-}
-#tasks-holder {
-  width:100%;
-  background-color:green;
-}
-</style>

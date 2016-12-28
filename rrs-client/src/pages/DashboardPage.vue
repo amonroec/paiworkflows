@@ -1,19 +1,22 @@
 <script>
-	import LiveOrders from './../components/tasks-elements/LiveOrders'
+  import DashboardOverview from './../components/dashboard-element/DashboardOverview'
+  import DashboardLinks from './../components/dashboard-element/DashboardLinks'
 export default {
-  components: {
-    LiveOrders
-  }
+    components: {
+      DashboardOverview,
+      DashboardLinks
+    }
 }
 </script>
 <template>
 <div id="dashboard-page">
-  <live-orders></live-orders>
+  <dashboard-overview></dashboard-overview>
+  <dashboard-links></dashboard-links>
 </div>
 </template>
 <style>
 #dashboard-page {
-	width:100%;
-	height:calc(100% - 80px);
+  width:100%;
+  height:calc(100% - 80px);
 }
 </style>

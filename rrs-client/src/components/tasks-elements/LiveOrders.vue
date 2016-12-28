@@ -20,6 +20,7 @@
           .then(response => {
             if (response.status === 200) {
               this.tasks = response.data
+              console.log(response.data)
               var i = response.data.length
               for (var j = 0; j < i; j++) {
                 this.linkData(response.data[j]['order_id'], response.data[j]['table_name'])
@@ -103,47 +104,3 @@
     </div>
   </div>
 </template>
-<style>
-#live-orders {
-  width:100%;
-  float:left;
-  border-radius: 5px;
-  margin-top:10px;
-}
-.task {
-  margin-top: 5px;
-  text-decoration: none;
-  text-align: center;
-}
-.task div {
-  width:100%;
-  height:60px;
-  background-color: #789f31;
-  margin-top: 10px;
-  font-size: 20px;
-  line-height: 60px;
-}
-.task-bar {
-  width:240px;
-  height: calc(100vh - 100px);
-  float:left;
-  background-color: #000;
-}
-#summaryBar {
-  width:calc(100% - 240px);
-  height:160px;
-  background-color:grey;
-  float:left;
-}
-#workspace {
-  width:calc(70vw - 240px);
-  height:calc(100vh - 260px);
-  background-color:$brand-warning;
-  float:left;
-}
-.activity-feed {
-  width:calc(30vw);
-  height:calc(100vh - 260px);
-  float:left;
-}
-</style>
