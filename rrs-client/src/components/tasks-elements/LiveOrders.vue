@@ -10,7 +10,8 @@
           table_name: ''
         },
         task: [],
-        single_task: []
+        single_task: [],
+        tasks_array: []
       }
     },
     methods: {
@@ -18,17 +19,20 @@
         this.$http.get(tasksUrl)
           .then(response => {
             if (response.status === 200) {
-              console.log(response.data)
               this.tasks = response.data
+              var i = response.data.length
+              for (var j = 0; j < i; j++) {
+                this.linkData(response.data[j]['order_id'], response.data[j]['table_name'])
+              }
             } else {
               console.log('noooooo')
             }
           })
       },
-      linkData: function (inputs) {
+      linkData: function (orderId, tableName) {
         const postData = {
-          order_id: inputs.path[2].order_id._value,
-          table_name: inputs.path[2].table_name._value
+          order_id: orderId,
+          table_name: tableName
         }
         this.loadSingleTasks(postData)
       },
@@ -36,12 +40,20 @@
         this.$http.post(getSingleTask, postData)
         .then(response => {
           if (response.status === 200) {
-            console.log(response.data)
             this.single_task = response.data
+            this.tasks_array.push(response.data)
           } else {
             console.log('noooooo')
           }
         })
+      },
+      linkSingleTask (orderId, tableName) {
+        var count = this.tasks_array.length
+        for (var i = 0; i < count; i++) {
+          if (this.tasks_array[i][0]['id'] === parseInt(orderId)) {
+            this.single_task = this.tasks_array[i]
+          }
+        }
       }
     },
     components: {
@@ -69,9 +81,9 @@
             :id="task.table_name"
             :value="task.table_name"
           >
-          <a class="task" href="javascript:void(0)" v-on:click="linkData($event)">
+          <a class="task"  href="javascript:void(0)" v-on:click="linkSingleTask(task.order_id, task.table_name)">
             <div>
-              {{ task.order_id }} - {{ task.table_name }}
+              {{ task.order_id }}
             </div>
           </a>
         </form>
@@ -106,14 +118,16 @@
 .task div {
   width:100%;
   height:60px;
-  background-color: grey;
+  background-color: #789f31;
   margin-top: 10px;
+  font-size: 20px;
+  line-height: 60px;
 }
 .task-bar {
   width:240px;
   height: calc(100vh - 100px);
   float:left;
-  background-color: green;
+  background-color: #000;
 }
 #summaryBar {
   width:calc(100% - 240px);
@@ -124,7 +138,7 @@
 #workspace {
   width:calc(70vw - 240px);
   height:calc(100vh - 260px);
-  background-color:green;
+  background-color:$brand-warning;
   float:left;
 }
 .activity-feed {
