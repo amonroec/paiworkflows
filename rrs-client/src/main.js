@@ -16,6 +16,8 @@ import MessagesPage from './pages/MessagesPage'
 import RequestUser from './pages/RequestUser'
 import EmbroideryForm from './forms/EmbroideryForm'
 import ArtpackForm from './forms/ArtpackForm'
+import SingleTask from './pages/SingleTask'
+import LiveOrders from './components/tasks-elements/LiveOrders'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
@@ -36,7 +38,9 @@ const routes = [
   {path: '/messages', component: MessagesPage, name: 'messages', meta: { requiresAuth: true }},
   {path: '/request-user', component: RequestUser, name: 'request-user'},
   {path: '/request-form/embroidery', component: EmbroideryForm, name: 'embroideryForm'},
-  {path: '/request-form/artpack', component: ArtpackForm, name: 'artpackForm'}
+  {path: '/request-form/artpack', component: ArtpackForm, name: 'artpackForm'},
+  {path: '/tasks/single', component: SingleTask, name: 'singletask'},
+  {path: '/tasks/live', component: LiveOrders, name: 'liveorders'}
 ]
 
 const router = new VueRouter({

@@ -46,3 +46,15 @@ Route::get('/tasks/load', function (Request $request) {
 });
 
 Route::resource('/tasks/load', 'TasksController@loadTasks');
+
+Route::post('/tasks/singleTask', function (Request $request) {
+	return redirect()->action('TasksController@setTask');
+});
+
+Route::resource('/tasks/singleTask', 'TasksController@setTask');
+
+Route::post('/tasks/getSingleTask', function (Request $request) {
+	return redirect()->action('TasksController@getTask');
+});
+
+Route::resource('/tasks/getSingleTask', 'TasksController@getTask');

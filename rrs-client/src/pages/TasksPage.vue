@@ -27,7 +27,6 @@
 </script>
 <template>
 <div id="tasksPage">
-  <div id="overview-box"></div>
   <live-orders></live-orders>
 </div>
 </template>
