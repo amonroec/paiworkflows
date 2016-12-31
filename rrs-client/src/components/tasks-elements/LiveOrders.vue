@@ -23,25 +23,27 @@
               console.log(response.data)
               var i = response.data.length
               for (var j = 0; j < i; j++) {
-                this.linkData(response.data[j]['order_id'], response.data[j]['table_name'])
+                this.linkData(response.data[j]['order_id'], response.data[j]['table_name'], j)
               }
             } else {
               console.log('noooooo')
             }
           })
       },
-      linkData: function (orderId, tableName) {
+      linkData: function (orderId, tableName, count) {
         const postData = {
           order_id: orderId,
           table_name: tableName
         }
-        this.loadSingleTasks(postData)
+        this.loadSingleTasks(postData, count)
       },
-      loadSingleTasks (postData) {
+      loadSingleTasks (postData, count) {
         this.$http.post(getSingleTask, postData)
         .then(response => {
           if (response.status === 200) {
-            this.single_task = response.data
+            if (count === 0) {
+              this.single_task = response.data
+            }
             this.tasks_array.push(response.data)
           } else {
             console.log('noooooo')

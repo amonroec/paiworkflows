@@ -7,6 +7,9 @@ export const embroideryUrl = apiDomain + 'api/request-form/embroidery/submit'
 export const tasksUrl = apiDomain + 'api/tasks/load'
 export const singleTask = apiDomain + 'api/tasks/singleTask'
 export const getSingleTask = apiDomain + 'api/tasks/getSingleTask'
+export const getPeople = apiDomain + 'api/getPeople'
+export const getGroups = apiDomain + 'api/getGroups'
+export const submitWorkflow = apiDomain + 'api/submitWorkflow'
 
 export const getHeader = function () {
   const tokenData = JSON.parse(window.localStorage.getItem('authUser'))

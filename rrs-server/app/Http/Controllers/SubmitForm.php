@@ -51,7 +51,7 @@ class SubmitForm extends Controller
             'threads' => $req->threads
           ]
         );
-        return $this->taskSubmit($id, 'embroidery');
+        return $this->taskSubmit($id, 'embroideries');
         //return redirect()->action('TasksController@taskSubmit', $id, 'embroideries');
     }
 
@@ -72,7 +72,26 @@ class SubmitForm extends Controller
         $req->num_designs = $request->input('design_num');
         $req->description = $request->input('description_box');
         $req->threads = $request->input('threads');
-        $req->save();
+        $id = artpack::insertGetId(
+          [
+            'artpack_num' => $req->artpack_num,
+            'rep_name' => $req->rep_name,
+            'turn_time' => $req->turn_time,
+            'account_name' => $req->account_name,
+            'account_num' => $req->account_num,
+            'customer_name' => $req->customer_name,
+            'reference_tapes' => $req->reference_tapes,
+            'package_type' => $req->package_type,
+            'style_preference' => $req->style_preference,
+            'course_location' => $req->course_location,
+            'csr_name' => $req->csr_name,
+            'manipulate_logo' => $req->manipulate_logo,
+            'num_designs' => $req->num_designs,
+            'description' => $req->description,
+            'threads' => $req->threads
+          ]
+        );
+        return $this->taskSubmit($id, 'artpacks');
         //return redirect()->action('TasksController@taskSubmit', $id, 'artpacks');
         //return $this->taskSubmit($id)
     }

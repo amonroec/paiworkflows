@@ -58,3 +58,21 @@ Route::post('/tasks/getSingleTask', function (Request $request) {
 });
 
 Route::resource('/tasks/getSingleTask', 'TasksController@getTask');
+
+Route::post('/getPeople', function (Request $request) {
+	return redirect()->action('RequestUsersController@pullUsers');
+});
+
+Route::resource('/getPeople', 'RequestUsersController@pullUsers');
+
+Route::post('/getGroups', function (Request $request) {
+	return redirect()->action('RequestUsersController@getGroups');
+});
+
+Route::resource('/getGroups', 'RequestUsersController@getGroups');
+
+Route::post('/submitWorkflow', function (Request $request) {
+	return redirect()->action('WorkflowController@submitWorkflow');
+});
+
+Route::resource('/submitWorkflow', 'WorkflowController@submitWorkflow');

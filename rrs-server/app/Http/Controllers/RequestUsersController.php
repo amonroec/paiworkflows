@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\RequestUser;
+use App\User;
+use App\Group;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Controllers\Controller; 
 
@@ -24,5 +26,15 @@ class RequestUsersController extends Controller
             $req->division = $request->input('division');
             $req->email = $request->input('email');
             $req->save();
+    }
+
+    public function pullUsers() {
+        $req = User::all();
+        return $req;
+    }
+
+    public function getGroups() {
+        $req = Group::all();
+        return $req;
     }
 }
