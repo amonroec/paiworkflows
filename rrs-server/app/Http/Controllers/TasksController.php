@@ -38,9 +38,17 @@ class TasksController extends Controller
     }
 
     public function getTask(Request $request){
+    	/*if($request->table_name == 'artpacks'){
+    		$task = artpack::select()
+    							->where('id', '=', $request->order_id)
+    							->get();
+    		return $task;
+    	}
+    	if($request->table_name == 'embroideries'){*/
     		$task = Embroidery::select()
     							->where('id', '=', $request->order_id)
     							->get();
-    	return $task;
+    		return $task;
+    	//}
     }
 }

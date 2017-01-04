@@ -1,6 +1,6 @@
 <script>
   import {tasksUrl, getSingleTask} from './../../config'
-  import ActivityFeed from './../ActivityFeed'
+  import ArtpackDisplay from './../form-displays/ArtpackDisplay'
   export default {
     data: function () {
       return {
@@ -60,7 +60,7 @@
       }
     },
     components: {
-      ActivityFeed
+      ArtpackDisplay
     },
     created: function () {
       this.loadTasks()
@@ -68,7 +68,7 @@
   }
 </script>
 <template>
-  <div id="live-orders">
+<div id="live-orders">
   <div class="task-bar">
     <div v-for="task in tasks">
         <form class="taskform" v-on:submit.prevent="linkData">
@@ -92,17 +92,8 @@
         </form>
     </div>
   </div>
-    <div id="summaryBar">
-      <div v-if="single_task != ''">
-        <label name="customer_num">Customer Number: {{ single_task[0]["customer_num"] }} </label>
-        <label name="po_num">PO Number: {{ single_task[0]["po_num"] }} </label>
-        <label name="due_date">Due Date: {{ single_task[0]["due_date"] }} </label>
-      </div>
-      <div v-else></div>
-    </div>
-    <div id="workspace"></div>
-    <div class="activity-feed">
-      <activity-feed></activity-feed>
-    </div>
+  <div id="artpackDisplay">
+    <artpack-display></artpack-display>
   </div>
+</div>
 </template>

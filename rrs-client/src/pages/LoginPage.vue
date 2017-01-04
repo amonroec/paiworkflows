@@ -30,10 +30,12 @@
               window.localStorage.setItem('authUser', JSON.stringify(authUser))
               this.$http.get(userUrl, {headers: getHeader()})
                 .then(response => {
-                  console.log('user obeject', response)
+                  console.log('user division', response.body.division)
                   authUser.email = response.body.email
                   authUser.name = response.body.name
                   window.localStorage.setItem('authUser', JSON.stringify(authUser))
+                  window.sessionStorage.setItem('userDivision', response.body.division)
+                  window.sessionStorage.setItem('accessLevel', response.body.access_level)
                   this.$router.push({name: 'dashboard'})
                 })
             }

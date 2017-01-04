@@ -9,7 +9,6 @@ class Workflow extends Model
     protected $fillable = [
         'workflow_name',
 		'step_name',
-		'needs_assigned',
 		'select_group',
 		'assigner',
 		'approval_type',

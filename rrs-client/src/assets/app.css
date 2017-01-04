@@ -1,8 +1,11 @@
+html, body {
+  margin: 0px;
+  padding: 0px; }
+
 #live-orders {
   width: 100%;
   float: left;
-  border-radius: 5px;
-  margin-top: 10px; }
+  border-radius: 5px; }
 
 .task {
   margin-top: 5px;
@@ -19,30 +22,39 @@
 
 .task-bar {
   width: 240px;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 50px);
   float: left;
   background-color: #000; }
 
+#artpackDisplay {
+  width: calc(100vw - 240px);
+  height: calc(100vh - 50px);
+  float: left; }
+
+#artpackDisplayDiv {
+  width: 100%;
+  height: 100%; }
+
+.activity-feed {
+  width: 30%;
+  height: calc(100% - 160px);
+  float: left; }
+
 #summaryBar {
-  width: calc(100% - 240px);
+  width: 100%;
   height: 160px;
   background-color: grey;
   float: left; }
 
 #workspace {
-  width: calc(70vw - 240px);
-  height: calc(100vh - 260px);
+  width: 70%;
+  height: calc(100% - 160px);
   background-color: #cbb956;
   float: left; }
 
-.activity-feed {
-  width: calc(30vw);
-  height: calc(100vh - 260px);
-  float: right; }
-
 #body {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   float: left;
   background-color: #e0e0e0;
   width: 100%;
@@ -50,8 +62,8 @@
 
 .routerView {
   float: left;
-  position: absolute;
-  left: 0px;
+  margin-top: 0px;
+  position: relative;
   width: 100%;
   height: calc(100vh - 80px); }
 
@@ -136,12 +148,17 @@
   background: linear-gradient(#ff56eb, #ba00a4);
   box-shadow: inset 0 7em 10em -5em rgba(255, 255, 255, 0.6), 0 0.3em 0.5em -0.2em #ba00a4, 0 1em 2em -0.75em rgba(186, 0, 164, 0.75), 0 1em 3em -0.5em rgba(186, 0, 164, 0.5), 0 2em 3em -0.25em rgba(186, 0, 164, 0.2); }
 
+#topMenuDiv {
+  width: 100%;
+  height: 100%;
+  float: left; }
+
 #topMenu {
   position: relative;
-  z-index: 200;
-  width: 100%;
-  height: 80px;
-  background-color: black; }
+  width: 100vw;
+  height: 50px;
+  background-color: black;
+  float: left; }
 
 .button-div {
   float: right; }

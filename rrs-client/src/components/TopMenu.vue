@@ -1,5 +1,5 @@
 <template>
-	<div id="topMenu">
+	<div id="topMenuDiv">
 		<div class="button-div">
 			<div class="subcat-link">
 				<router-link :to="{ name: 'dashboard' }" append>Dashboard</router-link>

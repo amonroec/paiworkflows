@@ -11,7 +11,9 @@
 </script>
 <template>
 <div id="body">
-  <top-menu></top-menu>
+  <div id="topMenu">
+    <top-menu></top-menu>
+  </div>
   <div class="routerView">
     <router-view></router-view>
   </div>

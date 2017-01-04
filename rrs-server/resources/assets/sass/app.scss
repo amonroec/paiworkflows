@@ -1,12 +1,16 @@
 // Variables
 @import "variables";
 
+html, body {
+	margin:0px;
+	padding:0px;
+}
+
 //LiveOrders.vue
 #live-orders {
   width:100%;
   float:left;
   border-radius: 5px;
-  margin-top:10px;
 }
 .task {
   margin-top: 5px;
@@ -23,32 +27,43 @@
 }
 .task-bar {
   width:240px;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 50px);
   float:left;
   background-color: #000;
 }
+#artpackDisplay {
+	width:calc(100vw - 240px);
+	height:calc(100vh - 50px);
+	float:left;
+}
+
+//ArtpackDisplay.vue
+#artpackDisplayDiv {
+	width:100%;
+	height:100%;
+}
+.activity-feed {
+  width:30%;
+  height:calc(100% - 160px);
+  float:left;
+}
 #summaryBar {
-  width:calc(100% - 240px);
+  width:100%;
   height:160px;
   background-color:grey;
   float:left;
 }
 #workspace {
-  width:calc(70vw - 240px);
-  height:calc(100vh - 260px);
+  width:70%;
+  height:calc(100% - 160px);
   background-color:$brand-warning;
   float:left;
-}
-.activity-feed {
-  width:calc(30vw);
-  height:calc(100vh - 260px);
-  float:right;
 }
 
 //DashboardOverview.vue
 #body {
-  margin:0px;
-  padding:0px;
+  margin:0;
+  padding:0;
   float:left;
   background-color: #e0e0e0;
   width:100%;
@@ -56,8 +71,8 @@
 }
 .routerView {
   float:left;
-  position:absolute;
-  left: 0px ;
+  margin-top: 0px;
+  position:relative;
   width: 100%;
   height:calc(100vh - 80px);
 }
@@ -185,8 +200,11 @@
 }
 
 //TopMenu.vue
+#topMenuDiv {
+	width:100%;height:100%;float:left;
+}
 #topMenu {
-	position:relative;z-index:200;width:100%;height:80px;background-color:black;
+	position:relative;width:100vw;height:50px;background-color:black;float:left;
 }
 .button-div {
 	float:right;
