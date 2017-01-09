@@ -26,7 +26,7 @@ export default {
           class="form-control"
           name="tasks"
           href="javascript:void(0)"
-          to="/tasks"
+          to="/tasks/live"
         >
           <div>
 	          <center>
@@ -108,6 +108,21 @@ export default {
             <img src="../../assets/white100/Comments Filled.png"></img> 
           </center>
           Messages
+        </div>
+        </router-link>
+      </div>
+      <div class="link settingsBackground">
+        <router-link
+          class="form-control"
+          name="needs_assigned"
+          href="javascript:void(0)"
+          to="/tasks"
+        >
+        <div>
+          <center>
+             
+          </center>
+          Needs Assigned
         </div>
         </router-link>
       </div>

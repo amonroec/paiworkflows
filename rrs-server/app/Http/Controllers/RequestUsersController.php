@@ -1,6 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
+session_start();
 
 use Illuminate\Http\Request;
 use App\RequestUser;
@@ -35,6 +35,14 @@ class RequestUsersController extends Controller
 
     public function getGroups() {
         $req = Group::all();
+        return $req;
+    }
+
+    public function getWorkers(Request $request) {
+        $req = User::select()
+                ->where('division', '=', $request->division)
+                ->where('access_level', '>', $request->accessLevel)
+                ->get();
         return $req;
     }
 }

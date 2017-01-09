@@ -10,6 +10,11 @@ export const getSingleTask = apiDomain + 'api/tasks/getSingleTask'
 export const getPeople = apiDomain + 'api/getPeople'
 export const getGroups = apiDomain + 'api/getGroups'
 export const submitWorkflow = apiDomain + 'api/submitWorkflow'
+export const setSingleTask = apiDomain + 'api/setTask'
+export const getArtpack = apiDomain + 'api/getArtpack'
+export const uploadFile = apiDomain + 'api/uploadFile'
+export const getWorkers = apiDomain + 'api/getWorkers'
+export const assignTask = apiDomain + 'api/assignTask'
 
 export const getHeader = function () {
   const tokenData = JSON.parse(window.localStorage.getItem('authUser'))

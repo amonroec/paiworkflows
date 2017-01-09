@@ -1,5 +1,5 @@
 <script>
-  import {artpackUrl} from './../config'
+  import {artpackUrl, uploadFile} from './../config'
   export default {
     data () {
       return {
@@ -24,11 +24,12 @@
           design_num: '',
           description_box: '',
           threads: ''
-        }
+        },
+        image: ''
       }
     },
     methods: {
-      handleRequestUser () {
+      handleSubmitForm () {
         const postData = {
           artpack_num: this.form_submit.artpack_num,
           rep_name: this.form_submit.rep_name,
@@ -49,9 +50,29 @@
         this.$http.post(artpackUrl, postData)
           .then(response => {
             if (response.status === 200) {
-              this.$router.push({name: 'dashboard'})
+              const postData2 = {
+                image: this.image
+              }
+              this.$http.post(uploadFile, postData2)
+                .then(response => {
+                  console.log(response)
+                  if (response.status === 200) {
+                    this.$router.push({name: 'dashboard'})
+                  }
+                })
             }
           })
+      },
+      onFileChange (e) {
+        var files = e.target.files || e.dataTransfer.files
+        if (!files.length) {
+          return
+        }
+        this.image = files[0]
+        console.log(this.image)
+      },
+      removeImage: function (e) {
+        this.image = ''
       }
     }
   }
@@ -60,7 +81,7 @@
 <div class="artpack-form">
 <center>
   <h1>Artpack Request Form</h1>
-  <form v-on:submit.prevent="handleRequestUser()">
+  <form v-on:submit.prevent="handleSubmitForm()">
     <table>
       <tbody>
         <tr>
@@ -214,6 +235,14 @@
         v-model="form_submit.threads"
         placeholder="Threads..."
       ></textarea>
+      <div v-if="!image">
+        <h2>Select an image</h2>
+        <input type="file" @change="onFileChange">
+      </div>
+      <div v-else>
+        <img :src="image" />
+        <button @click="removeImage">Remove image</button>
+      </div>
     </div>
     <input
       type="submit"

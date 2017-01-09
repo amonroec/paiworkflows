@@ -17,12 +17,14 @@ import RequestUser from './pages/RequestUser'
 import EmbroideryForm from './forms/EmbroideryForm'
 import ArtpackForm from './forms/ArtpackForm'
 import SingleTask from './pages/SingleTask'
-import LiveOrders from './components/tasks-elements/LiveOrders'
+import LiveRequests from './components/tasks-elements/LiveRequests'
+import ArtpackDisplay from './components/form-displays/ArtpackDisplay.vue'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
 Vue.component('app', App)
+Vue.component('artpackDisplay', ArtpackDisplay)
 
 /* eslint-disable no-new */
 
@@ -40,7 +42,7 @@ const routes = [
   {path: '/request-form/embroidery', component: EmbroideryForm, name: 'embroideryForm'},
   {path: '/request-form/artpack', component: ArtpackForm, name: 'artpackForm'},
   {path: '/tasks/single', component: SingleTask, name: 'singletask'},
-  {path: '/tasks/live', component: LiveOrders, name: 'liveorders'}
+  {path: '/tasks/live', component: LiveRequests, name: 'liverequests'}
 ]
 
 const router = new VueRouter({

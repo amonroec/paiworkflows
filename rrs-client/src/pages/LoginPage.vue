@@ -34,6 +34,7 @@
                   authUser.email = response.body.email
                   authUser.name = response.body.name
                   window.localStorage.setItem('authUser', JSON.stringify(authUser))
+                  window.sessionStorage.setItem('userId', response.body.id)
                   window.sessionStorage.setItem('userDivision', response.body.division)
                   window.sessionStorage.setItem('accessLevel', response.body.access_level)
                   this.$router.push({name: 'dashboard'})

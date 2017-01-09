@@ -36,8 +36,33 @@ class UsersTableSeeder extends Seeder
           'password' => Hash::make('password'),
         ];
 
-        User::create($user2);
-        User::create($user3);
-        User::create($user4);
+        $user5 = [
+          'name' => 'Art User1',
+          'email' => 'artUser1@paifashion.com',
+          'password' => Hash::make('password'),
+        ];
+
+        $user6 = [
+          'name' => 'Art User2',
+          'email' => 'artUser2@paifashion.com',
+          'password' => Hash::make('password'),
+        ];
+
+        $user7 = [
+          'name' => 'Art User3',
+          'email' => 'artUser3@paifashion.com',
+          'password' => Hash::make('password'),
+        ];
+
+        $user8 = [
+          'name' => 'Art User4',
+          'email' => 'artUser4@paifashion.com',
+          'password' => Hash::make('password'),
+        ];
+
+        User::create($user5);
+        User::create($user6);
+        User::create($user7);
+        User::create($user8);
     }
 }

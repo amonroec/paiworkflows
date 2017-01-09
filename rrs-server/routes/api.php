@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use app\Http\Controllers;
+use Illuminate\Support\Facades\Input;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -41,7 +42,7 @@ Route::post('/request-form/embroidery/submit', function (Request $request) {
 });
 Route::resource('/request-form/embroidery/submit', 'SubmitForm@embroiderySubmit');
 
-Route::get('/tasks/load', function (Request $request) {
+Route::post('/tasks/load', function (Request $request) {
 	return redirect()->action('TasksController@loadTasks');
 });
 
@@ -76,3 +77,33 @@ Route::post('/submitWorkflow', function (Request $request) {
 });
 
 Route::resource('/submitWorkflow', 'WorkflowController@submitWorkflow');
+
+Route::post('/getArtpack', function (Request $request) {
+	return redirect()->action('TasksController@getArtpack');
+});
+
+Route::resource('/getArtpack', 'TasksController@getArtpack');
+
+Route::post('/getWorkers', function (Request $request) {
+	return redirect()->action('RequestUsersController@getWorkers');
+});
+
+Route::resource('/getWorkers', 'RequestUsersController@getWorkers');
+
+Route::post('/assignTask', function (Request $request) {
+	return redirect()->action('TasksController@assignTask');
+});
+
+Route::resource('/assignTask', 'TasksController@assignTask');
+
+Route::post('/uploadFile', function (Request $request) {
+	foreach ($request->image as $image) {
+		$imagename = time() . $image->getClientOriginalName();
+		$uploadFile = $image->move('./../storage/app/public/uploads', $imagename);
+		if ($uploadFile) {
+			$uploadedImage[] = $imagename;
+			return response()->json(['success' => true, 'message' => 'images uploaded']);
+		}
+	}
+	return $request;
+});
