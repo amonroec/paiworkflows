@@ -76,6 +76,7 @@ methods.linkSingleTask = function (orderId, tableName) {
 methods.setSingleTask = function (orderArray) {
   this.active_array.task_array = orderArray
   this.table_name = orderArray[1][0]
+  this.activeClick()
   /*
   const postData = {
     order_id: orderId,
