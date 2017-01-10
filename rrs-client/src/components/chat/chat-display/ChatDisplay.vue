@@ -1,7 +1,9 @@
 <template>
 <div id="chatDisplay">
   <div class="messageHolder">
-    <div class="message"></div>
+    <div v-if="messages!==''"class="message" v-for="message in messages">
+    	{{message.name}}: {{message.text}}
+    </div>
   </div>
 </div>
 </template>

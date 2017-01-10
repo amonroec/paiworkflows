@@ -102,6 +102,12 @@ Route::post('/submitChat', function (Request $request) {
 
 Route::resource('/submitChat', 'ChatController@submitChat');
 
+Route::post('/getMessages', function (Request $request) {
+	return redirect()->action('ChatController@getMessages');
+});
+
+Route::resource('/getMessages', 'ChatController@getMessages');
+
 Route::post('/uploadFile', function (Request $request) {
 	foreach ($request->image as $image) {
 		$imagename = time() . $image->getClientOriginalName();
