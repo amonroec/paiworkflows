@@ -19,7 +19,7 @@ methods.loadTasks = function () {
           /*
           this.linkData(response.data[j]['order_id'], response.data[j]['table_name'], j)
           */
-          var groupData = {orderId: response.data[j]['order_id'], tableName: response.data[j]['table_name'], stage: response.data[j]['stage']}
+          var groupData = {orderId: response.data[j]['order_id'], tableName: response.data[j]['table_name'], stage: response.data[j]['stage'], taskId: response.data[j]['id']}
           this.data_array.push(groupData)
         }
         const postData = {

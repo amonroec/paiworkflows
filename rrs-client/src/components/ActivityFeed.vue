@@ -1,16 +1,10 @@
-<script>
-export default {
-
-}
-</script>
 <template>
 <div id="activityFeed">
+<div id="chatBoardDiv">
+  <chat-board :task_id.sync="taskId"></chat-board>
+</div>
 </div>
 </template>
-<style>
-#activityFeed {
-    width:100%;
-    height:100%;
-    background-color: yellow;
-}
-</style>
+<script>
+module.exports = require('./activity-feed.js')
+</script>

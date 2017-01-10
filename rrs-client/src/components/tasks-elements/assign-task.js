@@ -21,7 +21,7 @@ methods.getWorkers = function () {
 
 methods.assignTask = function () {
   const postData = {
-    id: this.order_id,
+    id: this.request_id,
     worker_id: this.selectedWorker
   }
   console.log(postData)
@@ -31,6 +31,10 @@ methods.assignTask = function () {
         console.log(response)
       }
     })
+}
+
+methods.submitForApproval = function () {
+  console.log(this.stage)
 }
 
 module.exports = {
@@ -44,11 +48,12 @@ module.exports = {
   },
   methods: methods,
   props: {
-    order_id: ''
+    request_id: '',
+    stage: ''
   },
   watch: {
-    order_id: function (val, oldVal) {
-      this.id = val
+    request_id: function (val, oldVal) {
+      console.log(this.stage)
     }
   },
   created: function () {

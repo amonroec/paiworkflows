@@ -96,6 +96,12 @@ Route::post('/assignTask', function (Request $request) {
 
 Route::resource('/assignTask', 'TasksController@assignTask');
 
+Route::post('/submitChat', function (Request $request) {
+	return redirect()->action('ChatController@submitChat');
+});
+
+Route::resource('/submitChat', 'ChatController@submitChat');
+
 Route::post('/uploadFile', function (Request $request) {
 	foreach ($request->image as $image) {
 		$imagename = time() . $image->getClientOriginalName();

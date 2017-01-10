@@ -81,7 +81,7 @@ class TasksController extends Controller
                 $task = artpack::select()
                             ->where('id', '=', $out['orderId'])
                             ->get();
-                $table = ['artpacks', $out['stage']];
+                $table = ['artpacks', $out['stage'], $out['taskId']];
             }elseif($out['tableName'] == 'embroidery'){
                 $task = Embroidery::select()
                                 ->where('id', '=', $out['orderId'])

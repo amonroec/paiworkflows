@@ -19,9 +19,11 @@ methods.getArtpack = function () {
   */
   this.artpacks = this.active_array[0]
   this.id = this.active_array[0][0].id
+  this.task_id = this.active_array[1][2]
   this.table_name = this.active_array[1][0]
   this.stage = this.active_array[1][1]
-  console.log(this.id)
+  console.log('activearray')
+  console.log(this.task_id)
 }
 
 module.exports = {
@@ -31,7 +33,8 @@ module.exports = {
       artpacks: [],
       table_name: '',
       stage: '',
-      id: ''
+      id: '',
+      task_id: ''
     }
   },
   methods: methods,
