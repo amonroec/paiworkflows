@@ -45,4 +45,11 @@ class RequestUsersController extends Controller
                 ->get();
         return $req;
     }
+
+    public function getUserData(Request $request) {
+        $req = User::select()
+                ->where('email', $request->input('email'))
+                ->get();
+        return $req;
+    }
 }
