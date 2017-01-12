@@ -4,6 +4,7 @@
     <h2>Current Tasks</h2>
     <div v-for="task in tasks_array">
         <form class="taskform" v-on:submit.prevent="linkData">
+          <div class="task-side"><div>
           <input
             type="hidden"
             name="order_id"
