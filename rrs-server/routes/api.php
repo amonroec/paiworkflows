@@ -27,13 +27,18 @@ Route::post('/requestuser/submit', function (Request $request) {
 	return redirect()->action('RequestUsersController@insertRequest', $request->input());
 });
 Route::resource('/requestuser/submit', 'RequestUsersController@insertRequest');
+
+Route::post('/getUserData', function (Request $request) {
+	return redirect()->action('RequestUsersController@getUserData', $request->input());
+});
+Route::resource('/getUserData', 'RequestUsersController@getUserData');
 /*
 Route::get('/artpack/list', function (Request $request) {
 	return redirect()->action()
 });*/
 
 Route::post('/request-form/artpack/submit', function (Request $request) {
-	return redirect()->action('SubmitForm@artpackSubmit', $request->input());
+	return redirect()->action('SubmitForm@taskSubmit', $request->input());
 });
 Route::resource('/request-form/artpack/submit', 'SubmitForm@artpackSubmit');
 
@@ -77,6 +82,24 @@ Route::post('/submitWorkflow', function (Request $request) {
 });
 
 Route::resource('/submitWorkflow', 'WorkflowController@submitWorkflow');
+
+Route::post('/submitWorkflowForm', function (Request $request) {
+	return redirect()->action('WorkflowFormController@submitWorkflowForm');
+});
+
+Route::resource('/submitWorkflowForm', 'WorkflowFormController@submitWorkflowForm');
+
+Route::get('/getWorkflows', function (Request $request) {
+	return redirect()->action('WorkflowFormController@getWorkflows');
+});
+
+Route::resource('/getWorkflows', 'WorkflowFormController@getWorkflows');
+
+Route::post('/getWholeWorkflow', function (Request $request) {
+	return redirect()->action('WorkflowController@getWholeWorkflow');
+});
+
+Route::resource('/getWholeWorkflow', 'WorkflowController@getWholeWorkflow');
 
 Route::post('/getArtpack', function (Request $request) {
 	return redirect()->action('TasksController@getArtpack');

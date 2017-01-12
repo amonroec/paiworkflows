@@ -1,5 +1,6 @@
 import ActivityFeed from './../ActivityFeed'
 import AssignTask from './../tasks-elements/AssignTask'
+var Active = require('./../../active.js')
 var methods = {}
 
 methods.getArtpack = function () {
@@ -23,7 +24,11 @@ methods.getArtpack = function () {
   this.table_name = this.active_array[1][0]
   this.stage = this.active_array[1][1]
   console.log('activearray')
-  console.log(this.task_id)
+  console.log(this.stage)
+}
+
+methods.getTask = function () {
+  console.log(Active.methods.getTask())
 }
 
 module.exports = {
@@ -52,5 +57,6 @@ module.exports = {
   },
   created: function () {
     this.getArtpack()
+    this.getTask()
   }
 }

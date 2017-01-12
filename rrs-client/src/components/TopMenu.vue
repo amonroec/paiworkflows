@@ -5,10 +5,9 @@
         <router-link :to="{ name: 'dashboard' }" append>Dashboard</router-link>
       </div>
       <div class="subcat-link" id="subcat-request">
-        <a name="requestForm" id="requestForm">Request Forms</a>
+        <a name="requestForm" id="requestForm">Workflows</a>
         <div class="subcat-div" id="request-dropdown">
-          <router-link :to="{ name: 'artpackForm' }" append>Artpack</router-link>
-          <router-link :to="{ name: 'embroideryForm' }" append>Embroidery</router-link>
+          <a href="javascript:void(0)" v-for="workflow in workflows" v-on:click="workflowClick(workflow.form_name, workflow.id)">{{workflow.workflow_name}}</a>
         </div>
       </div>
       <div class="subcat-link">

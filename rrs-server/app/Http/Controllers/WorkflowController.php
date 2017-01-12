@@ -22,4 +22,12 @@ class WorkflowController extends Controller
 		}
 		return print_r($request->workflow_name);
     }
+
+    public function getWholeWorkflow(Request $request) {
+    	$workflow = Workflow::select()
+    						->where('workflow_name', $request->input('workflow_id'))
+    						->orderBy('id', 'asc')
+    						->get();
+    	return $workflow;
+    }
 }

@@ -1,6 +1,7 @@
 import {tasksUrl, getSingleTask} from './../../config'
 import ArtpackDisplay from './../form-displays/ArtpackDisplay'
 var Vue = require('Vue')
+var Active = require('./../../active.js')
 var methods = {}
 
 methods.loadTasks = function () {
@@ -76,7 +77,7 @@ methods.linkSingleTask = function (orderId, tableName) {
 methods.setSingleTask = function (orderArray) {
   this.active_array.task_array = orderArray
   this.table_name = orderArray[1][0]
-  this.activeClick()
+  Active.methods.setTask(this.active_array.task_array)
   /*
   const postData = {
     order_id: orderId,

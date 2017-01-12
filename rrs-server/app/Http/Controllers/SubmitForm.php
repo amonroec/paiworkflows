@@ -91,6 +91,7 @@ class SubmitForm extends Controller
             'threads' => $req->threads
           ]
         );
+        //$this->getNextTask($id, 'artpacks');
         return $this->taskSubmit($id, 'artpacks');
         //return redirect()->action('TasksController@taskSubmit', $id, 'artpacks');
         //return $this->taskSubmit($id)

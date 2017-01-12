@@ -20,7 +20,9 @@ import SingleTask from './pages/SingleTask'
 import LiveRequests from './components/tasks-elements/LiveRequests'
 import ArtpackDisplay from './components/form-displays/ArtpackDisplay.vue'
 import ChatBoard from './components/chat/chat-board/ChatBoard'
+import GSignInButton from 'vue-google-signin-button'
 
+Vue.use(GSignInButton)
 Vue.use(VueRouter)
 Vue.use(VueResource)
 

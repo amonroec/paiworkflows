@@ -1,5 +1,5 @@
 <script>
-import {getPeople, getGroups, submitWorkflow} from './../config'
+import {getPeople, getGroups, submitWorkflow, submitWorkflowForm} from './../config'
 export default {
   data: function () {
     return {
@@ -30,6 +30,12 @@ export default {
         { text: 'Requesting Person', value: 'csr' },
         { text: 'Other Person', value: 'person' },
         { text: 'Any in Group', value: 'group' }
+      ],
+      form_select: 'select',
+      form_options: [
+        { text: 'Select Form', value: 'select' },
+        { text: 'Artpack Form', value: 'artpack' },
+        { text: 'Embroidery Form', value: 'embroidery' }
       ]
     }
   },
@@ -73,10 +79,17 @@ export default {
         task_description: this.workflows.task_description
         */
       }
+      const workflowData = {
+        workflow_name: this.workflow_name,
+        form_name: this.form_select
+      }
       console.log(postData)
       this.$http.post(submitWorkflow, postData)
         .then(response => {
-          console.log(response)
+          this.$http.post(submitWorkflowForm, workflowData)
+            .then(response => {
+              console.log(response)
+            })
         })
     }
   },
@@ -89,6 +102,7 @@ export default {
 <template>
 <div id="workflowDiv">
   <form class="workflow-form" v-on:submit.prevent="submitForm">
+    <center>
     <input
       class="workflow-name"
       type="text"
@@ -97,6 +111,10 @@ export default {
       v-model="workflow_name"
       placeholder="Workflow Name"
     >
+    <select v-model="form_select">
+      <option v-for="option in form_options" v-bind:value="option.value">{{ option.text }}</option>
+    </select>
+    </center>
     <div v-for="workflow in workflows">
       <div class="workflow-holder">
         <div class="workflow-bar">

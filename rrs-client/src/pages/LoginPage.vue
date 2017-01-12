@@ -1,13 +1,20 @@
 <script>
   import {loginUrl, getHeader, userUrl} from './../config'
   import {clientId, clientSecret} from './../env'
+  import GSignInButton from 'vue-google-signin-button'
   export default {
     data () {
       return {
         login: {
-          email: 'amc_080@hotmail.com',
-          password: 'password'
-        }
+          email: '',
+          password: ''
+        },
+        googleSignInParams: {
+          client_id: '700357075201-feeks33sjmv3mfo7h9npi48h7evml642.apps.googleusercontent.com',
+          hosted_domain: 'paifashion.com',
+          prompt: 'select_account'
+        },
+        profile: ''
       }
     },
     methods: {
@@ -44,7 +51,26 @@
           }, (response) => {
             window.alert('Username and/or Password is Incorrect. Please Try Again.')
           })
+      },
+      onSignInSuccess (googleUser) {
+        const profile = googleUser.getBasicProfile()
+        this.profile = profile
+        console.log(this.profile)
+        this.setStorage(this.profile.U3)
+        this.$router.push({name: 'dashboard'})
+      },
+      onSignInError (error) {
+        console.log('OH NOES', error)
+      },
+      getDomain () {
+        var domain = this.login.email
+        domain = domain.slice(-14)
+        this.googleSignInParams.hosted_domain = domain
+        console.log(domain)
       }
+    },
+    components: {
+      GSignInButton
     }
   }
 </script>
@@ -60,12 +86,13 @@
   </div>
   <div id="login-form">
     <center>
-      <form v-on:submit.prevent="handleLoginFormSubmit()">
+      <form v-on:submit.prevent="onSignIn()">
         <div class="login-user-box">
           <div class="login-emblems"><img src="../assets/dark50/Email.png"></img></div>
           <input id="login-textbox" type="text" name="email" value="" placeholder="E-mail.."
             class="form-control"
             v-model="login.email"
+            v-on:keyup="getDomain()"
           >
         </div>
         <div class="login-user-box">
@@ -75,7 +102,12 @@
             v-model="login.password"
           >
         </div>
-        <input type="submit" name="submitLogin" value="Login" id="login-button"></input>
+        <g-signin-button
+          :params.sync="googleSignInParams"
+          @success="onSignInSuccess"
+          @error="onSignInError">
+          Sign in with Google
+        </g-signin-button>
       </form>
       <div id="userForgotDiv">
           <router-link

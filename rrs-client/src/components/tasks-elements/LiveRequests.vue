@@ -43,6 +43,9 @@
           </a>
         </form>
     </div>
+    <div v-if="tasks_array.length <= 0">
+      <h3>You have no tasks assigned</h3>
+    </div>
   </div>
   <div id="displayForm">
     <artpack-display v-if="table_name === 'artpacks'" transition="fade" transition-mode="out-in" :active_array.sync="active_array.task_array"></artpack-display>
