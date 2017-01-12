@@ -47,9 +47,7 @@
       </tbody>
     </table>
   </div>
-  <div class="activity-feed">
-    <activity-feed :task_id.sync="task_id"></activity-feed>
-  </div>
+  <activity-feed :task_id.sync="task_id"></activity-feed>
 </div>
 </template>
 <script>
