@@ -1,5 +1,5 @@
 <script>
-  import {loginUrl, getHeader, userUrl} from './../config'
+  import {loginUrl, getHeader, userUrl, getUserData} from './../config'
   import {clientId, clientSecret} from './../env'
   import GSignInButton from 'vue-google-signin-button'
   export default {
@@ -56,7 +56,7 @@
         const profile = googleUser.getBasicProfile()
         this.profile = profile
         console.log(this.profile)
-        this.setStorage(this.profile.U3)
+        this.getUser(this.profile.U3)
         this.$router.push({name: 'dashboard'})
       },
       onSignInError (error) {
@@ -67,6 +67,21 @@
         domain = domain.slice(-14)
         this.googleSignInParams.hosted_domain = domain
         console.log(domain)
+      },
+      getUser (email) {
+        const postData = {
+          email: email
+        }
+        this.$http.post(getUserData, postData)
+          .then(response => {
+            if (response.status === 200) {
+              console.log(response.data[0].id)
+              window.sessionStorage.setItem('userId', response.data[0].id)
+              window.sessionStorage.setItem('userDivision', response.data[0].division)
+              window.sessionStorage.setItem('accessLevel', response.data[0].access_level)
+              window.sessionStorage.setItem('userName', response.data[0].name)
+            }
+          })
       }
     },
     components: {
