@@ -53,6 +53,7 @@
           })
       },
       onSignInSuccess (googleUser) {
+        console.log(googleUser)
         const profile = googleUser.getBasicProfile()
         this.profile = profile
         console.log(this.profile)

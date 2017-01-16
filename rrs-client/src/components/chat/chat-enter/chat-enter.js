@@ -19,7 +19,9 @@ methods.submitChat = function () {
     })
 }
 
-methods.getDate = function () {}
+methods.getDate = function () {
+  this.message.date = Date()
+}
 
 methods.setTaskId = function () {
   this.taskId = this.task_id

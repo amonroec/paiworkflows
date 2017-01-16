@@ -6,7 +6,7 @@
     	<div class="messageRight">
     		<a class="messageName"> {{message.name}} </a>
     		<a class="messageText"> {{message.text}} </a>
-    		<a class="messageTimestamp"> Wednesday - January 12, 2017 - 00:00:00 </a>
+    		<a class="messageTimestamp"> {{message.date}} </a>
     	</div>
     	<div class="line"></div>
     </div>
