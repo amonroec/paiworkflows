@@ -376,7 +376,13 @@ h3 {
 	width: 100%;
 	text-align: center;
 }
-
+.headers {
+	font-family: helvetica;
+	font-size: 22px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 35px;
+}
 
 //Assign task
 #assignTask {
@@ -417,7 +423,7 @@ float: left;
 }
 #chatDisplay {
 	width: 100%;
-	height: calc(100vh - #{$top-bar-height} - #{$summary-bar-height} - 120px);
+	height: calc(100vh - #{$top-bar-height} - #{$summary-bar-height} - 170px);
 	overflow: scroll;
 }
 #chatEnter {
@@ -476,8 +482,9 @@ float: left;
 .line {
 	position: relative;
 	float: left;
-	width: 95%;
-    border-bottom: 1px solid black;
+	margin-left: 3%;
+	width: 94%;
+    border-bottom: 1px solid $grey;
     margin-bottom: 3px;
 }
 .g-signin-button {
