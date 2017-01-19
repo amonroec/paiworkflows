@@ -1,5 +1,6 @@
 import ChatEnter from './../chat-enter/ChatEnter'
 import ChatDisplay from './../chat-display/ChatDisplay'
+import {mapState} from 'vuex'
 
 var methods = {}
 
@@ -24,8 +25,13 @@ module.exports = {
       this.setTaskId()
     }
   },
+  computed: {
+    ...mapState({
+      chatStore: state => state.chatStore
+    })
+  },
   created: function () {
-    this.setTaskId()
+    this.$store.dispatch('setChatMessages')
   },
   components: {
     ChatEnter,

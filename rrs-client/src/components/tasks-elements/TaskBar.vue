@@ -43,5 +43,5 @@
   </div>
 </template>
 <script>
-module.export = require('./live-request.js')
+module.export = require('./task-bar.js')
 </script>

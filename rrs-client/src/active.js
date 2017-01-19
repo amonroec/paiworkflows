@@ -1,30 +1,58 @@
-var active = {}
+var methods = {}
 
-active.setTask = function (task) {
+methods.setTask = function (task) {
   this.task = task
   return
 }
 
-active.getTask = function () {
+methods.getTask = function () {
   return this.task
 }
 
-active.setWorkflow = function (id) {
+methods.setWorkflow = function (id) {
   this.workflowId = id
   return
 }
 
-active.getWorkflowId = function () {
+methods.getWorkflowId = function () {
   return this.workflowId
+}
+
+methods.setCurrentUser = function (user) {
+  /*
+  this.user.name = user['name']
+  this.user.email = user['email']
+  this.user.division = user['division']
+  this.user.access_level = user['access_level']
+  */
+  this.name = user.name
+  this.email = user.email
+  this.division = user.division
+  this.access_level = user.access_level
+  return
+}
+
+methods.getCurrentUser = function () {
+  var currentUser = {
+    name: this.name,
+    email: this.email,
+    division: this.division,
+    access_level: this.access_level
+  }
+  return currentUser
 }
 
 module.exports = {
   name: 'active',
-  data: function (done) {
+  data: function () {
     return {
       task: {},
-      workflowId: ''
+      workflowId: '',
+      name: '',
+      email: '',
+      division: '',
+      access_level: ''
     }
   },
-  methods: active
+  methods: methods
 }

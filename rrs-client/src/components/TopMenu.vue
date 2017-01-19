@@ -1,5 +1,5 @@
 <template>
-  <div id="topMenuDiv">
+  <div id="topMenuDiv" v-if="userStore.authUser !== null && userStore.authUser.access_token">
     <div class="button-div">
       <div class="subcat-link">
         <router-link :to="{ name: 'dashboard' }" append>Dashboard</router-link>
@@ -11,7 +11,8 @@
         </div>
       </div>
       <div class="subcat-link">
-        <router-link :to="{ name: 'profile' }" append>{{name}}</router-link>
+        <div id="image"><img v-bind:src="userStore.authUser.picture"></img></div>
+        <router-link id="routerLink" :to="{ name: 'profile' }" append><div>{{userStore.authUser.name}}</div></router-link>
       </div>
     </div>
   </div>

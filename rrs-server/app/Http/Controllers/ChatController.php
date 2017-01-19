@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+USE Vinkla\Pusher\Facades\Pusher as LaravelPusher;
 use App\Chat;
 
 class ChatController extends Controller
@@ -30,7 +31,7 @@ class ChatController extends Controller
 	    	$req->task_id = $taskId;
 	    	$req->messages = $merged;
 	    	$req->save();
-	    	return $count;
+            return $this->getMessageOnSubmit($taskId);
     	}else{
     		$incomingMessage = [$request->input('message')];
     		//$array = array_push($check, $request->input('message'));
@@ -38,8 +39,16 @@ class ChatController extends Controller
     		$merged = array_merge($array, $incomingMessage);
     		$req = Chat::where('task_id', $taskId)
     					->update(['messages' => json_encode($merged)]);
-    		return $count;
+            return $this->getMessageOnSubmit($taskId);
     	}
+    }
+
+    protected function getMessageOnSubmit($taskId){
+        $check = Chat::select('messages')
+                    ->where('task_id', '=', $taskId)
+                    ->get();
+        LaravelPusher::trigger('chat_channel', 'chat_entered', ['messages' => $check]);
+        return 'getMessageOnSubmit';
     }
 
     protected function checkMessages($taskId){

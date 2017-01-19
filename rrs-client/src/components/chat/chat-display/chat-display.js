@@ -1,4 +1,5 @@
 import {getMessages} from './../../../config'
+import {mapState} from 'vuex'
 var methods = {}
 
 methods.getMessages = function () {
@@ -26,6 +27,11 @@ module.exports = {
     }
   },
   methods: methods,
+  computed: {
+    ...mapState({
+      chatStore: state => state.chatStore
+    })
+  },
   props: {
     task_id: ''
   },
@@ -34,9 +40,5 @@ module.exports = {
       this.setTaskId()
       this.getMessages()
     }
-  },
-  created: function () {
-    this.setTaskId()
-    this.getMessages()
   }
 }

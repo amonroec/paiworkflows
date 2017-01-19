@@ -172,17 +172,41 @@ html, body {
   float: left; }
 
 .button-div {
-  float: right; }
+  float: right;
+  margin-top: 10px; }
 
 .subcat-link {
   width: 200px;
+  height: 25px;
   text-decoration: none;
   background-color: grey;
   margin: 2px;
   float: left;
   color: white;
-  font-family: helvetica;
-  text-align: center; }
+  font-family: helvetica; }
+
+.subcat-link div {
+  position: relative;
+  width: 140px;
+  height: 20px;
+  text-align: center;
+  float: right; }
+
+.subcat-link #image {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  float: left;
+  background-color: green; }
+
+.subcat-link img {
+  width: 100%;
+  height: 100%; }
+
+.subcat-link #routerLink {
+  width: calc(100% - 40px);
+  height: 20px;
+  float: left; }
 
 #subcat-request:hover #request-dropdown {
   display: block;
@@ -193,22 +217,25 @@ html, body {
   z-index: 100; }
 
 .subcat-div a {
-  width: 100%;
-  height: 20px; }
+  width: calc(100% - 50px);
+  height: 20px;
+  margin-top: 15px;
+  float: left; }
 
 #request-dropdown {
   display: none;
   visibility: hidden; }
 
 .button-div a {
-  width: 200px;
+  width: 100%;
   text-decoration: none;
   background-color: grey;
   margin-top: 2px;
   float: left;
   color: white;
   font-size: 18px;
-  font-family: helvetica; }
+  font-family: helvetica;
+  text-align: center; }
 
 .subcat-div {
   width: 100%;

@@ -1,5 +1,4 @@
 import {tasksUrl, getSingleTask} from './../../config'
-import ArtpackDisplay from './../form-displays/ArtpackDisplay'
 var Vue = require('Vue')
 var methods = {}
 

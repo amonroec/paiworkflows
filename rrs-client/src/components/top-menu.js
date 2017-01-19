@@ -1,4 +1,6 @@
 import {getWorkflows} from './../config'
+import {mapState} from 'vuex'
+
 var Active = require('./../active.js')
 var methods = {}
 
@@ -30,8 +32,9 @@ module.exports = {
     }
   },
   methods: methods,
-  created: function () {
-    this.getUser()
-    this.getWorkflows()
+  computed: {
+    ...mapState({
+      userStore: state => state.userStore
+    })
   }
 }

@@ -2,6 +2,7 @@
   import {loginUrl, getHeader, userUrl, getUserData} from './../config'
   import {clientId, clientSecret} from './../env'
   import GSignInButton from 'vue-google-signin-button'
+  import {mapState} from 'vuex'
   export default {
     data () {
       return {
@@ -53,12 +54,32 @@
           })
       },
       onSignInSuccess (googleUser) {
-        console.log(googleUser)
-        const profile = googleUser.getBasicProfile()
-        this.profile = profile
+        this.profile = googleUser
         console.log(this.profile)
-        this.getUser(this.profile.U3)
-        this.$router.push({name: 'dashboard'})
+        const postData = {
+          email: this.profile['w3'].U3,
+          name: this.profile['w3'].ig
+        }
+        this.$http.post(getUserData, postData)
+          .then(response => {
+            if (response.status === 200) {
+              console.log(response.data)
+              const authUser = {}
+              authUser.access_token = this.profile['Zi'].access_token
+              authUser.refresh_token = ''
+              authUser.email = response.data[0].email
+              authUser.name = response.data[0].name
+              authUser.id = response.data[0].id
+              authUser.access_level = response.data[0].access_level
+              authUser.division = response.data[0].division
+              authUser.picture = this.profile['w3'].Paa
+              window.localStorage.setItem('authUser', JSON.stringify(authUser))
+              this.$store.dispatch('setUserObject', authUser)
+              this.$router.push({name: 'dashboard'})
+            } else {
+              return 'failed'
+            }
+          })
       },
       onSignInError (error) {
         console.log('OH NOES', error)
@@ -68,22 +89,12 @@
         domain = domain.slice(-14)
         this.googleSignInParams.hosted_domain = domain
         console.log(domain)
-      },
-      getUser (email) {
-        const postData = {
-          email: email
-        }
-        this.$http.post(getUserData, postData)
-          .then(response => {
-            if (response.status === 200) {
-              console.log(response.data[0].id)
-              window.sessionStorage.setItem('userId', response.data[0].id)
-              window.sessionStorage.setItem('userDivision', response.data[0].division)
-              window.sessionStorage.setItem('accessLevel', response.data[0].access_level)
-              window.sessionStorage.setItem('userName', response.data[0].name)
-            }
-          })
       }
+    },
+    computed: {
+      ...mapState({
+        userStore: state => state.userStore
+      })
     },
     components: {
       GSignInButton
