@@ -30,7 +30,7 @@ class TasksController extends Controller
     public function loadTasks(Request $request){
     	//$tasks = Task::all();
         $tasks = Task::select()
-                    ->where('app_worker', '=', $request->userId)
+                    ->where('app_worker', '=', $request->input('userId'))
                     ->get();
     	return $tasks;
     }

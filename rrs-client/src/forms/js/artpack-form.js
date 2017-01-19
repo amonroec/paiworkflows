@@ -1,5 +1,5 @@
-import {artpackUrl, uploadFile, getWholeWorkflow} from './../../config'
-var Active = require('./../../active.js')
+import {artpackUrl} from './../../config'
+import {mapState} from 'vuex'
 var methods = {}
 
 methods.handleSubmitForm = function () {
@@ -14,37 +14,18 @@ methods.handleSubmitForm = function () {
     package_type: this.form_submit.package_type,
     style_preference: this.form_submit.style_preference,
     location_course: this.form_submit.location_course,
-    csr_name: this.form_submit.csr_name,
+    submitted_by: this.userStore.authUser.id,
     manipulate: this.selected,
     design_num: this.form_submit.design_num,
     description_box: this.form_submit.description_box,
-    threads: this.form_submit.threads
+    threads: this.form_submit.threads,
+    workflow_id: this.workflowStore.currentWorkflow.id
   }
   this.$http.post(artpackUrl, postData)
     .then(response => {
       if (response.status === 200) {
-        const postData2 = {
-          image: this.image
-        }
-        this.$http.post(uploadFile, postData2)
-          .then(response => {
-            console.log(response)
-            if (response.status === 200) {
-              this.$router.push({name: 'dashboard'})
-            }
-          })
+        console.log(response)
       }
-    })
-}
-
-methods.pullWorkflow = function () {
-  const postData = {
-    workflow_id: this.workflowId
-  }
-  this.$http.post(getWholeWorkflow, postData)
-    .then(response => {
-      this.workflow = response.data
-      console.log(this.workflow[0])
     })
 }
 
@@ -54,10 +35,6 @@ methods.onFileChange = function (e) {
     return
   }
   this.image = files[0]
-}
-
-methods.getWorkflowId = function () {
-  this.workflowId = Active.methods.getWorkflowId()
 }
 
 module.exports = {
@@ -79,19 +56,27 @@ module.exports = {
         package_type: '',
         style_preference: '',
         location_course: '',
-        csr_name: '',
+        submitted_by: '',
         manipulate: '',
         design_num: '',
         description_box: '',
         threads: ''
       },
       image: '',
-      workflowId: '',
-      workflow: []
+      task: {
+        app_worker: '',
+        stage: ''
+      }
     }
   },
   methods: methods,
+  computed: {
+    ...mapState({
+      userStore: state => state.userStore,
+      workflowStore: state => state.workflowStore
+    })
+  },
   created: function () {
-    this.getWorkflowId()
+    console.log(this.userStore)
   }
 }

@@ -2,7 +2,7 @@
 <div class="artpack-form">
 <center>
   <h1>Artpack Request Form</h1>
-  <form v-on:submit.prevent="pullWorkflow()">
+  <form v-on:submit.prevent="handleSubmitForm()">
     <table>
       <tbody>
         <tr>

@@ -56,8 +56,12 @@ class SubmitForm extends Controller
     }
 
     public function artpackSubmit(Request $request) {
+        $workflow_id = $request->input('workflow_id');
+        $submit = $request->input('submitted_by');
+        $task_id = $this->newTaskSubmit($workflow_id, $submit, 'artpack');
 				$req = new artpack;
-        $req->artpack_num = $request->input('artpack_num');
+        //$req->artpack_num = $request->input('artpack_num');
+        $req->task_id = $task_id;
         $req->rep_name = $request->input('rep_name');
         $req->turn_time = $request->input('turn_time');
         $req->account_name = $request->input('account_name');
@@ -67,14 +71,14 @@ class SubmitForm extends Controller
         $req->package_type = $request->input('package_type');
         $req->style_preference = $request->input('style_preference');
         $req->course_location = $request->input('location_course');
-        $req->csr_name = $request->input('csr_name');
+        $req->submitted_by = $request->input('submitted_by');
         $req->manipulate_logo = $request->input('manipulate');
         $req->num_designs = $request->input('design_num');
         $req->description = $request->input('description_box');
         $req->threads = $request->input('threads');
         $id = artpack::insertGetId(
           [
-            'artpack_num' => $req->artpack_num,
+            'task_id' => $task_id,
             'rep_name' => $req->rep_name,
             'turn_time' => $req->turn_time,
             'account_name' => $req->account_name,
@@ -84,7 +88,7 @@ class SubmitForm extends Controller
             'package_type' => $req->package_type,
             'style_preference' => $req->style_preference,
             'course_location' => $req->course_location,
-            'csr_name' => $req->csr_name,
+            'submitted_by' => $req->submitted_by,
             'manipulate_logo' => $req->manipulate_logo,
             'num_designs' => $req->num_designs,
             'description' => $req->description,
@@ -92,7 +96,7 @@ class SubmitForm extends Controller
           ]
         );
         //$this->getNextTask($id, 'artpacks');
-        return $this->taskSubmit($id, 'artpacks');
+        return;
         //return redirect()->action('TasksController@taskSubmit', $id, 'artpacks');
         //return $this->taskSubmit($id)
     }
@@ -104,5 +108,20 @@ class SubmitForm extends Controller
         $task->table_name = $order;
         $task->save();
         return;
+    }
+
+    public function newTaskSubmit($id, $person, $table){
+      $req = new Task;
+      $req->workflow_id = $id;
+      $req->submitted_by = $person;
+
+      $task_id = Task::insertGetId(
+        [
+          'table_name' => $table,
+          'workflow_id' => $req->workflow_id,
+          'submitted_by' => $req->submitted_by
+        ]
+      );
+      return $task_id;
     }
 }

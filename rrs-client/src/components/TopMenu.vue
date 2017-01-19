@@ -7,7 +7,7 @@
       <div class="subcat-link" id="subcat-request">
         <a name="requestForm" id="requestForm">Workflows</a>
         <div class="subcat-div" id="request-dropdown">
-          <a href="javascript:void(0)" v-for="workflow in workflows" v-on:click="workflowClick(workflow.form_name, workflow.id)">{{workflow.workflow_name}}</a>
+          <a href="javascript:void(0)" v-for="workflow in workflows" v-on:click="workflowClick(workflow)">{{workflow.workflow_name}}</a>
         </div>
       </div>
       <div class="subcat-link">

@@ -1,7 +1,6 @@
 import {getWorkflows} from './../config'
 import {mapState} from 'vuex'
 
-var Active = require('./../active.js')
 var methods = {}
 
 methods.getUser = function () {
@@ -10,15 +9,19 @@ methods.getUser = function () {
 
 methods.getWorkflows = function () {
   this.$http.get(getWorkflows)
-    .then(response => {
-      this.workflows = response.data
-      console.log(this.workflows)
-    })
+  .then(response => {
+    this.workflows = response.data
+    /*
+    this.$store.dispatch('setWorkflows', this.workflows)
+    */
+    console.log(this.workflows)
+  })
 }
 
-methods.workflowClick = function (form, id) {
-  Active.methods.setWorkflow(id)
-  if (form === 'artpack') {
+methods.workflowClick = function (workflow) {
+  this.$store.dispatch('setCurrentWorkflow', workflow)
+  console.log(workflow)
+  if (workflow.form_name === 'artpack') {
     this.$router.push({name: 'artpackForm'})
   }
 }
@@ -34,7 +37,11 @@ module.exports = {
   methods: methods,
   computed: {
     ...mapState({
-      userStore: state => state.userStore
+      userStore: state => state.userStore,
+      workflowStore: state => state.workflowStore
     })
+  },
+  created: function () {
+    this.getWorkflows()
   }
 }
