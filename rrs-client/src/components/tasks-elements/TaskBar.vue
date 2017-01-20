@@ -1,47 +1,40 @@
 <template>
   <div class="task-bar">
-    <div v-for="task in tasks_array">
-        <form class="taskform" v-on:submit.prevent="linkData">
-          <input
-            type="hidden"
-            name="order_id"
-            :id="task.order_id"
-            :value="task.order_id"
-          >
-          <input
-            type="hidden"
-            name="table_name"
-            :id="task.table_name"
-            :value="task.table_name"
-          >
-          <a class="task" v-if="task[1] === 'embroidery'"  href="javascript:void(0)" v-on:click="setSingleTask(task[0][0].id, task[1])">
-            <div>
-              <table>
-                <tbody>
-                  <tr>/
-                    <td>{{ task[1] }}</td>
-                    <td>{{ task[0][0].id }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </a>
-          <a class="task" v-if="task[1] === 'artpacks'"  href="javascript:void(0)" v-on:click="setSingleTask(task[0][0].id, task[1])">
-            <div>
-              <table>
-                <tbody>
-                  <tr>
-                    <td>{{ task[1] }}</td>
-                    <td>{{ task[0][0].id }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </a>
-        </form>
+    <h2>Current Tasks</h2>
+    <div v-for="task in taskStore.tasks">
+      <form class="taskform" v-on:submit.prevent="linkData">
+        <a class="task" v-if="task.table_name === 'embroidery'"  href="javascript:void(0)" v-on:click="setCurrentTask(task)">
+          <div>
+            <table>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </a>
+        <a class="task" v-if="task.table_name === 'artpacks'"  href="javascript:void(0)" v-on:click="setCurrentTask(task)">
+          <div>
+            <table>
+              <tbody>
+                <tr>
+                  <td>{{ task.id }}</td>
+                  <td>{{ task.table_name }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </a>
+      </form>
+    </div>
+    <div>
+      <h3>You have no tasks assigned</h3>
     </div>
   </div>
 </template>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
-module.export = require('./task-bar.js')
+module.exports = require('./task-bar.js')
 </script>

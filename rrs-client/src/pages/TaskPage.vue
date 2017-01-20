@@ -1,6 +1,7 @@
 <template>
   <div id="taskPage">
-  	<task-bar></task-bar>
+    <task-bar></task-bar>
+    <display-form></display-form>
   </div>
 </template>
 <script>

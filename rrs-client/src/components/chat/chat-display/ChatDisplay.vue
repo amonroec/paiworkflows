@@ -1,7 +1,7 @@
 <template>
 <div id="chatDisplay">
   <div class="messageHolder">
-    <div v-if="messages!==''" class="message" v-for="message in messages">
+    <div class="message" v-for="message in taskStore.currentChat">
     	<div class="messageLeft"></div>
     	<div class="messageRight">
     		<a class="messageName"> {{message.name}} </a>

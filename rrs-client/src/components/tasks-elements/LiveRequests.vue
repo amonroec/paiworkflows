@@ -2,7 +2,7 @@
 <div id="live-orders">
   <div class="task-bar">
     <h2>Current Tasks</h2>
-    <div v-for="task in tasks_array">
+    <div v-for="task in taskStore.tasks">
         <form class="taskform" v-on:submit.prevent="linkData">
           <div class="task-side"><div>
           <input
@@ -17,25 +17,25 @@
             :id="task.table_name"
             :value="task.table_name"
           >
-          <a class="task" v-if="task[1][0] === 'embroidery'"  href="javascript:void(0)" v-on:click="setSingleTask(task[0][0].id, task[1][0])">
+          <a class="task" v-if="task.table_name === 'embroidery'"  href="javascript:void(0)" v-on:click="setCurrentTask(task)">
             <div>
               <table>
                 <tbody>
                   <tr>
-                    <td>{{ task[1][0] }}</td>
-                    <td>{{ task[0][0].id }}</td>
+                    <td></td>
+                    <td></td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </a>
-          <a class="task" v-if="task[1][0] === 'artpacks'"  href="javascript:void(0)" v-on:click="setSingleTask(task)">
+          <a class="task" v-if="task.table_name === 'artpacks'"  href="javascript:void(0)" v-on:click="setCurrentTask(task)">
             <div>
               <table>
                 <tbody>
                   <tr>
-                    <td>{{ task[1][0] }}</td>
-                    <td>{{ task[0][0].id }}</td>
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.table_name }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -48,7 +48,6 @@
     </div>
   </div>
   <div id="displayForm">
-    <artpack-display v-if="table_name === 'artpacks'" transition="fade" transition-mode="out-in" :active_array.sync="active_array.task_array"></artpack-display>
   </div>
 </div>
 </template>

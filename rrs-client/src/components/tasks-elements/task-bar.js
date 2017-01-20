@@ -1,104 +1,46 @@
-import {tasksUrl, getSingleTask} from './../../config'
-var Vue = require('Vue')
+import {mapState} from 'vuex'
+import {getArtpack, getMessages} from './../../config'
 var methods = {}
 
-methods.loadTasks = function () {
-  this.$http.get(tasksUrl)
+methods.setCurrentTask = function (task) {
+  this.$store.dispatch('setCurrentTask', task)
+  this.getArtpack()
+}
+
+methods.getArtpack = function () {
+  const postData = {
+    task_id: this.taskStore.currentTask.id
+  }
+  this.$http.post(getArtpack, postData)
     .then(response => {
       if (response.status === 200) {
-        this.tasks = response.data
-        var i = response.data.length
-        for (var j = 0; j < i; j++) {
-          /*
-          this.linkData(response.data[j]['order_id'], response.data[j]['table_name'], j)
-          */
-          var groupData = {orderId: response.data[j]['order_id'], tableName: response.data[j]['table_name']}
-          this.data_array.push(groupData)
-        }
-        const postData = {
-          array: this.data_array
-        }
-        this.$http.post(getSingleTask, postData)
-          .then(response => {
-            if (response.status === 200) {
-              this.tasks_array = response.data
-              console.log(this.tasks_array)
-            }
-          })
-      } else {
-        console.log('noooooo')
+        this.$store.dispatch('setCurrentForm', response.data[0])
+        this.getChat()
       }
     })
 }
 
-methods.linkData = function (orderId, tableName, count) {
+methods.getChat = function () {
   const postData = {
-    order_id: orderId,
-    table_name: tableName
+    task_id: this.taskStore.currentTask.id
   }
-  this.loadSingleTasks(postData, count)
-}
-
-methods.loadSingleTasks = function (postData, count) {
-  this.$http.post(getSingleTask, postData)
-  .then(response => {
-    if (response.status === 200) {
-      if (count === 0) {
-        this.single_task = response.data
-      }
-      this.tasks_array.push(response.data)
-    } else {
-      console.log('noooooo')
-    }
-  })
-}
-
-methods.linkSingleTask = function (orderId, tableName) {
-  this.order_id = orderId
-  this.table_name = tableName
-  /*
-  var count = this.tasks_array.length
-  for (var i = 0; i < count; i++) {
-    if (this.tasks_array[i][0]['id'] === parseInt(orderId)) {
-      this.single_task = this.tasks_array[i]
-    }
-  }
-  */
-}
-
-methods.setSingleTask = function (orderId, tableName) {
-  this.order_id = orderId
-  this.table_name = tableName
-  /*
-  const postData = {
-    order_id: orderId,
-    table_name: tableName
-  }
-
   console.log(postData)
-  this.$http.post(setSingleTask, postData)
-  .then(response => {
-    console.log(response.body)
-  })
-  */
+  this.$http.post(getMessages, postData)
+    .then(response => {
+      this.$store.dispatch('setCurrentChat', response.data[0].messages)
+      console.log(response.data[0].messages)
+    })
 }
 
 module.exports = {
-  name: 'liveOrders',
   data: function () {
     return {
-      tasks: [],
-      task: [],
-      single_task: [],
-      tasks_array: [],
-      order_id: '',
-      table_name: '',
-      data_array: []
     }
   },
   methods: methods,
-  render: Vue.component('artpack-display'),
-  created: function () {
-    this.loadTasks()
+  computed: {
+    ...mapState({
+      taskStore: state => state.taskStore
+    })
   }
 }

@@ -37,7 +37,7 @@ class TasksController extends Controller
 
     public function getArtpack(Request $request){
         $task = artpack::select()
-                    ->where('id', '=', $request->order_id)
+                    ->where('task_id', $request->input('task_id'))
                     ->get();
         return $task;
     }

@@ -40,9 +40,10 @@ html, body {
   height: calc(100vh - 50px);
   float: left; }
 
-#artpackDisplayDiv {
-  width: 100%;
-  height: 100%; }
+#displayForm {
+  width: calc(100vw - $task-bar-width);
+  height: calc(100vh - 50px);
+  float: left; }
 
 .activity-feed {
   width: 320px;

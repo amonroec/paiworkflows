@@ -9,7 +9,6 @@ import App from './App'
 import LoginPage from './pages/LoginPage'
 import DashboardPage from './pages/DashboardPage'
 import ProfilePage from './pages/ProfilePage'
-import TasksPage from './pages/TasksPage'
 import CalendarPage from './pages/CalendarPage'
 import GroupPage from './pages/GroupPage'
 import WorkflowPage from './pages/WorkflowPage'
@@ -20,7 +19,6 @@ import EmbroideryForm from './forms/EmbroideryForm'
 import ArtpackForm from './forms/ArtpackForm'
 import SingleTask from './pages/SingleTask'
 import LiveRequests from './components/tasks-elements/LiveRequests'
-import ArtpackDisplay from './components/form-displays/ArtpackDisplay.vue'
 import ChatBoard from './components/chat/chat-board/ChatBoard'
 import GSignInButton from 'vue-google-signin-button'
 import TaskPage from './pages/TaskPage'
@@ -31,7 +29,6 @@ Vue.use(VueResource)
 Vue.use(Vuex)
 
 Vue.component('app', App)
-Vue.component('artpackDisplay', ArtpackDisplay)
 Vue.component('chatBoard', ChatBoard)
 
 /* eslint-disable no-new */
@@ -40,7 +37,6 @@ const routes = [
   {path: '/', component: LoginPage, name: 'home'},
   {path: '/dashboard', component: DashboardPage, name: 'dashboard'},
   {path: '/profile', component: ProfilePage, name: 'profile'},
-  {path: '/tasks', component: TasksPage, name: 'tasks'},
   {path: '/calendar', component: CalendarPage, name: 'calendar'},
   {path: '/group', component: GroupPage, name: 'group'},
   {path: '/workflow', component: WorkflowPage, name: 'workflow'},

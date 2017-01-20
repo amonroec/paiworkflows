@@ -29,15 +29,16 @@
     },
     created () {
       const userObj = JSON.parse(window.localStorage.getItem('authUser'))
-      this.$store.dispatch('setUserObject', userObj)
-      this.getTasks()
-      console.log('I was created')
+      if (userObj !== null) {
+        this.$store.dispatch('setUserObject', userObj)
+        this.getTasks()
+        console.log('I was created')
+      }
     }
   }
 </script>
 <template>
 <div id="body">
-  <pre>{{ taskStore }}</pre>
   <div id="topMenu">
     <top-menu></top-menu>
   </div>

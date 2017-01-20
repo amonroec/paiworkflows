@@ -1,3 +1,4 @@
+var methods = {}
 import {mapState} from 'vuex'
 
 module.exports = {
@@ -5,6 +6,7 @@ module.exports = {
     return {
     }
   },
+  methods: methods,
   computed: {
     ...mapState({
       taskStore: state => state.taskStore

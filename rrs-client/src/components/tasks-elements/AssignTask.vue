@@ -2,12 +2,14 @@
 <div id="taskStage">
   <div v-if="stage==1" id="assignTask">
     <h1>Needs Assigned!!!</h1>
-    <select v-model="selectedWorker">
+    <!--
+    <select v-if="workers.length > 0" v-model="selectedWorker">
       <option v-bind:value="'assignWorker'">Assign to Worker</option>
       <option v-for="worker in workers" v-bind:value="worker.id">
         {{ worker.name }}
       </option>
     </select>
+    -->
     <input
       type="button"
       name="assign_task"

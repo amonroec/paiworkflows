@@ -1,15 +1,15 @@
 import TaskBar from './../../components/tasks-elements/TaskBar'
+import DisplayForm from './../../components/form-displays/DisplayForm'
 var methods = {}
 
 module.exports = {
-  name: 'active',
   data: function () {
     return {
-
     }
   },
   methods: methods,
   components: {
-    TaskBar
+    TaskBar,
+    DisplayForm
   }
 }

@@ -1,4 +1,4 @@
-import ChatBoard from './chat/chat-board/ChatBoard'
+import ChatBoard from './../../chat/chat-board/ChatBoard'
 var methods = {}
 
 methods.setTaskId = function () {

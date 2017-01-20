@@ -41,7 +41,7 @@ class RequestUsersController extends Controller
     public function getWorkers(Request $request) {
         $req = User::select()
                 ->where('division', '=', $request->division)
-                ->where('access_level', '>', $request->accessLevel)
+                ->where('access_level', '>=', $request->accessLevel)
                 ->get();
         return $req;
     }
