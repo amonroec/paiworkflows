@@ -21,6 +21,7 @@ export const getMessages = apiDomain + 'api/getMessages'
 export const getWorkflows = apiDomain + 'api/getWorkflows'
 export const getWholeWorkflow = apiDomain + 'api/getWholeWorkflow'
 export const getUserData = apiDomain + 'api/getUserData'
+export const getLiveTask = apiDomain + 'api/tasks/getTask'
 
 export const getHeader = function () {
   const tokenData = JSON.parse(window.localStorage.getItem('authUser'))

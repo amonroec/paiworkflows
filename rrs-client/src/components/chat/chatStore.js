@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import {getMessages} from './../../config.js'
 
-var Active = require('./../../active.js')
-
 const state = {
   messageList: {}
 }
@@ -15,7 +13,7 @@ const mutations = {
 
 const actions = {
   setChatMessages: ({commit}, messageList) => {
-    var id = Active.methods.getTask()
+    var id = 10
     console.log('iddddd')
     console.log(id)
     const postData = {

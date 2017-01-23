@@ -60,10 +60,16 @@ Route::post('/tasks/singleTask', function (Request $request) {
 Route::resource('/tasks/singleTask', 'TasksController@setTask');
 
 Route::post('/tasks/getSingleTask', function (Request $request) {
+	return redirect()->action('TasksController@getForm');
+});
+
+Route::resource('/tasks/getSingleTask', 'TasksController@getForm');
+
+Route::post('/tasks/getTask', function (Request $request) {
 	return redirect()->action('TasksController@getTask');
 });
 
-Route::resource('/tasks/getSingleTask', 'TasksController@getTask');
+Route::resource('/tasks/getTask', 'TasksController@getTask');
 
 Route::post('/getPeople', function (Request $request) {
 	return redirect()->action('RequestUsersController@pullUsers');

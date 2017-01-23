@@ -1,5 +1,5 @@
 const state = {
-  currentWorkflow: null
+  currentWorkflow: {}
 }
 
 const mutations = {

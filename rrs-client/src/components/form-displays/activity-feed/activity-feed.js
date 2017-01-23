@@ -1,10 +1,6 @@
 import ChatBoard from './../../chat/chat-board/ChatBoard'
+import {mapState} from 'vuex'
 var methods = {}
-
-methods.setTaskId = function () {
-  this.taskId = this.task_id
-  console.log('taskId' + this.taskId)
-}
 
 module.exports = {
   data: function () {
@@ -13,18 +9,12 @@ module.exports = {
     }
   },
   methods: methods,
-  props: {
-    task_id: ''
-  },
-  watch: {
-    task_id: function (val, oldVal) {
-      this.setTaskId()
-    }
-  },
-  created: function () {
-    this.setTaskId()
-  },
   components: {
     ChatBoard
+  },
+  computed: {
+    ...mapState({
+      taskStore: state => state.taskStore
+    })
   }
 }

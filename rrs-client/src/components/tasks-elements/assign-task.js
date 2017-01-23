@@ -2,8 +2,6 @@ import {getWorkers, assignTask} from './../../config'
 var methods = {}
 
 methods.getWorkers = function () {
-  var division = window.sessionStorage.getItem('userDivision')
-  var accessLevel = window.sessionStorage.getItem('accessLevel')
   const postData = {
     division: division,
     accessLevel: accessLevel

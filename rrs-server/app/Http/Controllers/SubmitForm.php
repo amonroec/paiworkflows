@@ -76,7 +76,8 @@ class SubmitForm extends Controller
         $req->num_designs = $request->input('design_num');
         $req->description = $request->input('description_box');
         $req->threads = $request->input('threads');
-        $id = artpack::insertGetId(
+        $req->save();
+        /*$id = artpack::insertGetId(
           [
             'task_id' => $task_id,
             'rep_name' => $req->rep_name,
@@ -94,9 +95,9 @@ class SubmitForm extends Controller
             'description' => $req->description,
             'threads' => $req->threads
           ]
-        );
+        );*/
         //$this->getNextTask($id, 'artpacks');
-        return;
+        return $task_id;
         //return redirect()->action('TasksController@taskSubmit', $id, 'artpacks');
         //return $this->taskSubmit($id)
     }

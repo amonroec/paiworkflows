@@ -22,6 +22,7 @@ import LiveRequests from './components/tasks-elements/LiveRequests'
 import ChatBoard from './components/chat/chat-board/ChatBoard'
 import GSignInButton from 'vue-google-signin-button'
 import TaskPage from './pages/TaskPage'
+import SuccessfulSubmit from './pages/SuccessfulSubmit'
 
 Vue.use(GSignInButton)
 Vue.use(VueRouter)
@@ -47,7 +48,8 @@ const routes = [
   {path: '/request-form/artpack', component: ArtpackForm, name: 'artpackForm'},
   {path: '/tasks/single', component: SingleTask, name: 'singletask'},
   {path: '/tasks/live', component: LiveRequests, name: 'liverequests'},
-  {path: '/tasks/page', component: TaskPage, name: 'taskpage'}
+  {path: '/tasks/page', component: TaskPage, name: 'taskpage'},
+  {path: '/form/success', component: SuccessfulSubmit, name: 'successfulsubmit'}
 ]
 
 const router = new VueRouter({

@@ -3,6 +3,7 @@
     <h2>Current Tasks</h2>
     <div v-for="task in taskStore.tasks">
       <form class="taskform" v-on:submit.prevent="linkData">
+        <div class="task-side"><div>
         <a class="task" v-if="task.table_name === 'embroidery'"  href="javascript:void(0)" v-on:click="setCurrentTask(task)">
           <div>
             <table>

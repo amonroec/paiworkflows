@@ -61,6 +61,13 @@ class TasksController extends Controller
     }*/
 
     public function getTask(Request $request){
+        $task = Task::select()
+                    ->where('id', '=', $request->input('task_id'))
+                    ->get();
+        return $task;
+    }
+
+    public function getForm(Request $request){
     	/*if($request->table_name == 'artpacks'){
     		$task = artpack::select()
     							->where('id', '=', $request->order_id)

@@ -1,4 +1,4 @@
-import {artpackUrl} from './../../config'
+import {getLiveTask, artpackUrl} from './../../config'
 import {mapState} from 'vuex'
 var methods = {}
 
@@ -24,8 +24,23 @@ methods.handleSubmitForm = function () {
   this.$http.post(artpackUrl, postData)
     .then(response => {
       if (response.status === 200) {
-        console.log(response)
+        console.log(response.data)
+        /*
+        Active.methods.submitForm(response.data)
+        this.$router.push({name: 'successfulsubmit'})
+        */
       }
+    })
+}
+
+methods.getActualTask = function (taskId) {
+  const postData = {
+    task_id: taskId
+  }
+  console.log(postData)
+  this.$http.post(getLiveTask, postData)
+    .then(response => {
+      console.log(response)
     })
 }
 

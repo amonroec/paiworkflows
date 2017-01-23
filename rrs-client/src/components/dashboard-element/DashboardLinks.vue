@@ -26,7 +26,7 @@ export default {
           class="form-control"
           name="tasks"
           href="javascript:void(0)"
-          to="/tasks/live"
+          to="/tasks/page"
         >
           <div>
 	          <center>
