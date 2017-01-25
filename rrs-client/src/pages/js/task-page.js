@@ -8,6 +8,11 @@ module.exports = {
     }
   },
   methods: methods,
+  events: {
+    'setCurrentWorkflow': function (data) {
+      this.$broadcast('passWorkflow', data)
+    }
+  },
   components: {
     TaskBar,
     DisplayForm

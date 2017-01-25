@@ -95,7 +95,7 @@ Route::post('/submitWorkflowForm', function (Request $request) {
 
 Route::resource('/submitWorkflowForm', 'WorkflowFormController@submitWorkflowForm');
 
-Route::get('/getWorkflows', function (Request $request) {
+Route::post('/getWorkflows', function (Request $request) {
 	return redirect()->action('WorkflowFormController@getWorkflows');
 });
 

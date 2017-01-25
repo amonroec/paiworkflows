@@ -58,7 +58,7 @@ html, body {
   height:calc(100% - 160px);
   float:left;
 }
-.summaryBar {
+#infoBar {
   width:100%;
   height:160px;
   background-color:grey;
@@ -518,5 +518,34 @@ float: left;
   background-color: #3c82f7;
   color: #fff;
   box-shadow: 0 3px 0 #0f69ff;
+}
+
+
+//info bar
+.stageBar {
+	width: 100px;
+	height:30px;
+	margin-left: 2px;
+	float:left;
+}
+.stageBar .stageComplete {
+	background-color: green;
+}
+.stageBar .stageNotComplete {
+	background-color: yellow;
+}
+#stageBarHolder {
+	height:30px;
+	width:100%;
+	float:left;
+}
+#taskInfo {
+	width: 100%;
+	float:left;
+}
+#taskInfo div {
+	background-color: #e0e0e0;
+	float:left;
+	margin:5px;
 }
 

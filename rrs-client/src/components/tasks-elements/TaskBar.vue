@@ -16,13 +16,13 @@
             </table>
           </div>
         </a>
-        <a class="task" v-if="task.table_name === 'artpacks'"  href="javascript:void(0)" v-on:click="setCurrentTask(task)">
+        <a class="task" v-if="task.table_name === 'artpack'"  href="javascript:void(0)" v-on:click="setCurrentTask(task)">
           <div>
             <table>
               <tbody>
                 <tr>
                   <td>{{ task.id }}</td>
-                  <td>{{ task.table_name }}</td>
+                  <td>Art Pack Request</td>
                 </tr>
               </tbody>
             </table>

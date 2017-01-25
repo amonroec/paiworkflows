@@ -4,6 +4,15 @@ var methods = {}
 
 methods.setCurrentTask = function (task) {
   this.$store.dispatch('setCurrentTask', task)
+  var workflowId = task.workflow_id
+  var workflows = this.workflowStore.workflows
+  var that = this
+  workflows.forEach(function (workflow) {
+    if (parseInt(workflow.id) === parseInt(workflowId)) {
+      that.$store.dispatch('setCurrentWorkflow', workflow)
+    }
+  })
+  console.log(this.workflowStore.currentWorkflow)
   this.getArtpack()
 }
 
@@ -24,11 +33,21 @@ methods.getChat = function () {
   const postData = {
     task_id: this.taskStore.currentTask.id
   }
-  console.log(postData)
   this.$http.post(getMessages, postData)
     .then(response => {
-      this.$store.dispatch('setCurrentChat', response.data[0].messages)
-      console.log(response.data[0].messages)
+      if (response.data.length === 0) {
+        var array = []
+        var obj = {
+          name: '',
+          text: 'No Messages',
+          date: ''
+        }
+        array.push(obj)
+        this.$store.dispatch('setCurrentChat', array)
+      } else {
+        console.log(response.data)
+        this.$store.dispatch('setCurrentChat', response.data[0].messages)
+      }
     })
 }
 
@@ -40,7 +59,8 @@ module.exports = {
   methods: methods,
   computed: {
     ...mapState({
-      taskStore: state => state.taskStore
+      taskStore: state => state.taskStore,
+      workflowStore: state => state.workflowStore
     })
   }
 }

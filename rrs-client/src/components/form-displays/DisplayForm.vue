@@ -1,8 +1,6 @@
 <template>
 <div id="displayForm">
-  <div id="summaryBar">
-  	<info-bar></info-bar>
-  </div>
+  <info-bar :workflow.async="workflow"></info-bar>
   <work-space></work-space>
   <activity-feed></activity-feed>
 </div>

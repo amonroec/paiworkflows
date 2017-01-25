@@ -1,11 +1,17 @@
 import {submitChat} from './../../../config.js'
+import {mapState} from 'vuex'
 import Pusher from 'pusher-js'
 
 var methods = {}
 
 methods.getNameId = function () {
+  /*
   this.message.name = window.sessionStorage.getItem('userName')
   this.message.id = window.sessionStorage.getItem('userId')
+  */
+  console.log(this.userStore.authUser.name)
+  this.message.name = this.userStore.authUser.name
+  this.message.id = this.userStore.authUser.id
 }
 
 methods.incomingChat = function (chatMessage) {
@@ -28,7 +34,7 @@ methods.submitChat = function () {
     console.log('incoming chat boyssss')
   })
   const postData = {
-    task_id: this.taskId,
+    task_id: this.taskStore.currentTask.id,
     message: this.message
   }
   console.log(postData)
@@ -47,7 +53,6 @@ methods.getDate = function () {
 }
 
 methods.setTaskId = function () {
-  this.taskId = this.task_id
 }
 
 module.exports = {
@@ -65,17 +70,14 @@ module.exports = {
     }
   },
   methods: methods,
-  props: {
-    task_id: ''
-  },
-  watch: {
-    task_id: function (val, oldVal) {
-      this.setTaskId()
-    }
+  computed: {
+    ...mapState({
+      userStore: state => state.userStore,
+      taskStore: state => state.taskStore
+    })
   },
   created: function () {
     this.getNameId()
-    this.setTaskId()
     this.getDate()
   }
 }

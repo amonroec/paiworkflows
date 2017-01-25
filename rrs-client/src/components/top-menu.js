@@ -8,7 +8,7 @@ methods.getUser = function () {
 }
 
 methods.getWorkflows = function () {
-  this.$http.get(getWorkflows)
+  this.$http.post(getWorkflows)
   .then(response => {
     this.workflows = response.data
     /*

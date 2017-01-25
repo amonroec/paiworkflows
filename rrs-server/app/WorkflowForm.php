@@ -9,5 +9,6 @@ class WorkflowForm extends Model
     protected $fillable = [
         'workflow_name',
 		'form_name',
+		'stage_num',
     ];
 }

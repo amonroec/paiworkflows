@@ -1,22 +1,32 @@
 <script>
   import {mapState} from 'vuex'
-  import {tasksUrl} from './config.js'
+  import {tasksUrl, getWorkflows} from './config.js'
   import TopMenu from './components/TopMenu'
+  import store from './store.js'
   export default {
     components: {
       TopMenu
     },
+    store,
     methods: {
       getTasks () {
         const postData = {
           userId: this.userStore.authUser.id
         }
-        console.log(postData)
         this.$http.post(tasksUrl, postData)
           .then(response => {
             if (response.status === 200) {
+              console.log(response.data)
               this.$store.dispatch('setTasksArray', response.data)
             }
+          })
+      },
+      getWorkflows () {
+        this.$http.post(getWorkflows)
+          .then(response => {
+            var workflows = response.data
+            this.$store.dispatch('setWorkflows', workflows)
+            console.log(workflows)
           })
       }
     },
@@ -32,6 +42,7 @@
       if (userObj !== null) {
         this.$store.dispatch('setUserObject', userObj)
         this.getTasks()
+        this.getWorkflows()
         console.log('I was created')
       }
     }
