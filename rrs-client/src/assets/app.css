@@ -516,6 +516,9 @@ h3 {
 .stageBar .stageComplete {
   background-color: green; }
 
+.stageBar .stageActive {
+  background-color: red; }
+
 .stageBar .stageNotComplete {
   background-color: yellow; }
 

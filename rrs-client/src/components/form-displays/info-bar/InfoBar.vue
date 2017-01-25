@@ -11,7 +11,8 @@
     <div id="stageBarHolder">
       <h1>Stage of Task</h1>
       <div class="stageBar" v-for="(step, index) in workflowSteps">
-        <div class="stageComplete" v-if="taskStore.currentTask.stage >= index">{{step.step_name}}</div>
+        <div class="stageComplete" v-if="taskStore.currentTask.stage > index">{{step.step_name}}</div>
+        <div class="stageActive" v-else-if="taskStore.currentTask.stage == index">{{step.step_name}}</div>
         <div class="stageNotComplete" v-else>{{step.step_name}}</div>
       </div>
     </div>
