@@ -526,22 +526,26 @@ float: left;
 
 //info bar
 .stageBar {
-	width: 100px;
-	height:30px;
-	margin-left: 2px;
-	float:left;
+    width: 120px;
+    height: 70px;
+    position:relative;
+    margin-left:5px;
+    float:left;
 }
-.stageBar .stageComplete {
+.stageComplete {
 	background-color: green;
+	height: 100%;
 }
-.stageBar .stageActive {
+.stageActive {
 	background-color: red;
+	height: 100%;
 }
-.stageBar .stageNotComplete {
+.stageNotComplete {
 	background-color: yellow;
+	height: 100%;
 }
 #stageBarHolder {
-	height:30px;
+	height:70px;
 	width:100%;
 	float:left;
 }
@@ -553,5 +557,25 @@ float: left;
 	background-color: #e0e0e0;
 	float:left;
 	margin:5px;
+}
+.stageBar:before,
+.stageBar:after {
+    display:inline-block;
+    content:"";
+    width:0;
+    height:0em;
+    border-style:solid;
+    position:absolute;
+}
+.stageBar:before {
+    left:0;
+    border-width:35px 0 35px 20px;
+    border-color:transparent transparent transparent green;    
+}
+.stageBar:after {
+    right:0;
+    top:0;
+    border-width:35px 0 35px 20px;
+    border-color:green transparent;    
 }
 
