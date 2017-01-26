@@ -59,7 +59,7 @@ class SubmitForm extends Controller
         $workflow_id = $request->input('workflow_id');
         $submit = $request->input('submitted_by');
         $task_id = $this->newTaskSubmit($workflow_id, $submit, 'artpack');
-				$req = new artpack;
+		$req = new artpack;
         //$req->artpack_num = $request->input('artpack_num');
         $req->task_id = $task_id;
         $req->rep_name = $request->input('rep_name');

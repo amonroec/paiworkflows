@@ -4,12 +4,13 @@ var methods = {}
 methods.addNewStep = function () {
   this.workflows.push({
     step_name: '',
-    task_type: 'SelectTaskType',
+    task_type: '',
     needs_assigned: '',
+    person_or_group: '',
     assigner: '',
-    assigned_group: 'select',
-    approval_type: 'select',
-    choose_person: 'select',
+    assigned_group: '',
+    approval_type: '',
+    choose_person: '',
     task_description: ''
   })
 }
@@ -18,7 +19,17 @@ methods.pullPeople = function () {
   this.$http.post(getPeople)
     .then(response => {
       this.people = response.data
+      this.getAdmins()
     })
+}
+
+methods.getAdmins = function () {
+  var that = this
+  this.people.forEach(function (person) {
+    if (parseInt(person.access_level) === 1) {
+      that.admins.push(person)
+    }
+  })
 }
 
 methods.pullGroups = function () {
@@ -57,33 +68,42 @@ module.exports = {
       workflows: [
         {
           step_name: '',
-          task_type: 'SelectTaskType',
+          task_type: '',
           needs_assigned: '',
+          person_or_group: '',
           assigner: '',
-          assigned_group: 'select',
-          approval_type: 'select',
-          choose_person: 'select',
+          assigned_group: '',
+          approval_type: '',
+          choose_person: '',
           task_description: ''
         }
       ],
       people: [],
       groups: [],
+      admins: [],
+      personOrGroup: [
+        { text: 'Person Or Group?', value: '' },
+        { text: 'Person', value: 'person' },
+        { text: 'Group', value: 'group' }
+      ],
       task_options: [
-        { text: 'Select Task Type', value: 'SelectTaskType' },
+        { text: 'Select Task Type', value: '' },
         { text: 'Upload', value: 'upload' },
         { text: 'Inquire', value: 'inquire' },
         { text: 'Edit File', value: 'edit' },
-        { text: 'Manual', value: 'manual' }
+        { text: 'Manual', value: 'manual' },
+        { text: 'Need Assigned?', value: 'assign' },
+        { text: 'Assign Group', value: 'assign_group' },
+        { text: 'Approve', value: 'approve' }
       ],
       approval_options: [
-        { text: 'None', value: 'None' },
         { text: 'Requesting Person', value: 'csr' },
         { text: 'Other Person', value: 'person' },
         { text: 'Any in Group', value: 'group' }
       ],
-      form_select: 'select',
+      form_select: '',
       form_options: [
-        { text: 'Select Form', value: 'select' },
+        { text: 'Select Form', value: '' },
         { text: 'Artpack Form', value: 'artpack' },
         { text: 'Embroidery Form', value: 'embroidery' }
       ]
