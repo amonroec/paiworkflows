@@ -1,5 +1,5 @@
 const state = {
-  currentTask: null,
+  currentTask: '',
   tasks: null,
   currentForm: {},
   currentChat: {}

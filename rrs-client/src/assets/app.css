@@ -209,13 +209,14 @@ html, body {
   height: 20px;
   float: left; }
 
-#subcat-request:hover #request-dropdown {
+#subcat-request:hover > #request-dropdown {
   display: block;
   visibility: visible;
   float: left;
   width: 100%;
+  height: 200px;
   background-color: #95f9a3;
-  z-index: 100; }
+  z-index: 300; }
 
 .subcat-div a {
   width: calc(100% - 50px);
@@ -389,6 +390,13 @@ html, body {
 .fade-enter, .fade-leave {
   opacity: 0; }
 
+h1 {
+  font-size: 25px;
+  width: 100%;
+  text-align: center;
+  font-family: helvetica;
+  color: grey; }
+
 h2 {
   color: white;
   width: 100%;
@@ -511,22 +519,26 @@ h3 {
   box-shadow: 0 3px 0 #0f69ff; }
 
 .stageBar {
-  width: 100px;
-  height: 30px;
-  margin-left: 2px;
+  width: 120px;
+  height: 70px;
+  position: relative;
+  margin-left: 5px;
   float: left; }
 
-.stageBar .stageComplete {
-  background-color: green; }
+.stageComplete {
+  background-color: green;
+  height: 100%; }
 
-.stageBar .stageActive {
-  background-color: red; }
+.stageActive {
+  background-color: red;
+  height: 100%; }
 
-.stageBar .stageNotComplete {
-  background-color: yellow; }
+.stageNotComplete {
+  background-color: yellow;
+  height: 100%; }
 
 #stageBarHolder {
-  height: 30px;
+  height: 70px;
   width: 100%;
   float: left; }
 
@@ -538,5 +550,64 @@ h3 {
   background-color: #e0e0e0;
   float: left;
   margin: 5px; }
+
+.stageBar:before,
+.stageBar:after {
+  display: inline-block;
+  content: "";
+  width: 0;
+  height: 0em;
+  border-style: solid;
+  position: absolute; }
+
+.stageBar:before {
+  left: 0;
+  border-width: 35px 0 35px 20px;
+  border-color: transparent transparent transparent green; }
+
+.stageBar:after {
+  right: 0;
+  top: 0;
+  border-width: 35px 0 35px 20px;
+  border-color: green transparent; }
+
+#taskStep {
+  width: calc(100% - 10px);
+  background-color: #68ba7c;
+  position: relative;
+  display: flex;
+  padding: 5px; }
+
+#submitForApproval {
+  position: relative;
+  width: 100%;
+  height: 100%; }
+
+#submitForApproval input[type="button"] {
+  width: 200px;
+  height: 30px; }
+
+#declineArtReason {
+  position: relative;
+  width: 100%;
+  float: left; }
+
+#declineArtReason div {
+  position: relative;
+  width: 100%;
+  text-align: center; }
+
+#declineArtReason textarea {
+  width: 400px; }
+
+.buttonHolder {
+  position: relative;
+  width: 80%;
+  height: 30px;
+  align-self: center;
+  background-color: grey; }
+
+.buttonHolder input[type="button"] {
+  position: relative; }
 
 /*# sourceMappingURL=app.css.map */
