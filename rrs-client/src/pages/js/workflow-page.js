@@ -94,7 +94,8 @@ module.exports = {
         { text: 'Manual', value: 'manual' },
         { text: 'Need Assigned?', value: 'assign' },
         { text: 'Assign Group', value: 'assign_group' },
-        { text: 'Approve', value: 'approve' }
+        { text: 'Approve', value: 'approve' },
+        { text: 'Submit Form', value: 'submit' }
       ],
       approval_options: [
         { text: 'Requesting Person', value: 'csr' },

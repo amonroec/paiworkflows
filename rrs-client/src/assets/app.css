@@ -209,13 +209,14 @@ html, body {
   height: 20px;
   float: left; }
 
-#subcat-request:hover #request-dropdown {
+#subcat-request:hover > #request-dropdown {
   display: block;
   visibility: visible;
   float: left;
   width: 100%;
+  height: 200px;
   background-color: #95f9a3;
-  z-index: 100; }
+  z-index: 300; }
 
 .subcat-div a {
   width: calc(100% - 50px);
@@ -388,6 +389,13 @@ html, body {
 
 .fade-enter, .fade-leave {
   opacity: 0; }
+
+h1 {
+  font-size: 25px;
+  width: 100%;
+  text-align: center;
+  font-family: helvetica;
+  color: grey; }
 
 h2 {
   color: white;
@@ -604,5 +612,43 @@ h3 {
 @keyframes loading {
   50% {
     box-shadow: inset 0px 0px 0px 3px #4286f4, inset 0px 0px 0px 6px #5a95f5, inset 0px 0px 0px 9px #72a5f7, inset 0px 0px 0px 12px #8ab4f8, inset 0px 0px 0px 15px #a2c4fa, inset 0px 0px 0px 18px #bad3fb, inset 0px 0px 0px 21px #d3e3fc, inset 0px 0px 0px 24px #ebf2fe, inset 0px 0px 0px 27px white, inset 0px 0px 0px 30px #2a77f3; } }
+#taskStep {
+  width: calc(100% - 10px);
+  background-color: #68ba7c;
+  position: relative;
+  display: flex;
+  padding: 5px; }
+
+#submitForApproval {
+  position: relative;
+  width: 100%;
+  height: 100%; }
+
+#submitForApproval input[type="button"] {
+  width: 200px;
+  height: 30px; }
+
+#declineArtReason {
+  position: relative;
+  width: 100%;
+  float: left; }
+
+#declineArtReason div {
+  position: relative;
+  width: 100%;
+  text-align: center; }
+
+#declineArtReason textarea {
+  width: 400px; }
+
+.buttonHolder {
+  position: relative;
+  width: 80%;
+  height: 30px;
+  align-self: center;
+  background-color: grey; }
+
+.buttonHolder input[type="button"] {
+  position: relative; }
 
 /*# sourceMappingURL=app.css.map */

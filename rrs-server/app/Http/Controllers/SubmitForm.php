@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\artpack;
 use App\Embroidery;
 use App\Task;
+use App\Workflow;
+use App\Http\Controllers\WorkflowController;
 
 class SubmitForm extends Controller
 {
@@ -112,6 +114,18 @@ class SubmitForm extends Controller
     }
 
     public function newTaskSubmit($id, $person, $table){
+      $workflow = $this->getWorkflow($id);
+      if($workflow[1]->needs_assigned == 1){
+        $column = 'app_worker';
+        $value = $workflow[1]->assigner;
+        $status = $workflow[1]->task_type;
+      }else{
+        if($workflow[1]->assigned_group != ""){
+          $column = 'app_group';
+          $value = $workflow[1]->assigned_group;
+          $status = $workflow[2]->task_type;
+        }
+      }
       $req = new Task;
       $req->workflow_id = $id;
       $req->submitted_by = $person;
@@ -120,9 +134,19 @@ class SubmitForm extends Controller
         [
           'table_name' => $table,
           'workflow_id' => $req->workflow_id,
-          'submitted_by' => $req->submitted_by
+          'submitted_by' => $req->submitted_by,
+          $column => $value,
+          'status' => $status
         ]
       );
       return $task_id;
+    }
+
+    private function getWorkflow($id){
+      $workflow = Workflow::select()
+                ->where('workflow_name', $id)
+                ->orderBy('id', 'asc')
+                ->get();
+      return $workflow;
     }
 }
