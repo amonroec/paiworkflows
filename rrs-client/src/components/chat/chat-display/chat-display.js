@@ -7,7 +7,8 @@ module.exports = {
   },
   computed: {
     ...mapState({
-      taskStore: state => state.taskStore
+      taskStore: state => state.taskStore,
+      userStore: state => state.userStore
     })
   }
 }

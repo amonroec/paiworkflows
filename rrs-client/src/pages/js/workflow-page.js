@@ -98,9 +98,9 @@ module.exports = {
         { text: 'Submit Form', value: 'submit' }
       ],
       approval_options: [
-        { text: 'Requesting Person', value: 'csr' },
-        { text: 'Other Person', value: 'person' },
-        { text: 'Any in Group', value: 'group' }
+        { text: 'Requesting Person', value: 'person_who_submitted' },
+        { text: 'Other Person', value: 'other_person' },
+        { text: 'Any in Group', value: 'any_in_group' }
       ],
       form_select: '',
       form_options: [

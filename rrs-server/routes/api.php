@@ -137,6 +137,12 @@ Route::post('/getMessages', function (Request $request) {
 
 Route::resource('/getMessages', 'ChatController@getMessages');
 
+Route::post('/submitForApproval', function (Request $request) {
+	return redirect()->action('TasksController@submitForApproval');
+});
+
+Route::resource('/submitForApproval', 'TasksController@submitForApproval');
+
 Route::post('/uploadFile', function (Request $request) {
 	foreach ($request->image as $image) {
 		$imagename = time() . $image->getClientOriginalName();

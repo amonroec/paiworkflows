@@ -33,7 +33,7 @@ methods.assignTask = function () {
 }
 
 methods.submitForApproval = function () {
-  console.log(this.stage)
+  console.log(this.taskStore.currentTask)
 }
 
 methods.approveArt = function () {

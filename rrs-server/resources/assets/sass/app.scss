@@ -237,7 +237,7 @@ html, body {
 	text-align:center;
 	float:right;
 }
-.subcat-link #image {
+.subcat-link #topImage {
 	position:relative;width:25px;height:25px;float:left;background-color:green;
 }
 .subcat-link img {
@@ -475,13 +475,26 @@ float: left;
 }
 .message {	
 	position: relative;
-	flaot: left;
+	float: left;
 	margin-top: 3px;
 	font-size: 18px;
 }
+#messageImage img {
+	position: relative;
+	margin-left: 10px;
+	margin-bottom: 5px;
+	width: 50px;
+	height: 50px;
+	float:left;
+	border: 1px solid $light-grey;
+	border-radius: 50%;
+}
 .messageLeft {
 	position: relative;
-	width: 70px;
+	width: 60px;
+	height: 70px;
+	border-radius: 50%;
+	border: 1px solid $light-grey;
 }
 .messageRight {
 	position: relative;
@@ -511,6 +524,40 @@ float: left;
 	color: $dark-grey;
 	font-size: 10px;
 	text-align: right;
+}
+.messageTag {
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	position: absolute;
+	right: 10px;
+	box-shadow: 0px 0px 2px;
+}
+.messageTag a {
+	font-size: 16px;
+	line-height: 24px;
+	text-align: center;
+}
+.formSubmitted {
+	color: $submit-color;
+}
+.artDeclined {
+	color: $decline-color;
+}
+.artApproved {
+	color: $approve-color;
+}
+.fileUploaded {
+	color: $upload-color;
+}
+.fileRevised {
+	color: $revise-color;
+}
+.messageIcon {
+	color: message-color;
+}
+.requestClosed {
+	color: $closed-color;
 }
 .line {
 	position: relative;

@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="subcat-link">
-        <div id="image"><img v-bind:src="userStore.authUser.picture"></img></div>
+        <div id="topImage"><img v-bind:src="userStore.authUser.picture"></img></div>
         <router-link id="routerLink" :to="{ name: 'profile' }" append><div>{{userStore.authUser.name}}</div></router-link>
       </div>
     </div>
