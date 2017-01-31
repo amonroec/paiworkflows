@@ -35,6 +35,13 @@ body { font: 100% "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif; min
 	-moz-box-shadow: 0 2px 5px rgba(50, 50, 50, 0.1);
 }
 
+#canvas {
+  position: absolute;
+  width: 900px;
+  left: 50px;
+  top: 50px;
+}
+
 /* Form style */
 
 #container label {
