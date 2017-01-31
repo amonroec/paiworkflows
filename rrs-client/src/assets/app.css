@@ -59,8 +59,121 @@ html, body {
 #workspace {
   width: calc(100vw - 280px - 320px);
   height: calc(100% - 160px);
-  background-color: #cbb956;
+  background-color: #949494;
+  float: left;
+  position: relative;
+  overflow: scroll; }
+
+.accountInfo {
+  position: relative;
+  padding-top: 22px;
+  height: 170px;
+  width: 820px;
+  background-color: #fff;
+  margin-left: calc((100% - 820px)/2);
+  border-radius: 8px;
+  border: 1px solid black; }
+
+.artpackDetails {
+  margin-top: 25px;
+  margin-left: calc((100% - 820px)/2);
+  position: relative;
+  padding-top: 22px;
+  min-height: 370px;
+  height: 100%;
+  width: 820px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid black; }
+
+.artpackFiles {
+  width: 820px;
+  margin-top: 25px;
+  margin-left: calc((100% - 820px)/2);
+  margin-bottom: 25px;
+  padding-top: 22px;
+  position: relative;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid black;
+  height: 120px; }
+
+.formHeader {
+  position: absolute;
+  top: -17px;
+  left: 15px;
+  text-align: center;
+  width: 200px;
+  height: 38px;
+  line-height: 38px;
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 8px;
+  font-family: 'Comfortaa', cursive; }
+
+.formQuestion {
+  position: relative;
+  display: block;
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 52px;
+  padding-left: 3px;
+  margin-top: 12px;
+  background: white;
   float: left; }
+
+.formAnswer {
+  position: relative;
+  display: block;
+  width: 200px;
+  height: 38px;
+  line-height: 38px;
+  margin-top: 12px;
+  padding-left: 8px;
+  background-color: #fff;
+  float: left;
+  border: 1px solid black;
+  border-radius: 8px; }
+
+.formQuantityType {
+  position: relative;
+  display: block;
+  width: 115px;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 5px;
+  padding-left: 3px;
+  margin-top: 12px;
+  background: white;
+  text-align: left;
+  float: left; }
+
+.formQuantity {
+  position: relative;
+  display: block;
+  width: 60px;
+  height: 38px;
+  line-height: 38px;
+  margin-top: 12px;
+  padding-left: 8px;
+  background-color: #fff;
+  float: left;
+  border: 1px solid black;
+  border-radius: 8px; }
+
+.formComments {
+  position: relative;
+  display: block;
+  width: 585px;
+  min-height: 130px;
+  margin-top: 12px;
+  margin-bottom: 20px;
+  padding-left: 8px;
+  background-color: #fff;
+  float: left;
+  border: 1px solid black;
+  border-radius: 8px; }
 
 #body {
   margin: 0;
@@ -394,13 +507,14 @@ h1 {
   font-size: 25px;
   width: 100%;
   text-align: center;
-  font-family: helvetica;
+  font-family: 'Comfortaa', cursive;
   color: grey; }
 
 h2 {
   color: white;
   width: 100%;
-  text-align: center; }
+  text-align: center;
+  font-family: 'Comfortaa', cursive; }
 
 h3 {
   color: #6d9921;
@@ -409,7 +523,7 @@ h3 {
   text-align: center; }
 
 .headers {
-  font-family: helvetica;
+  font-family: 'Comfortaa', cursive;
   font-size: 22px;
   font-weight: bold;
   text-align: center;
@@ -432,7 +546,7 @@ h3 {
   float: left;
   width: 320px;
   height: calc(100vh - 50px - 160px);
-  background-color: #fff; }
+  background-color: #e0e0e0; }
 
 #chatBoardDiv {
   width: 100%;
@@ -446,18 +560,21 @@ h3 {
 #chatDisplay {
   width: 100%;
   height: calc(100vh - 50px - 160px - 170px);
-  overflow: scroll; }
+  overflow: scroll;
+  background-color: #e0e0e0; }
 
 #chatEnter {
-  margin-left: 25px;
-  width: 270px;
+  width: 320px;
   height: 120px;
-  float: left; }
+  float: left;
+  background-color: #e0e0e0; }
 
 #chat-textarea {
-  width: 100%;
+  margin-left: 25px;
+  width: 270px;
   float: left;
-  height: 80px; }
+  height: 80px;
+  border-radius: 8px; }
 
 .activeLink {
   background-color: grey; }
@@ -465,17 +582,23 @@ h3 {
 .message {
   position: relative;
   float: left;
-  margin-top: 3px;
-  font-size: 18px; }
+  font-size: 18px;
+  width: 92%;
+  margin-left: 4%;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px black;
+  margin-bottom: 7px;
+  background-color: #fff; }
 
 #messageImage img {
   position: relative;
-  margin-left: 10px;
-  margin-bottom: 5px;
-  width: 50px;
-  height: 50px;
+  margin-top: 4px;
+  margin-left: 4px;
+  margin-bottom: 12px;
+  width: 55px;
+  height: 55px;
   float: left;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #949494;
   border-radius: 50%; }
 
 .messageLeft {
@@ -488,43 +611,48 @@ h3 {
 .messageRight {
   position: relative;
   width: calc( 100% - 70px );
+  min-height: 77px;
   float: right; }
 
 .messageName {
+  margin-top: 4px;
   margin-bottom: 4px;
   position: relative;
   float: left;
   width: 100%;
   font-size: 15px;
-  font-weight: bold;
-  font-family: helvetica; }
+  font-family: 'Comfortaa', cursive; }
 
 .messageText {
+  position: relative;
   font-size: 13px;
   font-family: helvetica;
   float: left;
-  width: 100%; }
+  width: 100%;
+  margin-bottom: 17px; }
 
 .messageTimestamp {
-  margin-top: 2px;
-  float: bottom-right;
-  width: calc( 100% - 70px );
-  position: relative;
+  position: absolute;
+  bottom: 1px;
+  width: 100%;
   color: #949494;
-  font-size: 10px;
-  text-align: right; }
+  font-size: 9px;
+  text-align: left;
+  float: bottom;
+  font-family: 'Droid Sans Mono', monospace; }
 
 .messageTag {
   height: 30px;
   width: 30px;
   border-radius: 50%;
   position: absolute;
-  right: 10px;
+  left: 35px;
+  top: 42px;
   box-shadow: 0px 0px 2px; }
 
 .messageTag a {
   font-size: 16px;
-  line-height: 24px;
+  line-height: 29px;
   text-align: center;
   width: 100%;
   height: 100%; }
@@ -532,33 +660,38 @@ h3 {
 .formSubmitted {
   color: #fbff32;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%; }
+
+.formSubmitted {
+  color: #fff;
+  background-color: #fbff32; }
 
 .artDeclined {
-  color: #e8122b; }
+  color: #fff;
+  background-color: #e8122b; }
 
 .artApproved {
-  color: #00ce4f; }
+  color: #fff;
+  background-color: #00ce4f; }
 
 .fileUploaded {
-  color: #008cff; }
+  color: #fff;
+  background-color: #008cff; }
 
 .fileRevised {
-  color: #44abff; }
+  color: #fff;
+  background-color: #44abff; }
 
 .messageIcon {
-  color: message-color; }
+  color: #fff;
+  background-color: #8200ce; }
 
 .requestClosed {
-  color: #949494; }
-
-.line {
-  position: relative;
-  float: left;
-  margin-left: 3%;
-  width: 94%;
-  border-bottom: 1px solid #bababa;
-  margin-bottom: 3px; }
+  color: #fff;
+  background-color: #949494; }
 
 .g-signin-button {
   /* This is where you control how the button looks. Be creative! */
@@ -572,17 +705,23 @@ h3 {
 #stageBarHolder {
   position: relative;
   float: left;
-  height: 53px;
+  height: 54px;
   display: flex;
-  padding-left: 10px; }
+  margin-left: 10px; }
+
+.nodeHolder {
+  width: 104px;
+  height: 66px; }
 
 .stageBox {
-  width: 95px;
-  height: 65px;
+  width: 54px;
+  height: 54px;
+  margin-left: 25px;
+  margin-right: 25px;
   float: left;
   display: block;
   overflow: hidden;
-  background: none;
+  background: transparent;
   z-index: 2;
   position: relative; }
 
@@ -597,7 +736,7 @@ h3 {
 
 .connectingBar {
   background-color: #e0e0e0;
-  width: calc( 100% - 140px );
+  width: calc( 100% - 108px );
   height: 10px;
   border-radius: none;
   border: 1px solid #949494;
@@ -647,17 +786,16 @@ h3 {
   float: left; }
 
 #taskInfo div {
-  background-color: #e0e0e0;
   float: left;
   margin: 5px; }
 
 .stageText {
-  position: absolute;
-  width: 60px;
+  position: relative;
+  float: left;
+  width: 104px;
+  height: 12px;
   text-align: center;
-  margin-left: -4px;
   font-size: 10px;
-  bottom: 0px;
   font-family: helvetica; }
 
 @keyframes loading {
@@ -701,5 +839,10 @@ h3 {
 
 .buttonHolder input[type="button"] {
   position: relative; }
+
+.part1 {
+  font-family: helvetica;
+  font-size: 53px;
+  padding-left: 32px; }
 
 /*# sourceMappingURL=app.css.map */

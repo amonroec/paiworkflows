@@ -64,10 +64,127 @@ html, body {
   background-color:#fff;
   float:left;
 }
-#workspace {width:calc(100vw - #{$task-bar-width} - #{$activity-width});
+#workspace {
+  width:calc(100vw - #{$task-bar-width} - #{$activity-width});
   height:calc(100% - 160px);
-  background-color:$brand-warning;
+  background-color:$dark-grey;
   float:left;
+  position:relative;
+  overflow: scroll;
+}
+.accountInfo {
+	position:relative;
+	padding-top: 22px;
+	height: 170px;
+	width: 820px;
+	background-color:#fff;
+	margin-left: calc((100% - 820px)/2);
+	border-radius: 8px;
+	border: 1px solid black;
+}
+.artpackDetails {
+	margin-top:25px;
+	margin-left: calc((100% - 820px)/2);
+	position:relative;
+	padding-top: 22px;
+	min-height:370px;
+	height: 100%;
+	width: 820px;
+	background-color:#fff;
+	border-radius: 8px;
+	border: 1px solid black;
+}
+.artpackFiles {
+	width: 820px;
+	margin-top:25px;
+	margin-left: calc((100% - 820px)/2);
+	margin-bottom: 25px;
+	padding-top:22px;
+	position:relative;
+	background-color:#fff;
+	border-radius: 8px;
+	border: 1px solid black;
+	height: 120px;
+}
+.formHeader {
+	position:absolute;
+	top: -17px;
+	left: 15px;
+	text-align: center;
+	width: 200px;
+	height: 38px;
+	line-height: 38px;
+	background-color: #fff;
+	border: 1px solid black;
+	border-radius:8px;
+	font-family: 'Comfortaa', cursive;
+}
+.formQuestion {
+	position:relative;
+	display: block;
+	width: 120px;
+	height: 40px;
+	line-height: 40px;
+	margin-left: 52px;
+	padding-left:3px;
+	margin-top:12px;
+	background: white;
+	float:left;
+}
+.formAnswer {
+	position:relative;
+	display: block;
+	width: 200px;
+	height: 38px;
+	line-height: 38px;
+	margin-top:12px;
+	padding-left: 8px;
+	background-color: #fff;
+	float:left;
+	border: 1px solid black;
+	border-radius:8px;
+}
+.formQuantityType {
+	position:relative;
+	display: block;
+	width: 115px;
+	height: 40px;
+	line-height: 40px;
+	margin-left: 5px;
+	padding-left:3px;
+	margin-top:12px;
+	background: white;
+	text-align:left;
+	float:left;
+}
+.formQuantity {
+	position:relative;
+	display: block;
+	width: 60px;
+	height: 38px;
+	line-height: 38px;
+	margin-top:12px;
+	padding-left: 8px;
+	background-color: #fff;
+	float:left;
+	border: 1px solid black;
+	border-radius:8px;
+}
+.formComments {
+	position:relative;
+	display: block;
+	width: 585px;
+	min-height: 130px;
+	margin-top:12px;
+	margin-bottom:20px;
+	padding-left: 8px;
+	background-color: #fff;
+	float:left;
+	border: 1px solid black;
+	border-radius:8px;
+}
+.formUploads {
+	
 }
 
 //DashboardOverview.vue
@@ -395,13 +512,14 @@ h1 {
 	font-size:25px;
 	width:100%;
 	text-align:center;
-	font-family: helvetica;
+    font-family: 'Comfortaa', cursive;
 	color: grey;
 }
 h2 {
 	color: white;
 	width:100%;
 	text-align:center;
+    font-family: 'Comfortaa', cursive;
 }
 h3 {
 	color: #6d9921;
@@ -409,8 +527,11 @@ h3 {
 	width: 100%;
 	text-align: center;
 }
+h4 {
+
+}
 .headers {
-	font-family: helvetica;
+    font-family: 'Comfortaa', cursive;
 	font-size: 22px;
 	font-weight: bold;
 	text-align: center;
@@ -440,7 +561,7 @@ h3 {
 float: left;
     width:$activity-width;
     height:calc(100vh - #{$top-bar-height} - #{$summary-bar-height});
-    background-color: #fff;
+    background-color: $light-grey;
 }
 
 
@@ -458,17 +579,20 @@ float: left;
 	width: 100%;
 	height: calc(100vh - #{$top-bar-height} - #{$summary-bar-height} - 170px);
 	overflow: scroll;
+	background-color: $light-grey;
 }
 #chatEnter {
-	margin-left: 25px;
-	width: 270px;
+	width: 320px;
 	height: 120px;
 	float: left;
+	background-color: $light-grey;
 }
 #chat-textarea {
-	width: 100%;
+	margin-left:25px;
+	width: 270px;
 	float: left;
 	height: 80px;
+	border-radius: 8px;
 }
 .activeLink {
 	background-color: grey;
@@ -476,17 +600,23 @@ float: left;
 .message {	
 	position: relative;
 	float: left;
-	margin-top: 3px;
 	font-size: 18px;
+	width: 92%;
+	margin-left: 4%;
+	border-radius: 10px;
+	box-shadow: 2px 2px 2px black;
+	margin-bottom: 7px;
+	background-color: #fff;
 }
 #messageImage img {
 	position: relative;
-	margin-left: 10px;
-	margin-bottom: 5px;
-	width: 50px;
-	height: 50px;
+	margin-top:4px;
+	margin-left: 4px;
+	margin-bottom: 12px;
+	width: 55px;
+	height: 55px;
 	float:left;
-	border: 1px solid $light-grey;
+	border: 1px solid $dark-grey;
 	border-radius: 50%;
 }
 .messageLeft {
@@ -499,43 +629,48 @@ float: left;
 .messageRight {
 	position: relative;
 	width: calc( 100% - 70px );
+	min-height: 77px;
 	float:right;
 }
 .messageName {
+	margin-top: 4px;
 	margin-bottom: 4px;
 	position: relative;
 	float: left;
 	width: 100%;
 	font-size: 15px;
-	font-weight: bold;
-	font-family: helvetica;
+	font-family: 'Comfortaa', cursive;
 }
 .messageText {
+	position: relative;
 	font-size: 13px;
 	font-family: helvetica;
 	float: left;
 	width: 100%;
+	margin-bottom: 17px;
 }
 .messageTimestamp {
-	margin-top: 2px;
-	float: bottom-right;
-	width: calc( 100% - 70px );
-	position:relative;
+	position: absolute;
+	bottom: 1px;
+	width: 100%;
 	color: $dark-grey;
-	font-size: 10px;
-	text-align: right;
+	font-size: 9px;
+	text-align: left;
+	float: bottom;
+	font-family: 'Droid Sans Mono', monospace;
 }
 .messageTag {
 	height: 30px;
 	width: 30px;
 	border-radius: 50%;
 	position: absolute;
-	right: 10px;
+	left: 35px;
+	top: 42px;
 	box-shadow: 0px 0px 2px;
 }
 .messageTag a {
 	font-size: 16px;
-	line-height: 24px;
+	line-height: 29px;
 	text-align: center;
 	width: 100%;
 	height: 100%;
@@ -544,32 +679,37 @@ float: left;
 	color: $submit-color;
 	width:100%;
 	height:100%;
+	height: 100%;
+	width: 100%;
+	border-radius: 50%;
+}
+.formSubmitted {
+	color: #fff;
+	background-color: $submit-color;
 }
 .artDeclined {
-	color: $decline-color;
+	color: #fff;
+	background-color: $decline-color;
 }
 .artApproved {
-	color: $approve-color;
+	color: #fff;
+	background-color: $approve-color;
 }
 .fileUploaded {
-	color: $upload-color;
+	color: #fff;
+	background-color: $upload-color;
 }
 .fileRevised {
-	color: $revise-color;
+	color: #fff;
+	background-color: $revise-color;
 }
 .messageIcon {
-	color: message-color;
+	color: #fff;
+	background-color: $message-color;
 }
 .requestClosed {
-	color: $closed-color;
-}
-.line {
-	position: relative;
-	float: left;
-	margin-left: 3%;
-	width: 94%;
-    border-bottom: 1px solid $grey;
-    margin-bottom: 3px;
+	color: #fff;
+	background-color: $closed-color;
 }
 .g-signin-button {
   /* This is where you control how the button looks. Be creative! */
@@ -586,17 +726,23 @@ float: left;
 #stageBarHolder {
 	position:relative;
 	float:left; 
-	height:53px;
+	height:54px;
 	display:flex;
-	padding-left:10px;
+	margin-left:10px;
+}
+.nodeHolder {
+	width:104px;
+	height: 66px;
 }
 .stageBox {
-	width: 95px;
-	height: 65px;
+	width: 54px;
+	height: 54px;
+	margin-left: 25px;
+	margin-right:25px;
 	float:left;
 	display:block;
 	overflow:hidden;
-	background: none;
+	background: transparent;
 	z-index:2;
 	position:relative;
 }
@@ -611,7 +757,7 @@ float: left;
 }
 .connectingBar {
     background-color: $light-grey;
-   	width: calc( 100% - 140px );
+   	width: calc( 100% - 108px );
    	height: 10px;
    	border-radius: none;
    	border: 1px solid $dark-grey;
@@ -661,17 +807,16 @@ float: left;
 	float:left;
 }
 #taskInfo div {
-	background-color: $light-grey;
 	float:left;
 	margin:5px;
 }
 .stageText {
-	position:absolute;
-	width:60px;
+	position:relative;
+	float: left;
+	width:104px;
+	height: 12px;
 	text-align:center;
-	margin-left: -4px;
 	font-size: 10px;
-	bottom:0px;
 	font-family: helvetica;
 }
 @keyframes loading {
@@ -729,3 +874,11 @@ float: left;
 .buttonHolder input[type="button"] {
 	position: relative;
 }
+
+
+.part1 {
+	font-family: helvetica;
+	font-size: 53px;
+	padding-left: 32px;
+}
+

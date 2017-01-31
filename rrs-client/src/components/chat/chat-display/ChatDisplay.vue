@@ -6,7 +6,7 @@
       <div class="messageRight">
         <a class="messageName"> {{message.name}} </a>
         <a class="messageText"> {{message.text}} </a>
-        <a class="messageTimestamp"> {{message.date}} </a>
+        <div class="messageTimestamp"> {{message.date}} </div>
       </div>
       <div class="messageTag">
         <a v-show="message.action == 'submit-form'" class="formSubmitted fa fa-arrow-right"></a>
@@ -17,7 +17,6 @@
         <a v-show="message.action == 'message'" class="messageIcon fa fa-comment-o"></a>
         <a v-show="message.action == 'request-closed'" class="requestClosed fa fa-close"></a>
       </div>
-      <div class="line"></div>
     </div>
   </div>
 </div>

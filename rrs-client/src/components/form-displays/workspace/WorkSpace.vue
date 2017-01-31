@@ -3,46 +3,53 @@
     <task-step></task-step>
     <div id="form">
       <h2>Artpack Number Request</h2>
-      <table class="displayTable" border="1">
-        <tbody>
-          <tr>
-            <td>Artpack Number: {{taskStore.currentForm.artpack_num ? taskStore.currentForm.artpack_num : '---'}}</td>
-            <td>Customer Name: {{taskStore.currentForm.customer_name ? taskStore.currentForm.customer_name : '---'}}</td>
-          </tr>
-          <tr>
-            <td>Account Name: {{taskStore.currentForm.account_name ? taskStore.currentForm.account_name : '---'}}</td>
-            <td>Account Number: {{taskStore.currentForm.account_num ? taskStore.currentForm.account_num : '---'}}</td>
-          </tr>
-          <tr>
-            <td>Date Entered: {{taskStore.currentForm.created_at ? taskStore.currentForm.created_at : '---'}}</td>
-            <td>Turn Time: {{taskStore.currentForm.turn_time ? taskStore.currentForm.turn_time : '---'}}</td>
-          </tr>
-          <tr>
-            <td># of Designs: {{taskStore.currentForm.num_designs ? taskStore.currentForm.num_designs : '---'}}</td>
-            <td>Package Type: {{taskStore.currentForm.package_type ? taskStore.currentForm.package_type : '---'}}</td>
-          </tr>
-          <tr>
-            <td>Package Type: {{taskStore.currentForm.package_type ? taskStore.currentForm.package_type : '---'}}</td>
-            <td>Reference Tapes: {{taskStore.currentForm.reference_tapes ? taskStore.currentForm.reference_tapes : '---'}}</td>
-          </tr>
-          <tr>
-            <td>Number of Designs: {{taskStore.currentForm.num_designs ? taskStore.currentForm.num_designs : '---'}}</td>
-            <td>Manipulate the Logo?: {{taskStore.currentForm.manipulate_logo ? taskStore.currentForm.manipulate_logo : '---'}}</td>
-          </tr>
-          <tr>
-            <td>Style Preference: {{taskStore.currentForm.style_preference ? taskStore.currentForm.style_preference : '---'}}</td>
-            <td>Turn Time: {{taskStore.currentForm.turn_time ? taskStore.currentForm.turn_time : '---'}}</td>
-          </tr>
-          <tr>
-            <td>Rep Name: {{taskStore.currentForm.rep_name ? taskStore.currentForm.rep_name : '---'}}</td>
-            <td>Person Requesting: {{taskStore.currentForm.person_request ? taskStore.currentForm.person_request : '-'}}</td>
-          </tr>
-          <tr>
-            <td>Description: {{taskStore.currentForm.description ? taskStore.currentForm.description : '---'}}</td>
-            <td>Threads: {{taskStore.currentForm.threads ? taskStore.currentForm.threads : '---'}}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="accountInfo">
+        <div class="formHeader">Account Info</div>
+        <div class="formQuestion">Customer Name</div>
+        <div class="formAnswer">{{taskStore.currentForm.customer_name ? taskStore.currentForm.customer_name : '---'}}</div>
+        <div class="formQuestion">Rep Name</div>
+        <div class="formAnswer">{{taskStore.currentForm.rep_name ? taskStore.currentForm.rep_name : '---'}}</div>
+        <div class="formQuestion">Account Name</div>
+        <div class="formAnswer">{{taskStore.currentForm.account_name ? taskStore.currentForm.account_name : '---'}}</div>
+        <div class="formQuestion">Account Num</div>
+        <div class="formAnswer">{{taskStore.currentForm.account_num ? taskStore.currentForm.account_num : '---'}}</div>
+        <div class="formQuestion">CSR Name</div>
+        <div class="formAnswer">{{taskStore.currentForm.person_requesting ? taskStore.currentForm.persron_requesting : '---'}}</div>
+        <div class="formQuestion">Turn Time</div>
+        <div class="formAnswer">{{taskStore.currentForm.turn_time ? taskStore.currentForm.turn_time : '---'}}</div>
+      </div> 
+      <div class="artpackDetails">
+        <div class="formHeader">Artpack Details</div>
+        <div class="formQuestion">Artpack Name</div>
+        <div class="formAnswer">{{taskStore.currentForm.artpack_name ? taskStore.currentForm.artpack_name : '---'}}</div>
+        <div class="formQuestion">Reference Art</div>
+        <div class="formAnswer">{{taskStore.currentForm.account_name ? taskStore.currentForm.account_name : '---'}}</div>
+        <div class="formQuestion">Package Type</div>
+        <div class="formQuantity">{{taskStore.currentForm.package_domestic ? taskStore.currentForm.package_domestic : '---'}}</div>
+        <div class="formQuantityType">Domestic</div>
+        <div class="formQuantity">{{taskStore.currentForm.package_q30 ? taskStore.currentForm.package_q30 : '---'}}</div>
+        <div class="formQuantityType">Q30</div>
+        <div class="formQuantity">{{taskStore.currentForm.package_c60 ? taskStore.currentForm.package_c60 : '---'}}</div>
+        <div class="formQuantityType">C60</div>
+        <div class="formQuestion"></div>
+        <div class="formQuantity">{{taskStore.currentForm.package_full_custom ? taskStore.currentForm.package_full_custom : '---'}}</div>
+        <div class="formQuantityType">Custom</div>
+        <div class="formQuantity">{{taskStore.currentForm.package_core20 ? taskStore.currentForm.package_core20 : '---'}}</div>
+        <div class="formQuantityType">Core 24</div>
+        <div class="formQuantity">{{taskStore.currentForm.package_total ? taskStore.currentForm.package_total : '---'}}</div>
+        <div class="formQuantityType">Total Designs</div>
+        <div class="formQuestion">Style Preference</div>
+        <div class="formAnswer">{{taskStore.currentForm.style_preference ? taskStore.currentForm.style_preference : '---'}}</div>
+        <div class="formQuestion">Logo Manip.</div>
+        <div class="formAnswer">{{taskStore.currentForm.manipulate_logo ? taskStore.currentForm.manipulate_logo : '---'}}</div>
+        <div class="formQuestion">Comments</div>
+        <div class="formComments">{{taskStore.currentForm.description ? taskStore.currentForm.description : '---'}}</div>
+      </div> 
+      <div class="artpackFiles">
+        <div class="formHeader">Uploads</div>
+        <div class="formQuestion">Uploaded Files</div>
+        <div class="formUploads"></div>
+      </div>
     </div>
   </div>
 </template>
