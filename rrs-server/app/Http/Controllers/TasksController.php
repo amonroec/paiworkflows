@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\artpack;
 use App\Embroidery;
 use App\Task;
+use App\Workflow;
 
 class TasksController extends Controller
 {
@@ -40,13 +41,6 @@ class TasksController extends Controller
                     ->where('task_id', $request->input('task_id'))
                     ->get();
         return $task;
-    }
-
-    public function assignTask(Request $request){
-        Task::where('order_id', $request->id)
-            ->where('table_name', '=', 'artpacks')
-            ->increment('stage', 1, ['app_worker' => $request->worker_id]);
-        return $request;
     }
 
     public function updateStage(Request $request){
@@ -100,5 +94,80 @@ class TasksController extends Controller
             array_push($array, $otherArray);
         }
         return $array;
+    }
+
+    public function submitTaskStep(Request $request){
+        $task = $request->input('task');
+        $workflowArray = $this->getWorkflow($task['workflow_id']);
+        $status = $task['status'];
+        $count = 0;
+        foreach($workflowArray as $step){
+            if($status == $step->task_type){
+                /*switch ($status) {
+                    case "upload":
+                        $this->checkNextStep($task->id, $workflowArray[$count + 1]);
+                        break;
+                    case "blue":
+                        echo "Your favorite color is blue!";
+                        break;
+                    case "green":
+                        echo "Your favorite color is green!";
+                        break;
+                    default:
+                        echo "Your favorite color is neither red, blue, nor green!";
+                }*/
+                return $this->checkNextStep($task, $workflowArray[$count + 1]);
+            }
+            $count++;
+        }
+    }
+
+    private function checkNextStep($task, $workflow){
+        $taskId = $task['id'];
+        switch ($workflow->task_type) {
+            case "assign":
+                $this->assignTask($task->id, $workflow->assigner);
+                break;
+            case "approve":
+                if($workflow->approval_type == 'person_who_submit'){
+                    return $this->submitForNextStage($taskId, $task['submitted_by'], 'approve');
+                }elseif($workflow->approval_type == 'other_person'){
+                    return $this->submitForNextStage($taskId, $workflow->approval_person, 'approve');
+                }else{
+                    return $this->submitForNextStage($taskId, $task['submitted_by'], 'approve');
+                }
+                break;
+            default:
+                return;
+                break;
+        }
+    }
+
+    public function submitForNextStage($taskId, $person, $taskType){
+        Task::where('id', $taskId)
+            ->update(['app_worker' => $person, 'status' => $taskType]);
+        return 'success submitted to next step';
+    }
+
+    public function updateUpload(Request $request){
+            $file = $request->file('file_upload')->store('assets/uploads', 'uploads');
+            Task::where('id', $request->input('task_id'))
+            ->update(['upload_url' => $file]);
+            return $file;
+    }
+
+    public function assignTask(Request $request){
+        Task::where('order_id', $request->id)
+            ->where('table_name', '=', 'artpacks')
+            ->increment('stage', 1, ['app_worker' => $request->worker_id]);
+        return $request;
+    }
+
+    private function getWorkflow($id){
+      $workflow = Workflow::select()
+                ->where('workflow_name', $id)
+                ->orderBy('id', 'asc')
+                ->get();
+      return $workflow;
     }
 }

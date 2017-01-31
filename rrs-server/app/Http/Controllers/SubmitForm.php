@@ -57,10 +57,23 @@ class SubmitForm extends Controller
         //return redirect()->action('TasksController@taskSubmit', $id, 'embroideries');
     }
 
+    public function testSubmit(Request $request){
+        $task = new Task;
+        $task->workflow_id = $request->input('account_name');
+        $task->save();
+        return;
+    }
+
+    public function submitWorkflowId(Request $request){
+        $workflowId = $request->input('workflow_id');
+        return redirect()->route('asi', [$workflowId]);
+    }
+
     public function artpackSubmit(Request $request) {
         $workflow_id = $request->input('workflow_id');
-        $submit = $request->input('submitted_by');
-        $task_id = $this->newTaskSubmit($workflow_id, $submit, 'artpack');
+        $submit = 1;//$request->input('submitted_by');
+        $csr = $request->input('csr_name');
+        $task_id = $this->newTaskSubmit($workflow_id, $submit, 'artpack', $csr);
 		$req = new artpack;
         //$req->artpack_num = $request->input('artpack_num');
         $req->task_id = $task_id;
@@ -71,7 +84,13 @@ class SubmitForm extends Controller
         $req->customer_name = $request->input('customer_name');
         $req->reference_tapes = $request->input('reference_tapes');
         $req->package_type = $request->input('package_type');
-        $req->style_preference = $request->input('style_preference');
+        $req->package_domestic = $request->input('domestic');
+        $req->package_q30 = $request->input('q30');
+        $req->package_c60 = $request->input('c60');
+        $req->package_full_custom = $request->input('full_custom');
+        $req->package_core_24 = $request->input('core_24');   
+        $req->package_total = $request->input('package_total');    
+        //$req->style_preference = $request->input('style_preference');
         $req->course_location = $request->input('location_course');
         $req->submitted_by = $request->input('submitted_by');
         $req->manipulate_logo = $request->input('manipulate');
@@ -99,7 +118,7 @@ class SubmitForm extends Controller
           ]
         );*/
         //$this->getNextTask($id, 'artpacks');
-        return $task_id;
+        return redirect('http://localhost:8080/dashboard');
         //return redirect()->action('TasksController@taskSubmit', $id, 'artpacks');
         //return $this->taskSubmit($id)
     }
@@ -113,7 +132,7 @@ class SubmitForm extends Controller
         return;
     }
 
-    public function newTaskSubmit($id, $person, $table){
+    public function newTaskSubmit($id, $person, $table, $csr){
       $workflow = $this->getWorkflow($id);
       if($workflow[1]->needs_assigned == 1){
         $column = 'app_worker';
@@ -134,6 +153,7 @@ class SubmitForm extends Controller
         [
           'table_name' => $table,
           'workflow_id' => $req->workflow_id,
+          'csr_assigned' => $csr,
           'submitted_by' => $req->submitted_by,
           $column => $value,
           'status' => $status
@@ -148,5 +168,9 @@ class SubmitForm extends Controller
                 ->orderBy('id', 'asc')
                 ->get();
       return $workflow;
+    }
+
+    public function artPack(Request $request){
+        return $request->input();
     }
 }

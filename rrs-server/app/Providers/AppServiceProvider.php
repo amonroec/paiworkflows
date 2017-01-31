@@ -23,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('path.storage', function () {
+
+        return 'your/path/here';
+
+        });
     }
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/requestuser/submit', function (Request $request) {
-	return redirect()->action('RequestUsersController@insertRequest', $request->input());
+Route::get('/asi', function () {
+	return view('asi');
+});
+
+Route::get('/asi/{workflowId}', function () {
+	return view('asi');
 });

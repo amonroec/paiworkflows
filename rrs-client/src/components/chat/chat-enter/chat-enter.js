@@ -62,7 +62,8 @@ module.exports = {
         name: '',
         id: '',
         text: '',
-        date: ''
+        date: '',
+        action: 'message'
       },
       taskId: '',
       pusher: '',

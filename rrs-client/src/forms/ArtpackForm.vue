@@ -1,225 +1,232 @@
 <template>
-<div class="artpack-form">
-<center>
-  <h1>Artpack Request Form</h1>
-  <form v-on:submit.prevent="handleSubmitForm()">
-    <table>
-      <tbody>
-        <tr>
-          <td colspan="2">
-            <div style="text-align:right;">ARTPACK #</div>
-            <input 
-              type="text"
-              style="margin-left:5px;width:22%;"
-              name="artpack_num"
-              value=""
-              v-model="form_submit.artpack_num"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div>Rep Name*</div>
-              <input
-                type="text"
-                name="rep_name"
-                value=""
-                v-model="form_submit.rep_name"
-                required
-              />
-          </td>
-          <td>
-            <div>Turn Time</div>
-              <input
-                type="text"
-                name="turn_time"
-                value=""
-                v-model="form_submit.turn_time"
-              />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div>Account Name*</div>
-              <input
-                type="text"
-                name="account_name"
-                value=""
-                v-model="form_submit.account_name"
-                required
-              />
-          </td>
-          <td>
-            <div>Account#</div>
-              <input
-                type="text"
-                name="account_num"
-                value=""
-                v-model="form_submit.account_num"
-              />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div>Customer Name*</div>
-              <input
-                type="text"
-                name="customer_name"
-                value=""
-                v-model="form_submit.customer_name"
-                required
-              />
-          </td>
-          <td>
-            <div>Reference Tapes</div>
-              <input
-                type="text"
-                name="reference_tapes"
-                value=""
-                v-model="form_submit.reference_tapes"
-              />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div>Package Type*</div>
-              <input
-                type="text"
-                name="package_type"
-                value=""
-                v-model="form_submit.package_type"
-                required
-            />
-          </td>
-          <td>
-            <div>Style Preference</div>
-              <input
-                type="text"
-                name="style_preference"
-                value=""
-                v-model="form_submit.style_preference"
-              />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div>Location of Course</div>
-              <input
-                type="text"
-                name="location_course"
-                value=""
-                v-model="form_submit.location_course"
-              />
-          </td>
-          <td>
-            <div>CSR Name</div>
-              <input
-                type="text"
-                name="csr_name"
-                value=""
-                v-model="form_submit.csr_name"
-              />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div>Can We Manipulate The Logo?*</div>
-            <select v-model="selected">
-              <option v-for="option in options">
-                {{ option.text }}
+  <div class="artpack-form">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <section id="container">
+    <header>
+      <span id="logo"><img src="http://originalpenguinaccessories.com/form/separations/images/logo.png" id="logo" name="logo" alt="PAi Logo"></span>
+      <h1>ASI Artpack</h1>
+    </header>
+
+    <form method="post" action="" name="containerform" id="containerform" autocomplete="on" class="form-horizontal" role="form">
+
+      <fieldset>
+
+        <legend>Account Information</legend>
+
+        <div class="half">
+          <label for="customer_name" accesskey="U">Customer Name</label>
+          <input name="customer_name" type="text" id="customer_name" placeholder="" required="required" />
+        </div>
+
+        <div class="half">
+          <label for="rep_name" accesskey="R">Rep Name<br><small>(optional)</small></label>
+          <input name="rep_name" type="text" id="rep_name" placeholder="" />
+        </div>
+
+        <div class="half">
+          <label for="account_name" accesskey="A">Account Name</label>
+          <input name="account_name" type="text" id="account_name" placeholder="" required="required" />
+        </div>
+
+        <div class="half">
+          <label for="account_num" accesskey="N">Account Number <small>(optional)</small></label>
+          <input name="account_num" type="text" id="account_num" placeholder="" />
+        </div>
+
+        <div class="half">
+          <label for="csr_name" accesskey="S">CSR Name</label>
+          <div class="col-2">
+            <select id="csr_name" class="selectpicker show-tick form-control" data-live-search="true" multiple data-max-options="1" required="required" />
+                            <option value="Joey Knight">
+                                  Joey Knight
+                            </option>
+                            <option value="Wren White">
+                                  Wren White
+                            </option>
+              <option value="Cari White">
+                                  Cari White
+                            </option>
+                            <option value="Tiphani Isom">
+                                  Tiphani Isom
+                            </option>
+                            <option value="Dena Isgrigg">
+                  Dena Isgrigg
               </option>
+              <option value="Julie Montgomery">
+                                Julie Montgomery
+                            </option>
+                            <option value="Sara Hawkins">
+                                  Sara Hawkins
+                            </option>
+                             <option value="Leeanne Widener">
+                  Leeanne Widener
+              </option>
+              <option value="Angel Talbert">
+                  Angel Talbert
+              </option>
+                            <option value="Lori Beste">
+                                Lori Beste
+                            </option>
+                            <option value="Amber Kitchen">
+                                  Amber Kitchen
+                            </option>
+              <option value="Rachel Bolinger">
+                  Rachel Bolinger
+              </option>
+                            <option value="Terry Licklider">
+                  Terry Licklider
+              </option>
+                            <option value="Tracy Montgomery">
+                                  Tracy Montgomery
+                            </option>
+                          <option value="Grant Clark">
+                              Grant Clark
+                            </option>
+                            <option value="Unassigned">
+                  (Unassigned)
+                </option>   
             </select>
-          </td>
-          <td>
-            <div>Number of Designs*</div>
-              <input
-                type="text"
-                name="design_num"
-                value=""
-                v-model="form_submit.design_num"
-                required
-              />
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="text-area-div">
-      <textarea
-        name="description_box"
-        value=""
-        v-model="form_submit.description_box"
-        placeholder="Description Box..."
-      ></textarea>
-      <textarea
-        name="threads"
-        value=""
-        v-model="form_submit.threads"
-        placeholder="Threads..."
-      ></textarea>
-      <div v-if="!image">
-        <h2>Select an image</h2>
-        <input type="file" @change="onFileChange">
-      </div>
-      <div v-else>
-        <img :src="image" />
-        <button @click="removeImage">Remove image</button>
-      </div>
-    </div>
-    <input
-      type="submit"
-      name="artpackSubmit"
-      value="Submit Form"
-    ></input>
-  </form>
-</center>
-</div>
+          </div>
+        </div>
+
+        <div class="half">
+          <label for="turn_time" accesskey="T">Turn Time</label>
+          <div class="col-2">
+            <select id="turn_time" class="selectpicker show-tick form-control" multiple data-max-options="1" />
+              <option value="2 Days" selected>2 Days</option>
+              <option value="Rush">Rush</option>
+            </select>
+          </div>
+        </div>
+
+      </fieldset>
+
+      <fieldset>
+
+        <legend>Artpack Details</legend>
+
+        <div class="half">
+          <label for="reference_tapes" accesskey="K">Artpack Name </label>
+          <input name="reference_tapes" type="text" id="reference_tapes" placeholder="" required="required" />
+        </div>
+
+        <div class="half">
+          <label for="reference_tapes" accesskey="E">Reference Art <br /><small>(optional)</small></label>
+          <input name="reference_tapes" type="text" id="reference_tapes" placeholder="" />
+        </div>
+
+        <!-- OLD PACKAGE TYPE SELECTOR 
+        <div>
+        <label for="package_type" accesskey="P">Package Type <br><small>(select all that apply)</small></label>
+          <div style="width:588px;float:left;">
+            <select id="package_type" class="selectpicker show-tick form-control" multiple data-max-options="5" required="required" />
+              <option>Domestic</option>
+              <option>Q30</option>
+              <option>C60</option>
+              <option>Full Custom</option>
+              <option>Core 24</option>
+            </select>
+          </div>
+        </div> -->
+
+        <div ng-app>
+          <label for="package_type" accesskey="P">Package Type<br><small>(enter quantity)</small></label>
+          <div class="checkarea">
+            <div>
+              <label>
+              <input ng-model="domestic" type="number">Domestic</label>
+            </div>
+
+            <div>
+              <label>
+              <input ng-model="q30" type="number"">Q30</label>
+            </div>
+
+            <div>
+              <label>
+              <input ng-model="c60" type="number">C60</label>
+            </div>
+
+            <div>
+              <label>
+              <input ng-model="full_custom" type="number"">Full Custom</label>
+            </div>
+
+            <div>
+              <label>
+              <input ng-model="core_24" type="number">Core 24</label>
+            </div>
+
+            <div>
+              <label style="font-weight:bold"><input type="number" value="" readonly disabled>Total Designs</label>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label for="style_preference" accesskey="Y">Style Preference <br><small>(select all that apply)</small></label>
+          <div class="checkarea">
+            <div class="checkbox">
+              <label>
+              <input name="style_preference[]" type="checkbox" id="golf_resort"/><span>Golf/Resort</span></label>
+            </div>
+            <div class="checkbox">
+              <label>
+              <input name="style_preference[]" type="checkbox" id="corporate"/><span>Corporate</span></label>
+            </div>
+            <div class="checkbox">
+              <label>
+              <input name="style_preference[]" type="checkbox" id="camo_outdoor"/><span>Camo/Outdoor</span></label>
+            </div>
+            <div class="checkbox">
+              <label>
+              <input name="style_preference[]" type="checkbox" id="extreme"/><span>Extreme</span></label>
+            </div>
+            <div class="checkbox">
+              <label>
+              <input name="style_preference[]" type="checkbox" id="performance"/><span>Performance</span></label>
+            </div>
+            <div class="checkbox">
+              <label>
+              <input name="style_preference[]" type="checkbox" id="winter_knit"/><span>Winter/Knit</span></label>
+            </div>
+            <div class="checkbox">
+              <label>
+              <input name="style_preference[]" type="checkbox" id="distressed"/><span>Distressed</span></label>
+            </div>
+            <div class="checkbox">
+              <label>
+              <input name="style_preference[]" type="checkbox" id="trucker"/><span>Trucker</span></label>
+            </div>
+            <div class="checkbox">
+              <label>
+              <input name="style_preference[]" type="checkbox" id="Other"/><span>Other</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="half">
+          <label for="logo_manip" accesskey="L" class="toggle-check">Logo Manipulation</label>
+          <div class="checkarea" style="width:auto !important; margin:8px 0;">
+                 <div>
+                    <input id="logo_manip" class="cmn-toggle cmn-toggle-yes-no" type="checkbox">
+                    <label for="logo_manip" data-on="Yes" data-off="No"></label>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label for="comments" accesskey="C">Comments</label>
+          <textarea name="comments" cols="40" rows="8" id="comments" placeholder="Enter your comments" spellcheck="true" required="required"></textarea>
+        </div>
+
+      </fieldset>
+
+      <input type="submit" class="submit" id="submit" value="Submit" />
+
+    </form>
+  </div>
 </template>
 <script>
-module.exports = require('./js/artpack-form.js')
+  module.exports = require('./js/artpack-form.js')
 </script>
-<style>
-.artpack-form {
-  position:absolute;
-  margin-top: 10px;
-  width:100%;
-  background-color: white;
-}
-.artpack-form table {
-  width:80%;
-  border-collapse: collapse;
-  background-color: white;
-  border: 2px solid black;
-}
-.artpack-form table tr td {
-  height:40px;
-  width: 50%;
-  border-bottom: 1px dotted grey;
-}
-.artpack-form table select {
-  height:20px;
-  width:80px;
-  vertical-align: bottom;
-  font-size:14px;
-}
-.artpack-form table div, input {
-  width:45%;
-  float:left;
-}
-.text-area-div {
-  padding-left:2%;
-  padding-top: 1%;
-  width:78%;
-  height:200px;
-  background-color: #e0e0e0;
-}
-.text-area-div textarea {
-  width:48%;height:90%;float:left;margin:4px;max-height:90%;max-width:48%;
-}
-.artpack-form input[type=submit] {
-  width:300px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: 20px;
-  float:none;
-}
-</style>

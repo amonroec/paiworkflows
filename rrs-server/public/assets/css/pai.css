@@ -1,0 +1,407 @@
+/* Remove this when pasting into your Stylesheet! */
+
+html, body { border: 0; margin: 0; padding: 0; }
+body { font: 100% "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif; min-width: 100%; min-height: 101%; color: #666; background:#eee; }
+
+
+/* END Remove This */
+
+#logo {
+    position: relative;
+    top: 0px;
+    left: 350px;
+    width:100px;
+}
+
+#container p, label, legend { font: 1.5em "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif; }
+
+#container h1 { margin: -30px 0 15px; font-size: 24px; color: #333333; display: block; font-weight:bold; }
+#container hr { color: inherit; height: 0; margin: 6px 0 6px 0; padding: 0; border: 1px solid #d9d9d9; border-style: none none solid; }
+
+#container {
+	display: block;
+	width: 860px;
+	margin: 50px auto;
+	padding: 30px;
+	border: 1px solid #cbcbcb;
+	background-color: #FFF;
+
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+
+	box-shadow: 0 2px 5px rgba(50, 50, 50, 0.1);
+	-webkit-box-shadow: 0 2px 5px rgba(50, 50, 50, 0.1);
+	-moz-box-shadow: 0 2px 5px rgba(50, 50, 50, 0.1);
+}
+
+/* Form style */
+
+#container label {
+	display: inline-block;
+	float: left;
+	height: 1em;
+	line-height: 1em;
+	padding: 6px 0 0;
+	width: 145px;
+	font-size: 1.4em;
+	margin: 5px 0;
+	clear: both;
+}
+
+#container label small {
+	font-size: 0.75em;
+	color: #ccc;
+}
+
+#container input, #container textarea, #container select {
+	width: 210px;
+	padding: 6px 12px;
+	color: #666;
+	background: #fff;
+	border: 1px solid #ccc;
+	margin: 8px 0;
+	font:1.4em "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	vertical-align: top;
+	line-height: 1.42857143;
+
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+	-moz-transition: all 0.25s ease-in-out;
+
+	box-shadow: 0 0 5px rgba(120, 164, 47, 0);
+	-webkit-box-shadow: 0 0 5px rgba(120, 164, 47, 0);
+	-moz-box-shadow: 0 0 5px rgba(120, 164, 47, 0);
+}
+
+#container select {
+	width: 232px;
+	margin: 8px 0;
+}
+
+#container textarea {
+	width: 600px;
+    resize:vertical;
+    max-height: 800px;
+}
+
+
+#container input:focus, #container select:focus {
+	border: 1px solid #ddd;
+	background-color: #fff;
+	color:#333;
+	outline: none;
+	position: relative;
+	z-index: 5;
+
+	box-shadow: 0 0 5px rgba(120, 164, 47, 1);
+	-webkit-box-shadow: 0 0 5px rgba(120, 164, 47, 1);
+	-moz-box-shadow: 0 0 5px rgba(120, 164, 47, 1);
+
+	-webkit-transform: scale(1.05);
+	-moz-transform: scale(1.05);
+
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+	-moz-transition: all 0.25s ease-in-out;
+}
+
+#container textarea:focus {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color:#333;
+    outline: none;
+    position: relative;
+    z-index: 5;
+
+    box-shadow: 0 0 5px rgba(120, 164, 47, 1);
+    -webkit-box-shadow: 0 0 5px rgba(120, 164, 47, 1);
+    -moz-box-shadow: 0 0 5px rgba(120, 164, 47, 1);
+
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+
+    transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+}
+
+#container input.error, #container textarea.error, #container select.error {
+	box-shadow: 0 0 5px rgba(204, 0, 0, 0.5);
+	-webkit-box-shadow: 0 0 5px rgba(204, 0, 0, 0.5);
+	-moz-box-shadow: 0 0 5px rgba(204, 0, 0, 0.5);
+	border: 1px solid #faabab;
+	background: #fef3f3
+}
+#container input.submit {
+	width: auto;
+	cursor: pointer;
+	position: relative;
+	border: 1px solid #282828;
+	color:#fff;
+	padding: 6px 16px;
+	text-decoration: none;
+	font-size: 1.5em;
+    text-align:center;
+
+	background:#555;
+
+	background:-webkit-gradient(
+	    linear,
+	    left bottom,
+    	left top,
+	    color-stop(0.12, rgb(60,60,60)),
+	    color-stop(1, rgb(85,85,85))
+	);
+	background:-moz-linear-gradient(
+	    center bottom,
+	    rgb(60,60,60) 12%,
+    	rgb(85,85,85) 100%
+	);
+
+	box-shadow: 0 2px 3px rgba(0,0,0,0.25);
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+}
+#container input.submit:hover {
+	background: #282828 !important;
+	transition: none;
+	-webkit-transition: none;
+	-moz-transition: none;
+}
+#container input.submit:active, #container input.submit:focus {
+	top: 1px;
+}
+
+#container input[type="submit"][disabled] { background:#888; }
+#container fieldset { padding:20px; border:1px solid #eee; -webkit-border-radius:5px; -moz-border-radius:5px; margin:0 0 20px; }
+#container legend { padding:7px 10px; font-weight:bold; color:#000; border:1px solid #eee; -webkit-border-radius:5px; -moz-border-radius:5px; margin-bottom:0 !important; margin-bottom:20px; width:auto;}
+
+#container input[type="checkbox"]:focus {transition: all 0.25s ease-in-out;-webkit-transition: all 0.25s ease-in-out;-moz-transition: all 0.25s ease-in-out;box-shadow: 0 0 5px rgba(120, 164, 47, 0);-webkit-box-shadow: 0 0 5px rgba(120, 164, 47, 0);-moz-box-shadow: 0 0 5px rgba(120, 164, 47, 0);
+}
+
+#container input.form-control {font-size:1em;}
+
+.dropdown-menu>li>a:hover { 
+    background-color: #f6f6f6;
+    color:#333;
+    outline: none;
+    position: relative;
+    z-index: 5;}
+
+.dropdown-menu>li>a:focus { 
+    background-color: #fff;
+    color:#333;
+    outline: none;
+    position: relative;
+    z-index: 5;}
+
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
+    background-color:#78a42f;
+}
+
+span.glyphicon.glyphicon-ok.check-mark {color:#78a42f;}
+
+
+/* ========== Custom styles for radio and checkbox =============== */
+input[type="radio"],            /* hiding the default checkbox and radio button */
+input[type="checkbox"] {
+  display:none;
+}
+
+input[type="radio"] + span:before,  /* Styling and positioning */
+input[type="checkbox"] + span:before {
+  position: relative;
+  top: 3px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';  /* Glyphicons replace the default elements */
+  font-weight: 400;
+  line-height: 1;
+}
+
+
+input[type="radio"] + span:before {
+  content: "\e165";    /* glyphicon record */
+  color: #ddd;
+  margin-right: 5px;
+}
+
+input[type="radio"]:checked + span:before {
+  content: "\e089";    /* glyphicon ok-circle */
+  color: #2196F3;
+}
+
+
+input[type="checkbox"] + span:before {
+  content: "\e165";   /* glyphicon unchecked */
+  color: #ddd;
+  margin-right: 5px;
+  font-size:1.2em;
+}
+
+input[type="checkbox"]:checked + span:before {
+  content: "\e084";   /* glyphicon checked */
+  color: #78a42f;
+  font-size:1.2em;
+}
+
+#container .checkbox label, .radio label {
+    padding-left: 0px;
+    width:190px;
+    padding: 0;
+}
+
+
+#container .checkarea {width:590px; display:inline-block; float:left; margin:0 0 10px 0;}
+#container .checkarea div {float:left;}
+#container .col-2{width:210px;display:inline;float:left;}
+#container .half{width:50%;float:left;}
+
+input[type=number]::-webkit-outer-spin-button {
+    display: none; 
+}
+input[type=number]::-webkit-inner-spin-button {
+    display: none;
+}
+#container input[type="number"] {width:50px;vertical-align:middle;font-size:1em; padding:6px 6px 6px 12px; }
+
+
+#container span.required{ font-size: 13px; color: #ff0000; } /* Select the colour of the * if the field is required. */
+
+#message { margin: 1em 0; padding: 0; display: block; background: transparent none; }
+
+.error_message { display: block; height: 22px; line-height: 22px; background: #FBE3E4 url('../img/error.gif') no-repeat 10px center; padding: 3px 10px 3px 35px; color:#8a1f11;border: 1px solid #FBC2C4; -webkit-border-radius:5px; }
+
+.loader { padding: 0 10px; }
+
+#container #success_page h1 { background: url('../img/success.gif') left no-repeat; padding-left:22px; }
+
+#container input[type="radio"] { width: 20px; margin-top:0px; margin-right:8px;}
+#container label.radio {float:left;}
+
+acronym { border-bottom:1px dotted #ccc; }
+
+
+div.btn-group.bootstrap-select.show-tick.form-control {margin: 8px 0 8px 0;}
+.btn-default{color:#666;}
+
+
+#container div.ng-scope div div label {height:auto;clear:none;padding: 15px 0 0 0;width:189px;}
+#container div.ng-scope div div input[readonly]{background:#f6f6f6;font-weight:bolder;}
+#container div.ng-scope label input{margin:-12px 12px 0 0;text-align:center;}
+#container div.ng-scope div.checkarea {margin: 0 0 10px 0;}
+
+
+/* ============================================================
+YES NO SWITCH
+============================================================ */
+#wrapper {
+  min-width: 600px;
+}
+
+.settings {
+  display: table;
+  width: 100%;
+}
+.settings .row {
+  display: table-row;
+}
+.settings .question,
+.settings .switch {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 10px;
+}
+.settings .question {
+  width: 600px;
+  font-size: 20px;
+}
+
+.cmn-toggle {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+}
+.cmn-toggle + label {
+  display: block !important;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input.cmn-toggle-yes-no + label {
+  padding: 2px !important;
+  width: 120px !important;
+  height: 30px !important;
+}
+input.cmn-toggle-yes-no + label:before, input.cmn-toggle-yes-no + label:after {
+  display: block !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  color: #fff;
+  text-align: center;
+  line-height: 30px;
+}
+input.cmn-toggle-yes-no + label:before {
+  background-color: #dddddd;
+  content: attr(data-off);
+  -webkit-transition: -webkit-transform 0.5s;
+  -moz-transition: -moz-transform 0.5s;
+  -o-transition: -o-transform 0.5s;
+  transition: transform 0.5s;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  border-radius: 5px !important;
+}
+input.cmn-toggle-yes-no + label:after {
+  background-color: #78a42f;
+  content: attr(data-on);
+  -webkit-transition: -webkit-transform 0.5s;
+  -moz-transition: -moz-transform 0.5s;
+  -o-transition: -o-transform 0.5s;
+  transition: transform 0.5s;
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  border-radius: 5px !important;
+}
+input.cmn-toggle-yes-no:checked + label:before {
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+input.cmn-toggle-yes-no:checked + label:after {
+  -webkit-transform: rotateY(0);
+  -moz-transform: rotateY(0);
+  -ms-transform: rotateY(0);
+  -o-transform: rotateY(0);
+  transform: rotateY(0);
+}

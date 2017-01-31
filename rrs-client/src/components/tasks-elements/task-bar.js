@@ -40,13 +40,14 @@ methods.getChat = function () {
         var obj = {
           name: '',
           text: 'No Messages',
-          date: ''
+          date: '',
+          action: ''
         }
         array.push(obj)
         this.$store.dispatch('setCurrentChat', array)
       } else {
-        console.log(response.data)
         this.$store.dispatch('setCurrentChat', response.data[0].messages)
+        console.log(this.taskStore.currentChat)
       }
     })
 }

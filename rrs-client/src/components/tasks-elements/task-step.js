@@ -1,4 +1,4 @@
-import {getWorkers, assignTask, submitChat} from './../../config'
+import {getWorkers, assignTask, submitChat, uploadFile} from './../../config'
 import {mapState} from 'vuex'
 var methods = {}
 
@@ -32,8 +32,25 @@ methods.assignTask = function () {
     })
 }
 
-methods.submitForApproval = function () {
-  console.log(this.taskStore.currentTask)
+methods.submitForApproval = function (e) {
+  /*
+  const postData = {
+    task: this.taskStore.currentTask
+  }
+  this.$http.post(submitApproval, postData)
+    .then(response => {
+      console.log(response)
+    })
+  */
+  var file = e.target[1].value
+  const postData = {
+    task: this.taskStore.currentTask,
+    file: file
+  }
+  this.$http.post(uploadFile, postData)
+    .then(response => {
+      console.log(response)
+    })
 }
 
 methods.approveArt = function () {
@@ -77,7 +94,8 @@ module.exports = {
         text: '',
         date: '',
         action: ''
-      }
+      },
+      fileUpload: ''
     }
   },
   methods: methods,

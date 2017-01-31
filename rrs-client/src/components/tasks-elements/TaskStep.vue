@@ -19,18 +19,19 @@
   </div>
   <div v-if="taskStore.currentTask.status === 'upload'" id="submitForUpload">
     <h1>Needs Upload/Submit for Review</h1>
-    <input
-      :v-model="fileUpload"
-      type="file"
-      name="fileUpload"
-      value=""
-    >
-    <input
-      type="button"
-      name="assign_task"
-      v-on:click="submitForApproval"
-      value="Submit for Approval"
-    ></input>
+    <form method="POST" action="http://localhost:8000/api/uploadFile" enctype="multipart/form-data">
+      <input type="hidden" name="task_id" :value="taskStore.currentTask.id"></input>
+      <input
+        type="file"
+        name="file_upload"
+        :value="fileUpload"
+      >
+      <input
+        type="submit"
+        name="submit"
+        value="submit"
+      >Submit</input>
+    </form>
   </div>
   <div v-if="taskStore.currentTask.status === 'approve'" id="submitForApproval">
     <h1>This Art File Needs Your Approval.</h1>

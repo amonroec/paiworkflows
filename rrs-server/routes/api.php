@@ -125,6 +125,12 @@ Route::post('/assignTask', function (Request $request) {
 
 Route::resource('/assignTask', 'TasksController@assignTask');
 
+Route::post('/submitApproval', function (Request $request) {
+	return redirect()->action('TasksController@submitTaskStep');
+});
+
+Route::resource('/submitApproval', 'TasksController@submitTaskStep');
+
 Route::post('/submitChat', function (Request $request) {
 	return redirect()->action('ChatController@submitChat');
 });
@@ -142,15 +148,49 @@ Route::post('/submitForApproval', function (Request $request) {
 });
 
 Route::resource('/submitForApproval', 'TasksController@submitForApproval');
+/*
+Route::get('/asi', function () {
+	return Response::view('asi');
+});
+
+Route::resource('/asi', Response::view('asi'));
+*/
+Route::post('/asi/submit', function (Request $request) {
+	redirect()->action('SubmitForm@artpackSubmit');
+	return view('success');
+});
+
+Route::resource('/asi/submit', 'SubmitForm@artpackSubmit');
+
+Route::post('/asi/submitForm', function (Request $request) {
+	redirect()->action('SubmitForm@submitWorkflowId');
+});
+
+Route::resource('/asi/submitForm', 'SubmitForm@submitWorkflowId');
+
+Route::post('/submitForm', function (Request $request) {
+	return redirect()->action('SubmitForm@artPack', $request->input());
+});
+
+Route::resource('/submitForm', 'SubmitForm@artPack');
 
 Route::post('/uploadFile', function (Request $request) {
-	foreach ($request->image as $image) {
+	/*foreach ($request->image as $image) {
 		$imagename = time() . $image->getClientOriginalName();
 		$uploadFile = $image->move('./../storage/app/public/uploads', $imagename);
 		if ($uploadFile) {
 			$uploadedImage[] = $imagename;
 			return response()->json(['success' => true, 'message' => 'images uploaded']);
 		}
-	}
-	return $request;
+	}*/
+	//Storage::disk('uploads')->put('testing', $request->file('file_upload'));
+	return redirect()->action('TasksController@updateUpload', $request);
+	
 });
+
+Route::resource('/uploadFile', 'TasksController@updateUpload');
+
+
+
+
+

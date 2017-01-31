@@ -19,11 +19,15 @@ methods.getWorkflows = function () {
 }
 
 methods.workflowClick = function (workflow) {
+  /*
   this.$store.dispatch('setCurrentWorkflow', workflow)
   console.log(workflow)
   if (workflow.form_name === 'artpack') {
     this.$router.push({name: 'artpackForm'})
   }
+  */
+  console.log(workflow)
+  window.location = 'http://localhost:8000/asi.php?workflow_id=' + workflow.id
 }
 
 module.exports = {
