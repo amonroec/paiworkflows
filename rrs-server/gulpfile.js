@@ -19,3 +19,10 @@ elixir(mix => {
     ], './../rrs-client/src/assets/app.css')
        .webpack('app.js');
 });
+
+elixir(function(mix) {
+    mix.webpack(
+        './app/assets/js/app.js',
+        './public/dist'
+    );
+});

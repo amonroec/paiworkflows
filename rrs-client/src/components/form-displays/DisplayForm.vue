@@ -1,7 +1,7 @@
 <template>
 <div id="displayForm">
   <info-bar :workflow.async="workflow" :taskStore.async="taskStore" :currentTask.async="currentTask"></info-bar>
-  <work-space :taskStore.async="taskStore"></work-space>
+  <work-space :currentTask.async="taskStore.currentTask"></work-space>
   <activity-feed></activity-feed>
 </div>
 </template>

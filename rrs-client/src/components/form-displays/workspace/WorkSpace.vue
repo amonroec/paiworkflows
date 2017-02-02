@@ -48,7 +48,7 @@
         <div class="formComments">{{taskStore.currentForm.description ? taskStore.currentForm.description : '---'}}</div>
       </div> 
 -->
-      <img src="./../../../../../rrs-server/public/assets/forms/81task.png" style="width:500px;"></img>
+      <img :src="image_url" style="width:100%;"></img>
 <!--
       <div class="artpackFiles">
         <div class="formHeader">Uploads</div>

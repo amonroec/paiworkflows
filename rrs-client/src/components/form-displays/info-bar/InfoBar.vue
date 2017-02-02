@@ -20,7 +20,10 @@
         <div class="stageText">{{step.step_name}}</div>
       </div>  
       <div class="connectingBar"></div>     
-    </div>    
+    </div>
+    <div id="infoBar_taskStep">
+      <task-step></task-step>
+    </div>  
   </div>
 </template>
 <script>

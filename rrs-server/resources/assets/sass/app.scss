@@ -561,14 +561,27 @@ h4 {
 #activityFeed {
 	float: left;
     width:$activity-width - 20px;
-    height:calc(100vh - #{$top-bar-height} - #{$summary-bar-height} - 20px);
+    height:calc(100vh - #{$top-bar-height} - #{$summary-bar-height} - 30px);
     margin-left:10px;
     padding-top:10px;
     border-radius: 8px;
     box-shadow: 2px 2px 2px 2px rgba(0,0,0,.35);
-    background-color: $darkest-grey;
 }
-
+#activityTop {
+	float:left;
+	width:100%;
+	height:50%;
+	background-color:#e0e0e0;
+}
+#activityBottom {
+	float:left;
+	width:100%;
+	height:50%;
+	background-image: url("./images/watertower-gb.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: right;
+}
 
 //Chat
 #chatBoardDiv {
@@ -577,8 +590,9 @@ h4 {
 	background-color: #fff;
 }
 #chatBoard {
-	width: 100%;
+	width:$activity-width - 20px;
  	height: 100%;
+ 	position:absolute;
 }
 #chatDisplay {
 	width: 100%;
@@ -840,6 +854,10 @@ h4 {
   }
 }
 //task step
+#infoBar_taskStep {
+	width:40%;
+	float:right;
+}
 #taskStep {
 	width: calc(100% - 10px);
 	background-color: #68ba7c;
@@ -886,4 +904,3 @@ h4 {
 	font-size: 53px;
 	padding-left: 32px;
 }
-

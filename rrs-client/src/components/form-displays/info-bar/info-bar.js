@@ -1,5 +1,6 @@
 var methods = {}
 import {getWholeWorkflow} from './../../../config'
+import TaskStep from './../../tasks-elements/TaskStep'
 
 methods.getWorkflowSteps = function () {
   const postData = {
@@ -20,6 +21,9 @@ module.exports = {
       div: '',
       workflowSteps: ''
     }
+  },
+  components: {
+    TaskStep
   },
   methods: methods,
   props: [

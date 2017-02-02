@@ -3,13 +3,19 @@ import TaskStep from './../../tasks-elements/TaskStep'
 module.exports = {
   data: function () {
     return {
-      iframe_url: ''
+      image_url: ''
     }
   },
   components: {
     TaskStep
   },
   props: [
-    'taskStore'
-  ]
+    'currentTask'
+  ],
+  watch: {
+    currentTask: function () {
+      console.log('changing image url')
+      this.image_url = 'http://localhost:8000/assets/forms/' + this.currentTask.form_image_url
+    }
+  }
 }
