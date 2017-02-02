@@ -1,6 +1,6 @@
 <template>
 <div id="chatBoard">
-  <center class="headers">Activity Feed</center>
+  <h2>Activity Feed</h2>
   <div class="line"></div>
   <chat-display :task_id.sync="taskId"></chat-display>
   <chat-enter :task_id.sync="taskId"></chat-enter>
