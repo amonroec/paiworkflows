@@ -1,9 +1,10 @@
 <template>
   <div id="workspace">
+    <!--
     <task-step></task-step>
+    -->
     <div id="form">
-      <h2>Artpack Number Request</h2>
-      <!--
+      <!--<h2>Artpack Number Request</h2>
       <div class="accountInfo">
         <div class="formHeader">Account Info</div>
         <div class="formQuestion">Customer Name</div>
@@ -47,13 +48,14 @@
         <div class="formComments">{{taskStore.currentForm.description ? taskStore.currentForm.description : '---'}}</div>
       </div> 
 -->
-      <iframe :src="taskStore.currentTask.form_image_url" style="width:100%;height:70%;"></iframe>
-
+      <img src="./../../../../../rrs-server/public/assets/forms/81task.png" style="width:500px;"></img>
+<!--
       <div class="artpackFiles">
         <div class="formHeader">Uploads</div>
         <div class="formQuestion">Uploaded Files</div>
         <div class="formUploads"></div>
       </div>
+-->
     </div>
   </div>
 </template>
