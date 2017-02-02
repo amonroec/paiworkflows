@@ -19,6 +19,7 @@ module.exports = {
   computed: {
     ...mapState({
       taskStore: state => state.taskStore,
+      currentTask: state => state.taskStore.currentTask,
       workflow: state => state.workflowStore.currentWorkflow
     })
   }

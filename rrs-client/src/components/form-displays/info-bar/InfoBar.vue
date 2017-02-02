@@ -12,8 +12,8 @@
       <div class="nodeHolder" v-for="(step, index) in workflowSteps">
         <div class="stageBox">
           <div class="stageOuter">
-            <div class="stageComplete fa fa-check" v-if="taskStore.currentTask.stage > index"></div>
-            <div class="stageActive fa fa-folder-open" v-else-if="taskStore.currentTask.stage == index"></div>
+            <div class="stageActive fa fa-folder-open" v-if="currentTask.status == step.task_type"></div>
+            <div class="stageComplete fa fa-check" v-else-if="stage+1 > index"></div>
             <div class="stageNotComplete fa fa-times" v-else></div>
           </div>
         </div>

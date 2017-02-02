@@ -1,6 +1,5 @@
 var methods = {}
 import {getWholeWorkflow} from './../../../config'
-import {mapState} from 'vuex'
 
 methods.getWorkflowSteps = function () {
   const postData = {
@@ -17,14 +16,16 @@ methods.getWorkflowSteps = function () {
 module.exports = {
   data: function () {
     return {
-      stages: '',
+      stage: '',
       div: '',
       workflowSteps: ''
     }
   },
   methods: methods,
   props: [
-    'workflow'
+    'workflow',
+    'currentTask',
+    'taskStore'
   ],
   /*
   computed: mapState({
@@ -32,11 +33,6 @@ module.exports = {
     stages: state => state.workflowStore.currentWorkflow.stage_num
   })
   */
-  computed: {
-    ...mapState({
-      taskStore: state => state.taskStore
-    })
-  },
   watch: {
     workflow: function () {
       console.log('workflowChanged')
@@ -45,9 +41,21 @@ module.exports = {
       }
       this.$http.post(getWholeWorkflow, postData)
         .then(response => {
-          console.log(response)
           this.workflowSteps = response.data
         })
+    },
+    currentTask: function () {
+      var currentStep = this.currentTask.status
+      console.log(currentStep)
+      var count = this.workflowSteps.length
+      console.log(count)
+      var i
+      for (i = 1; i < count; i++) {
+        if (this.workflowSteps[i].task_type === currentStep) {
+          this.stage = i
+        }
+        i++
+      }
     }
   }
 }

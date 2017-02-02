@@ -146,6 +146,8 @@ class TasksController extends Controller
     public function submitForNextStage($taskId, $person, $taskType){
         Task::where('id', $taskId)
             ->update(['app_worker' => $person, 'status' => $taskType]);
+        /*Task::increment('stage', 1)
+            ->where('id', $taskId);*/
         return 'success submitted to next step';
     }
 

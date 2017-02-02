@@ -21,6 +21,7 @@
 <script src="//code.jquery.com/jquery-latest.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.plugin.html2canvas.js"></script>
 <!-- AJAX Form Submit   <script src="assets/js/jquery.jigowatt.js"></script>   -->
 
 <!--[if IE]>
@@ -36,9 +37,11 @@
       <h1>ASI Artpack</h1>
     </header>
 
-    <form method="POST" action="api/asi/submit" name="containerform" id="containerform" autocomplete="on" class="form-horizontal" role="form">
+    <form method="POST" action="api/asi/submit" enctype="multipart/form-data" name="containerform" id="formContainer" autocomplete="on" class="form-horizontal" role="form">
 
       <fieldset>
+
+        <input type="hidden" id="form_image_src" name="form_image_src" value=""></input>
 
         <input type="hidden" name="workflow_id" value="<?php echo $workflowId; ?>"></input>
 
@@ -253,12 +256,11 @@
 
       </fieldset>
 
-      <input type="submit" class="submit" id="submit" value="submit" />
+      <input type="button" class="submit" id="submit" value="submit" onclick="save()" />
+      <input type="submit" id="submitButton" value="Actual Submit" />
+      
 
     </form>
-
-    <input id="holyshit" type="button" name="button" onclick="save()">Button</input>
-
 
 </section>
 
@@ -279,18 +281,28 @@
   // run chosen plugin
 
   function save() {
-    html2canvas(document.body, {
+    /*html2canvas(document.getElementById('container'), {
       onrendered: function(canvas) {
         document.body.appendChild(canvas);
-        convertCanvasToImage(canvas);
+        $('#form_image_src').val(canvas.toDataURL("image/png"));
       }
+    });
+    document.getElementById('submitButton').click();*/
+    $('#container').html2canvas({
+        onrendered: function (canvas) {
+            //Set hidden field's value to image data (base-64 string)
+            $('#form_image_src').val(canvas.toDataURL("image/png"));
+            //Submit the form manually
+            $("#submitButton").click();
+        }
     });
   }
 
   function convertCanvasToImage(canvas) {
     var image = new Image();
     image.src = canvas.toDataURL("image/png");
-    console.log(image);
+    document.getElementById('containerform').submit();
+
   }
   
 

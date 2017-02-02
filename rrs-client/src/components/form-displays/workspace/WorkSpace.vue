@@ -3,6 +3,7 @@
     <task-step></task-step>
     <div id="form">
       <h2>Artpack Number Request</h2>
+      <!--
       <div class="accountInfo">
         <div class="formHeader">Account Info</div>
         <div class="formQuestion">Customer Name</div>
@@ -45,6 +46,9 @@
         <div class="formQuestion">Comments</div>
         <div class="formComments">{{taskStore.currentForm.description ? taskStore.currentForm.description : '---'}}</div>
       </div> 
+-->
+      <iframe :src="taskStore.currentTask.form_image_url" style="width:100%;height:70%;"></iframe>
+
       <div class="artpackFiles">
         <div class="formHeader">Uploads</div>
         <div class="formQuestion">Uploaded Files</div>

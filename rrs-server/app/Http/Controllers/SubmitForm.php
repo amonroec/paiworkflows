@@ -71,9 +71,10 @@ class SubmitForm extends Controller
 
     public function artpackSubmit(Request $request) {
         $workflow_id = $request->input('workflow_id');
+        $form_image_url = $request->input('form_image_src');
         $submit = 1;//$request->input('submitted_by');
         $csr = $request->input('csr_name');
-        $task_id = $this->newTaskSubmit($workflow_id, $submit, 'artpack', $csr);
+        $task_id = $this->newTaskSubmit($workflow_id, $submit, 'artpack', $csr, $form_image_url);
 		$req = new artpack;
         //$req->artpack_num = $request->input('artpack_num');
         $req->task_id = $task_id;
@@ -132,7 +133,7 @@ class SubmitForm extends Controller
         return;
     }
 
-    public function newTaskSubmit($id, $person, $table, $csr){
+    public function newTaskSubmit($id, $person, $table, $csr, $form_image){
       $workflow = $this->getWorkflow($id);
       if($workflow[1]->needs_assigned == 1){
         $column = 'app_worker';
@@ -149,6 +150,8 @@ class SubmitForm extends Controller
       $req->workflow_id = $id;
       $req->submitted_by = $person;
 
+        //$file = $img->store('assets/forms', 'uploads');
+
       $task_id = Task::insertGetId(
         [
           'table_name' => $table,
@@ -159,6 +162,22 @@ class SubmitForm extends Controller
           'status' => $status
         ]
       );
+      //Get the base-64 string from data
+        $filteredData=substr($_POST['form_image_src'], strpos($_POST['form_image_src'], ",")+1);
+ 
+        //Decode the string
+        $unencodedData=base64_decode($filteredData);
+        //file_put_contents('img.png', $unencodedData);
+
+        $image = base64_decode($filteredData);
+        $image_name= $task_id . 'task.png';
+        $path = public_path() . "/assets/forms/" . $image_name;
+         
+        //Save the image
+        file_put_contents($path, $unencodedData);
+
+      Task::where('id', $task_id)
+            ->update(['form_image_url' => $image_name]);
       return $task_id;
     }
 

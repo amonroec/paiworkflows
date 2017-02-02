@@ -1,17 +1,15 @@
-import {mapState} from 'vuex'
 import TaskStep from './../../tasks-elements/TaskStep'
 
 module.exports = {
   data: function () {
     return {
+      iframe_url: ''
     }
   },
   components: {
     TaskStep
   },
-  computed: {
-    ...mapState({
-      taskStore: state => state.taskStore
-    })
-  }
+  props: [
+    'taskStore'
+  ]
 }

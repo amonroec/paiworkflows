@@ -12,7 +12,6 @@ methods.setCurrentTask = function (task) {
       that.$store.dispatch('setCurrentWorkflow', workflow)
     }
   })
-  console.log(this.workflowStore.currentWorkflow)
   this.getArtpack()
 }
 
