@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use app\Http\Controllers;
 use Illuminate\Support\Facades\Input;
+use app\Task;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -52,6 +53,13 @@ Route::post('/tasks/load', function (Request $request) {
 });
 
 Route::resource('/tasks/load', 'TasksController@loadTasks');
+
+Route::get('/task/updated', function (Request $request) {
+	return redirect()->action('TasksController@taskUpdated');
+	//Task::where('id', 81)->notify(new TaskUpdated);
+});
+
+Route::resource('/task/updated', 'TasksController@taskUpdated');
 
 Route::post('/tasks/singleTask', function (Request $request) {
 	return redirect()->action('TasksController@setTask');

@@ -47,7 +47,7 @@ class ChatController extends Controller
         $check = Chat::select('messages')
                     ->where('task_id', '=', $taskId)
                     ->get();
-        LaravelPusher::trigger('chat_channel', 'chat_entered', ['messages' => $check]);
+        LaravelPusher::trigger('chat_channel', 'chat_entered', ['task_id' => $taskId, 'messages' => $check]);
         return 'getMessageOnSubmit';
     }
 

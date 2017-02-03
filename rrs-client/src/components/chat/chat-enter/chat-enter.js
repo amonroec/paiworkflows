@@ -15,12 +15,17 @@ methods.getNameId = function () {
 }
 
 methods.incomingChat = function (chatMessage) {
-  console.log(chatMessage)
+  console.log(this.taskStore.currentChat)
+  if (chatMessage.task_id === this.taskStore.currentTask.id) {
+    this.$store.dispatch('setCurrentChat', chatMessage.messages[0].messages)
+  }
+  document.getElementById('chatDisplay').scrollBottom = document.getElementById('chatDisplay').scrollHeight
 }
 
 methods.submitChat = function () {
+/*
   Pusher.logToConsole = true
-  this.pusher = new Pusher('4be3f9e30b1c0f0ecea4', {
+  this.pusher = new Pusher('9ca3eda463882645ca10', {
     encrypted: true,
     cluster: 'mt1'
   })
@@ -33,6 +38,7 @@ methods.submitChat = function () {
     this.incomingChat(chatMessage)
     console.log('incoming chat boyssss')
   })
+*/
   const postData = {
     task_id: this.taskStore.currentTask.id,
     message: this.message
@@ -78,6 +84,19 @@ module.exports = {
     })
   },
   created: function () {
+    Pusher.logToConsole = true
+    this.pusher = new Pusher('9ca3eda463882645ca10', {
+      encrypted: true,
+      cluster: 'mt1'
+    })
+    let that = this
+    this.channel = this.pusher.subscribe('chat_channel')
+    this.channel.bind('chat_entered', function (data) {
+      that.$emit('incoming_chat', data)
+    })
+    this.$on('incoming_chat', function (chatMessage) {
+      this.incomingChat(chatMessage)
+    })
     this.getNameId()
     this.getDate()
   }

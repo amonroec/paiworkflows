@@ -7,9 +7,13 @@ use App\artpack;
 use App\Embroidery;
 use App\Task;
 use App\Workflow;
+use App\Notifications\TaskUpdated;
+use Illuminate\Notifications\Notifiable;
 
 class TasksController extends Controller
 {
+
+    use Notifiable;
     /*public function __construct(Task $task, Request $request){
     	$this->task = $task;
     	$this->request = $request;
@@ -32,6 +36,7 @@ class TasksController extends Controller
     	//$tasks = Task::all();
         $tasks = Task::select()
                     ->where('app_worker', '=', $request->input('userId'))
+                    ->orwhere('csr_assigned', $request->input('userId'))
                     ->get();
     	return $tasks;
     }
@@ -171,5 +176,9 @@ class TasksController extends Controller
                 ->orderBy('id', 'asc')
                 ->get();
       return $workflow;
+    }
+
+    public function taskUpdated(){
+        $this->notify(new TaskUpdated);
     }
 }
