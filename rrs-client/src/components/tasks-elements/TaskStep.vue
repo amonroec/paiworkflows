@@ -1,19 +1,19 @@
 <template>
 <div id="taskStep">
   <div v-if="taskStore.currentTask.status === 'assign'" id="assignTask">
-    <h1>Needs Assigned!!!</h1>
-    <select v-if="workers.length > 0" v-model="selectedWorker">
-      <option v-bind:value="'assignWorker'">Assign to Worker</option>
+    <h1>Needs Assigned</h1>
+    <select class="action_button" v-if="workers.length > 0" v-model="selectedWorker">
+      <option v-bind:value="'assignWorker'">Choose...<i class="fa fa-random"></i></option>
       <option v-for="worker in workers" v-bind:value="worker.id">
         {{ worker.name }}
       </option>
     </select>
-    <div class="action_button" type="button" name="assign_task" v-on:click="assignTask">Assign
+    <div class="action_button assignSelect" type="button" name="assign_task" v-on:click="assignTask">Assign
       <i class="fa fa-share"><i>
     </div>
   </div>
   <div v-if="taskStore.currentTask.status === 'upload'" id="submitForUpload">
-    <h1>Needs Upload/Submit for Review</h1>
+    <h1>Upload for Review</h1>
     <form method="POST" action="http://localhost:8000/api/uploadFile" enctype="multipart/form-data">
       <input type="hidden" name="task_id" :value="taskStore.currentTask.id"></input>
       <input
@@ -21,15 +21,21 @@
         name="file_upload"
         :value="fileUpload"
       >
+<<<<<<< HEAD
       <input
         type="submit"
         name="submit"
         value="submit"
       ></input>
+=======
+      <div class="action_button" type="button" name="upload" v-on:click="">Upload
+        <i class="fa fa-cloud-upload"><i>
+      </div>
+>>>>>>> origin/master
     </form>
   </div>
   <div v-if="taskStore.currentTask.status === 'approve'" id="submitForApproval">
-    <h1>This Art File Needs Your Approval.</h1>
+    <h1>Review Art</h1>
     <input
       type="button"
       name="approve_art"

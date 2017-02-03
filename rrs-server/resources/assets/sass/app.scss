@@ -64,7 +64,7 @@ html, body {
 }
 #infoBar {
   width:100%;
-  height:150px;
+  height:120px;
   float:left;
 }
 #workspace {
@@ -549,7 +549,11 @@ h4 {
 	text-align:center;
 }
 #assignTask select {
-	width: 200px; height:60px;
+	color:black;
+	font-size: 12px;
+	line-height: 30px;
+	height:32px;
+	width:122px;
 }
 
 
@@ -606,7 +610,7 @@ h4 {
 	overflow: scroll;
 }
 #chatEnter {
-	width: 320px;
+	width: $activity-width;
 	height: 120px;
 	float: left;
 }
@@ -618,12 +622,12 @@ h4 {
 	width:150px;
 }
 #chat-textarea {
-	margin-left:22px;
-	width: 270px;
+	margin-left:7px;
+	width: 260px;
 	float: left;
 	height: 80px;
 	margin-bottom: 10px;
-	background-color: rgba(255,255,255,.8);
+	background-color: rgba(255,255,255,.9);
 }
 .submitChatButton {
 	width: 100px;
@@ -666,39 +670,40 @@ h4 {
 	box-shadow: 2px 2px 2px black;
 	margin-bottom: 7px;
 	background-color: #fff;
+	height: 60px;
 }
 #messageImage img {
 	position: relative;
 	margin-top:4px;
 	margin-left: 4px;
 	margin-bottom: 12px;
-	width: 55px;
-	height: 55px;
+	width: 45px;
+	height: 45px;
 	float:left;
 	border: 1px solid $dark-grey;
 	border-radius: 50%;
 }
 .messageLeft {
 	position: relative;
-	width: 60px;
+	width: 50px;
 	height: 70px;
 	border-radius: 50%;
 	border: 1px solid $light-grey;
 }
 .messageRight {
 	position: relative;
-	width: calc( 100% - 70px );
+	width: calc( 100% - 60px );
 	min-height: 77px;
 	float:right;
 }
 .messageName {
-	margin-top: 4px;
+	margin-top: 2px;
 	margin-bottom: 4px;
 	position: relative;
 	float: left;
 	width: 100%;
-	font-size: 15px;
-	font-family: 'Comfortaa', cursive;
+	font-size: 14px;
+	font-family: verdana;
 }
 .messageText {
 	position: relative;
@@ -719,17 +724,17 @@ h4 {
 	font-family: 'Droid Sans Mono', monospace;
 }
 .messageTag {
-	height: 30px;
-	width: 30px;
+	height: 25px;
+	width: 25px;
 	border-radius: 50%;
 	position: absolute;
-	left: 35px;
-	top: 42px;
+	left: 30px;
+	top: 32px;
 	box-shadow: 0px 0px 2px;
 }
 .messageTag a {
 	font-size: 16px;
-	line-height: 29px;
+	line-height: 25px;
 	text-align: center;
 	width: 100%;
 	height: 100%;
@@ -869,11 +874,14 @@ h4 {
 	height: 120px;
 }
 #infoRight {
-	width:30%;
-	float:left;
+	width:280px;
+	height: 120px;
+	position:absolute;
+	right:10px;
 }
 #infoMid {
 	width: 20%;
+	height: 120px;
 	float:left;
 }
 #infoMid div {
@@ -889,6 +897,7 @@ h4 {
 	font-size: 10px;
 	font-family: helvetica;
 }
+<<<<<<< HEAD
 @keyframes loading {
   50% {
     box-shadow :  
@@ -905,35 +914,32 @@ h4 {
   }
 }
 
+=======
+>>>>>>> origin/master
 //task step
 .action_button {
 	height: 30px;
+	width: 120px;
+	font-size: 16px;
 	line-height: 30px;
-	width: 110px;
-	background-color: blue;
 	float:left;
-}
-#taskStep {
-	width: calc(100% - 10px);
-	background-color: #68ba7c;
-	position:relative;
-	display:flex;
-	padding: 5px;
-}
-#taskStep select {
-	height:30px;
-	width:50%;
-	float:left;
-}
-#taskStep input[type="button"] {
-	width: 40%;
-	min-width: 80px;
-	height: 40px;
-	border-radius: 8px;
-	border: 2px solid red;
+	margin-left:10px;
+	border: 1px solid $light-grey;
+	border-radius: 4px;
+	line-height: 30px;
+	text-align:center;
+	box-shadow: 2px 2px 2px black;
 	font-family: 'Comfortaa', cursive;
-	font-size: 15px;
-	line-height: 40px;
+	
+	&:hover {
+		background-color: lighten($active-task, 5%);
+		cursor: pointer;
+	}
+
+	&:active {
+		margin-top: -4px;
+		box-shadow: 1px 1px 1px black;
+	}
 }
 #submitForApproval {
 	position:relative;
