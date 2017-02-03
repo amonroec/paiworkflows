@@ -2,12 +2,9 @@
 <div id="chatEnter">
   <label for="chat-textarea" value="Me:"></label>
 	<textarea name="chat-textarea" id="chat-textarea" v-model="message.text"></textarea>
-  <input
-    type="button"
-    name="submitChat"
-    value="Submit Chat"
-    v-on:click="submitChat"
-  >
+	<div class="submitChatButton" type="button" name="submitChat" v-on:click="submitChat">Send
+	  <i class="fa fa-paper-plane" id="sendChat"><i>
+	</div>  
 </div>
 </template>
 <script>

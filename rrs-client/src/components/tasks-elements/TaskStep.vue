@@ -9,13 +9,16 @@
         {{ worker.name }}
       </option>
     </select>
-    -->
     <input
       type="button"
       name="assign_task"
       v-on:click="assignTask"
       value="Assign Task"
     ></input>
+    -->
+    <div class="action_button" type="button" name="assign_task" v-on:click="assignTask">Assign
+      <i class="fa fa-share"><i>
+    </div>
   </div>
   <div v-if="taskStore.currentTask.status === 'upload'" id="submitForUpload">
     <h1>Needs Upload/Submit for Review</h1>
@@ -39,7 +42,7 @@
       type="button"
       name="approve_art"
       v-on:click="approveArt"
-      value="Approve!"
+      value="Approve"
       v-show="declineArtValue === 0"
     ></input>
     <input
