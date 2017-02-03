@@ -39,7 +39,7 @@ html, body {
   width: calc(100vw - 280px);
   height: calc(100vh - 50px);
   float: left;
-  background-color: #e0e0e0; }
+  background-color: #fff; }
 
 #displayForm {
   width: calc(100vw - $task-bar-width);
@@ -55,7 +55,7 @@ html, body {
 
 #infoBar {
   width: 100%;
-  height: 160px;
+  height: 150px;
   float: left; }
 
 #workspace {
@@ -63,7 +63,10 @@ html, body {
   height: calc(100% - 160px);
   float: left;
   position: relative;
-  overflow: scroll; }
+  overflow: scroll;
+  background: url("pai-logo-with-tag.png") no-repeat center;
+  opacity: .1;
+  background-size: 40%; }
 
 .accountInfo {
   position: relative;
@@ -550,13 +553,14 @@ h3 {
   margin-left: 10px;
   padding-top: 10px;
   border-radius: 8px;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.35); }
+  background-color: #545454;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.38); }
 
 #activityTop {
   float: left;
   width: 100%;
   height: 50%;
-  background-color: #e0e0e0; }
+  background-color: #545454; }
 
 #activityBottom {
   float: left;
@@ -565,7 +569,7 @@ h3 {
   background-image: url("./images/watertower-gb.png");
   background-size: auto 100%;
   background-repeat: no-repeat;
-  background-position: right; }
+  background-position: bottom 0px right -90px; }
 
 #chatBoardDiv {
   width: 100%;
@@ -579,7 +583,7 @@ h3 {
 
 #chatDisplay {
   width: 100%;
-  height: calc(100vh - 50px - 160px - 220px);
+  height: calc(100vh - 50px - 160px - 230px);
   overflow: scroll; }
 
 #chatEnter {
@@ -587,13 +591,44 @@ h3 {
   height: 120px;
   float: left; }
 
+#chatEnter input[type="button"] {
+  float: right;
+  color: blue;
+  border: none;
+  height: 25px;
+  width: 150px; }
+
 #chat-textarea {
   margin-left: 22px;
   width: 270px;
   float: left;
   height: 80px;
   margin-bottom: 10px;
-  background-color: rgba(255, 255, 255, 0.9); }
+  background-color: rgba(255, 255, 255, 0.8); }
+
+.submitChatButton {
+  width: 100px;
+  height: 30px;
+  color: #003875;
+  background-color: #4286f4;
+  float: right;
+  margin-top: -5px;
+  margin-right: 22px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  line-height: 30px;
+  text-align: center;
+  box-shadow: 2px 2px 2px black;
+  font-family: 'Comfortaa', cursive; }
+  .submitChatButton:hover {
+    background-color: #5a95f5;
+    cursor: pointer; }
+  .submitChatButton:active {
+    margin-top: -4px;
+    box-shadow: 1px 1px 1px black; }
+
+#sendChat {
+  font-size: 20px; }
 
 .activeLink {
   background-color: grey; }
@@ -725,17 +760,17 @@ h3 {
 #stageBarHolder {
   position: relative;
   float: left;
-  height: 54px;
+  height: 60px;
   display: flex;
   margin-left: 10px; }
 
 .nodeHolder {
-  width: 104px;
-  height: 66px; }
+  width: 84px;
+  height: 54px; }
 
 .stageBox {
-  width: 54px;
-  height: 54px;
+  width: 44px;
+  height: 44px;
   margin-left: 25px;
   margin-right: 25px;
   float: left;
@@ -746,10 +781,10 @@ h3 {
   position: relative; }
 
 .stageOuter {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border: 1px solid #949494;
-  border-radius: 70px;
+  border-radius: 50%;
   float: left;
   background-color: #e0e0e0;
   z-index: 2; }
@@ -760,59 +795,69 @@ h3 {
   height: 10px;
   border-radius: none;
   border: 1px solid #949494;
-  align-self: center;
   position: absolute;
+  top: 16px;
   margin-left: 50px;
   z-index: 1; }
 
 .stageComplete {
   background-color: #00a84e;
-  height: 40px;
-  width: 40px;
-  border-radius: 60px;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
   border: 1px solid #949494;
-  margin: 4px;
+  margin: 3px;
   color: #00632e;
-  font-size: 25px;
+  font-size: 20px;
   text-align: center;
-  line-height: 40px; }
+  line-height: 32px; }
 
 .stageActive {
   background-color: #4286f4;
-  height: 40px;
-  width: 40px;
-  border-radius: 60px;
+  height: 31px;
+  width: 32px;
+  border-radius: 50%;
   border: 1px solid #949494;
-  margin: 4px;
+  margin: 3px;
+  padding-top: 1px;
   color: #003875;
-  font-size: 22px;
+  font-size: 18px;
   text-align: center;
-  line-height: 40px; }
+  line-height: 32px; }
 
 .stageNotComplete {
   background-color: #949494;
-  height: 40px;
-  width: 40px;
-  border-radius: 60px;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
   border: 1px solid #949494;
-  margin: 4px;
+  margin: 3px;
   color: #3a3a3a;
-  font-size: 25px;
+  font-size: 20px;
   text-align: center;
-  line-height: 40px; }
+  line-height: 32px; }
 
-#taskInfo {
-  width: 100%;
+#infoLeft {
+  width: 50%;
+  float: left;
+  height: 120px; }
+
+#infoRight {
+  width: 30%;
   float: left; }
 
-#taskInfo div {
+#infoMid {
+  width: 20%;
+  float: left; }
+
+#infoMid div {
   float: left;
   margin: 5px; }
 
 .stageText {
   position: relative;
   float: left;
-  width: 104px;
+  width: 94px;
   height: 12px;
   text-align: center;
   font-size: 10px;
@@ -821,9 +866,11 @@ h3 {
 @keyframes loading {
   50% {
     box-shadow: inset 0px 0px 0px 3px #4286f4, inset 0px 0px 0px 6px #5a95f5, inset 0px 0px 0px 9px #72a5f7, inset 0px 0px 0px 12px #8ab4f8, inset 0px 0px 0px 15px #a2c4fa, inset 0px 0px 0px 18px #bad3fb, inset 0px 0px 0px 21px #d3e3fc, inset 0px 0px 0px 24px #ebf2fe, inset 0px 0px 0px 27px white, inset 0px 0px 0px 30px #2a77f3; } }
-#infoBar_taskStep {
-  width: 40%;
-  float: right; }
+.action_button {
+  height: 30px;
+  line-height: 30px;
+  width: 110px;
+  background-color: blue; }
 
 #taskStep {
   width: calc(100% - 10px);
@@ -832,14 +879,20 @@ h3 {
   display: flex;
   padding: 5px; }
 
+#taskStep input[type="button"] {
+  width: 40%;
+  min-width: 80px;
+  height: 40px;
+  border-radius: 8px;
+  border: 2px solid red;
+  font-family: 'Comfortaa', cursive;
+  font-size: 15px;
+  line-height: 40px; }
+
 #submitForApproval {
   position: relative;
   width: 100%;
   height: 100%; }
-
-#submitForApproval input[type="button"] {
-  width: 200px;
-  height: 30px; }
 
 #declineArtReason {
   position: relative;
@@ -866,7 +919,10 @@ h3 {
 
 .part1 {
   font-family: helvetica;
-  font-size: 53px;
-  padding-left: 32px; }
+  font-size: 32px;
+  line-height: 60px;
+  padding-left: 32px;
+  height: 50%;
+  width: 100%; }
 
 /*# sourceMappingURL=app.css.map */
