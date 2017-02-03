@@ -61,6 +61,13 @@ Route::get('/task/updated', function (Request $request) {
 
 Route::resource('/task/updated', 'TasksController@taskUpdated');
 
+Route::get('/tasks/getAllTasks', function (Request $request) {
+	return redirect()->action('TasksController@getAllTasks');
+	//Task::where('id', 81)->notify(new TaskUpdated);
+});
+
+Route::resource('/tasks/getAllTasks', 'TasksController@getAllTasks');
+
 Route::post('/tasks/singleTask', function (Request $request) {
 	return redirect()->action('TasksController@setTask');
 });

@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class BuilNotificationsTable extends Migration
+class CreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +13,11 @@ class BuilNotificationsTable extends Migration
     public function up()
     {
         Schema::create('notifications', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->uuid('id')->primary();
             $table->string('type');
-            $table->string('notifiable_type');
-            $table->integer('notifiable_id');
+            $table->morphs('notifiable');
             $table->text('data');
-            $table->boolean('read');
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });
     }

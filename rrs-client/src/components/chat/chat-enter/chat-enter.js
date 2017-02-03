@@ -84,7 +84,6 @@ module.exports = {
     })
   },
   created: function () {
-    Pusher.logToConsole = true
     this.pusher = new Pusher('9ca3eda463882645ca10', {
       encrypted: true,
       cluster: 'mt1'

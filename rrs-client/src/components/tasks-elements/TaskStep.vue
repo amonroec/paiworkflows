@@ -21,9 +21,11 @@
         name="file_upload"
         :value="fileUpload"
       >
-      <div class="action_button" type="button" name="upload" v-on:click="">Upload
-        <i class="fa fa-share"><i>
-      </div>
+      <input
+        type="submit"
+        name="submit"
+        value="submit"
+      ></input>
     </form>
   </div>
   <div v-if="taskStore.currentTask.status === 'approve'" id="submitForApproval">

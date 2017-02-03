@@ -32,6 +32,11 @@ class TasksController extends Controller
         return;
     }
 
+    public function getAllTasks(Request $request){
+        $tasks = Task::all();
+        return $tasks;
+    }
+
     public function loadTasks(Request $request){
     	//$tasks = Task::all();
         $tasks = Task::select()
