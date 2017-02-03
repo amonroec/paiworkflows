@@ -66,7 +66,7 @@ html, body {
   position: relative;
   overflow: scroll;
   background: url("pai-logo-with-tag.png") no-repeat center;
-  opacity: .1;
+  background-opacity: .1;
   background-size: 40%; }
 
 .accountInfo {
@@ -871,7 +871,8 @@ h3 {
   height: 30px;
   line-height: 30px;
   width: 110px;
-  background-color: blue; }
+  background-color: blue;
+  float: left; }
 
 #taskStep {
   width: calc(100% - 10px);
@@ -879,6 +880,11 @@ h3 {
   position: relative;
   display: flex;
   padding: 5px; }
+
+#taskStep select {
+  height: 30px;
+  width: 50%;
+  float: left; }
 
 #taskStep input[type="button"] {
   width: 40%;

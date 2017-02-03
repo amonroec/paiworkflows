@@ -2,20 +2,12 @@
 <div id="taskStep">
   <div v-if="taskStore.currentTask.status === 'assign'" id="assignTask">
     <h1>Needs Assigned!!!</h1>
-    <!--
     <select v-if="workers.length > 0" v-model="selectedWorker">
       <option v-bind:value="'assignWorker'">Assign to Worker</option>
       <option v-for="worker in workers" v-bind:value="worker.id">
         {{ worker.name }}
       </option>
     </select>
-    <input
-      type="button"
-      name="assign_task"
-      v-on:click="assignTask"
-      value="Assign Task"
-    ></input>
-    -->
     <div class="action_button" type="button" name="assign_task" v-on:click="assignTask">Assign
       <i class="fa fa-share"><i>
     </div>
@@ -29,11 +21,9 @@
         name="file_upload"
         :value="fileUpload"
       >
-      <input
-        type="submit"
-        name="submit"
-        value="submit"
-      >Submit</input>
+      <div class="action_button" type="button" name="upload" v-on:click="">Upload
+        <i class="fa fa-share"><i>
+      </div>
     </form>
   </div>
   <div v-if="taskStore.currentTask.status === 'approve'" id="submitForApproval">
