@@ -1,8 +1,3 @@
-<script>
-export default {
-
-}
-</script>
 <template>
   <div id="link-box">
     <form v-on:submit.prevent="handleLoginFormSubmit()">
@@ -32,7 +27,22 @@ export default {
 	          <center>
 	            <img src="../../assets/white100/Checklist Filled.png"></img> 
 	          </center>
-          	Tasks
+          	My Tasks
+          </div>
+        </router-link>
+      </div>
+      <div class="link tasksBackground">
+        <router-link
+          class="form-control"
+          name="tasks"
+          href="javascript:void(0)"
+          to="/tasks/all"
+        >
+          <div>
+            <center>
+              <img src="../../assets/white100/Checklist Filled.png"></img> 
+            </center>
+            All Tasks
           </div>
         </router-link>
       </div>

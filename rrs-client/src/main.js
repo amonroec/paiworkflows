@@ -22,6 +22,7 @@ import LiveRequests from './components/tasks-elements/LiveRequests'
 import ChatBoard from './components/chat/chat-board/ChatBoard'
 import GSignInButton from 'vue-google-signin-button'
 import TaskPage from './pages/TaskPage'
+import AllTasksPage from './pages/AllTasksPage'
 import SuccessfulSubmit from './pages/SuccessfulSubmit'
 
 Vue.use(GSignInButton)
@@ -49,6 +50,7 @@ const routes = [
   {path: '/tasks/single', component: SingleTask, name: 'singletask'},
   {path: '/tasks/live', component: LiveRequests, name: 'liverequests'},
   {path: '/tasks/page', component: TaskPage, name: 'taskpage'},
+  {path: '/tasks/all', component: AllTasksPage, name: 'alltaskspage'},
   {path: '/form/success', component: SuccessfulSubmit, name: 'successfulsubmit'}
 ]
 

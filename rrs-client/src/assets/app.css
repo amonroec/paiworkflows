@@ -66,8 +66,10 @@ html, body {
   position: relative;
   overflow: scroll;
   background: url("pai-logo-with-tag.png") no-repeat center;
-  background-opacity: .1;
   background-size: 40%; }
+
+.uploadsDiv div {
+  margin-top: 10px; }
 
 .accountInfo {
   position: relative;
@@ -646,8 +648,7 @@ h3 {
   border-radius: 10px;
   box-shadow: 2px 2px 2px black;
   margin-bottom: 7px;
-  background-color: #fff;
-  height: 60px; }
+  background-color: #fff; }
 
 #messageImage img {
   position: relative;
@@ -670,7 +671,6 @@ h3 {
 .messageRight {
   position: relative;
   width: calc( 100% - 60px );
-  min-height: 77px;
   float: right; }
 
 .messageName {
@@ -688,7 +688,7 @@ h3 {
   font-family: helvetica;
   float: left;
   width: 100%;
-  margin-bottom: 17px; }
+  margin-bottom: 25px; }
 
 .messageTimestamp {
   position: absolute;
@@ -698,7 +698,8 @@ h3 {
   font-size: 9px;
   text-align: left;
   float: bottom;
-  font-family: 'Droid Sans Mono', monospace; }
+  font-family: 'Droid Sans Mono', monospace;
+  margin-top: 10px; }
 
 .messageTag {
   height: 25px;
@@ -724,6 +725,9 @@ h3 {
   height: 100%;
   width: 100%;
   border-radius: 50%; }
+
+.fileUpload {
+  display: none; }
 
 .formSubmitted {
   color: #fff;
@@ -875,6 +879,9 @@ h3 {
   font-size: 10px;
   font-family: helvetica; }
 
+@keyframes loading {
+  50% {
+    box-shadow: inset 0px 0px 0px 3px #4286f4, inset 0px 0px 0px 6px #5a95f5, inset 0px 0px 0px 9px #72a5f7, inset 0px 0px 0px 12px #8ab4f8, inset 0px 0px 0px 15px #a2c4fa, inset 0px 0px 0px 18px #bad3fb, inset 0px 0px 0px 21px #d3e3fc, inset 0px 0px 0px 24px #ebf2fe, inset 0px 0px 0px 27px white, inset 0px 0px 0px 30px #2a77f3; } }
 .action_button {
   height: 30px;
   width: 120px;
@@ -930,5 +937,50 @@ h3 {
   padding-left: 32px;
   height: 50%;
   width: 100%; }
+
+.input-file-container {
+  position: relative;
+  width: 225px; }
+
+.js .input-file-trigger {
+  display: block;
+  padding: 14px 45px;
+  background: #39D2B4;
+  color: #fff;
+  font-size: 1em;
+  transition: all .4s;
+  cursor: pointer; }
+
+.js .input-file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 225px;
+  opacity: 0;
+  padding: 14px 0;
+  cursor: pointer; }
+
+.js .input-file:hover + .input-file-trigger,
+.js .input-file:focus + .input-file-trigger,
+.js .input-file-trigger:hover,
+.js .input-file-trigger:focus {
+  background: #34495E;
+  color: #39D2B4; }
+
+.file-return {
+  margin: 0; }
+
+.file-return:not(:empty) {
+  margin: 1em 0; }
+
+.js .file-return {
+  font-style: italic;
+  font-size: .9em;
+  font-weight: bold; }
+
+.js .file-return:not(:empty):before {
+  content: "Selected file: ";
+  font-style: normal;
+  font-weight: normal; }
 
 /*# sourceMappingURL=app.css.map */
