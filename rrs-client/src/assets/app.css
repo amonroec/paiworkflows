@@ -860,7 +860,11 @@ h3 {
 
 #infoMid div {
   float: left;
-  margin: 5px; }
+  font-size: 14px;
+  line-height: 25px;
+  width: 100%;
+  margin-top: 2px;
+  font-family: verdana; }
 
 .stageText {
   position: relative;

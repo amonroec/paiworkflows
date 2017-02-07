@@ -17,11 +17,10 @@
       </div>
     </div>
     <div id="infoMid">
-      <div class="accountName">Account: {{taskStore.currentForm.account_name}}</div>
-      <div class="accontNum">Account #: {{taskStore.currentForm.account_num}}</div>
+      <div class="accountName">Acct: {{taskStore.currentForm.account_name}} -  {{taskStore.currentForm.account_num}}</div>
       <div class="turnTime">Turn Time: {{taskStore.currentForm.turn_time}}</div>
-      <div class="">Submitted By: {{taskStore.currentForm.submitted_by}}</div>
-      <div>Description: {{taskStore.currentForm.description}}</div>
+      <div class="">CSR: {{taskStore.currentForm.submitted_by}}</div>
+      <div class="">Timestamp: {{taskStore.currentForm.timestamp}}</div>
     </div>
     <div id="infoRight">
       <task-step></task-step>
