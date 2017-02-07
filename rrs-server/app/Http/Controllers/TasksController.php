@@ -167,45 +167,36 @@ class TasksController extends Controller
         return 'success submitted to next step';
     }
 
-    public function getUpload($taskId){
-        $upload = Task::select('upload_url')
-                    ->where('id', $taskId);
-        $upload_url = $upload->get('upload_url');
-        $upload_url = $upload_url->all();
-        return $upload_url;
-    }
-
     public function updateUpload(Request $request){
-        $taskId = $request->input('task_id');
-        $check = $this->getUpload($taskId);
+        $check = $this->checkUploads($request->input('task_id'));
         $count = count($check);
-        if(is_null($check)){
+        if($check[0]->upload_url == ''){
             $array = [];
             $file = [$request->file('file_upload')->store('assets/uploads', 'uploads')];
             $merged = array_merge($array, $file);
             Task::where('id', $request->input('task_id'))
             ->update(['upload_url' => json_encode($merged)]);
-            $this->submitTaskStep($request);
+            //$this->submitTaskStep($request);
         } else {
-            $array = $check;
+            $array = $check[0]->upload_url;
             $file = [$request->file('file_upload')->store('assets/uploads', 'uploads')];
             $merged = array_merge($array, $file);
             Task::where('id', $request->input('task_id'))
             ->update(['upload_url' => json_encode($merged)]);
-            //return redirect('http://localhost:8080/tasks/page');
-            $this->submitTaskStep($request);
+            //$this->submitTaskStep($request);
         }
+        return redirect('http://localhost:8080/tasks/page');
     }
 
-    public function checkUploads($taskId) {
-        $uploadUrl = Task::select()
-            ->where('id', $taskId)
+    private function checkUploads($taskId) {
+        $uploadUrl = Task::select('upload_url')
+            ->where('id', '=', $taskId)
             ->get();
-        print_r($uploadUrl);//return ;
+        return $uploadUrl;
     }
 
     public function assignTask(Request $request){
-        $task = json_decode($request->input('task'));
+        $task = $request->input('task');
         Task::where('id', $task->id)
             ->update(['app_worker' => $request->input('app_worker')]);
         $this->submitTaskStep($request);
