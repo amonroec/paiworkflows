@@ -1,7 +1,33 @@
 import {getWorkers, assignTask, submitChat, uploadFile} from './../../config'
 import {mapState} from 'vuex'
 var methods = {}
-
+/*
+methods.startFunction = function () {
+  document.querySelector('html').classList.add('js')
+  generateKinetic: function(){
+      this.stage = new Kinetic.Stage({
+          container: this.$els.canvas,
+          width: 300,
+          height: 300
+      });
+  }
+  var fileInput = document.querySelector('.input-file')
+  var button = document.querySelector('.input-file-trigger')
+  var theReturn = document.querySelector('.file-return')
+  button.addEventListener('keydown', function (event) {
+    if (event.keyCode === 13 || event.keyCode === 32) {
+      fileInput.focus()
+    }
+  })
+  button.addEventListener('click', function (event) {
+    fileInput.focus()
+    return false
+  })
+  fileInput.addEventListener('change', function (event) {
+    theReturn.innerHTML = this.value
+  })
+}
+*/
 methods.getWorkers = function () {
   const postData = {
     division: 3,
@@ -20,32 +46,22 @@ methods.getWorkers = function () {
 
 methods.assignTask = function () {
   const postData = {
-    id: this.request_id,
-    worker_id: this.selectedWorker
+    task: JSON.stringify(this.taskStore.currentTask),
+    app_worker: this.selectedWorker
   }
   console.log(postData)
   this.$http.post(assignTask, postData)
     .then(response => {
       if (response.status === 200) {
-        console.log(response)
+        console.log(response.data)
+        this.submitMessage('assign', 'Assigned')
       }
     })
 }
 
 methods.submitForApproval = function (e) {
-  /*
   const postData = {
-    task: this.taskStore.currentTask
-  }
-  this.$http.post(submitApproval, postData)
-    .then(response => {
-      console.log(response)
-    })
-  */
-  var file = e.target[1].value
-  const postData = {
-    task: this.taskStore.currentTask,
-    file: file
+    task_id: this.taskStore.currentTask.id
   }
   this.$http.post(uploadFile, postData)
     .then(response => {
@@ -62,11 +78,23 @@ methods.submitDecline = function () {
   this.submitMessage('decline-art')
 }
 
-methods.submitMessage = function (action) {
+methods.clickUpload = function () {
+  var uploadButton = document.querySelector('.fileUpload')
+  uploadButton.click()
+  this.task = JSON.stringify(this.taskStore.currentTask)
+  console.log(this.task)
+}
+
+methods.submitMessage = function (action, text) {
   this.message.name = this.userStore.authUser.name
   this.message.id = this.userStore.authUser.id
-  this.message.date = Date()
+  this.message.text = text
+  var date = new Date()
+  var n = date.toLocaleString()
+  this.message.date = n
   this.message.action = action
+  this.message.user_picture = this.userStore.authUser.picture
+  console.log(this.taskStore.currentTask)
   const postData = {
     task_id: this.taskStore.currentTask.id,
     message: this.message
@@ -75,6 +103,10 @@ methods.submitMessage = function (action) {
   this.$http.post(submitChat, postData)
     .then(response => {
       if (response.status === 200) {
+        if (action === 'upload-file') {
+          var submitButton = document.querySelector('#submitUpload')
+          submitButton.click()
+        }
         console.log(response.data)
       }
     })
@@ -93,8 +125,10 @@ module.exports = {
         id: '',
         text: '',
         date: '',
-        action: ''
+        action: '',
+        user_picture: ''
       },
+      task: '',
       fileUpload: ''
     }
   },

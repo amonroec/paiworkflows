@@ -11,6 +11,7 @@ const mutations = {
   },
   SET_CURRENT_TASK (state, obj) {
     state.currentTask = obj
+    console.log(state.currentTask)
   },
   SET_CURRENT_FORM (state, obj) {
     state.currentForm = obj

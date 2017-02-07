@@ -15,24 +15,42 @@
   <div v-if="taskStore.currentTask.status === 'upload'" id="submitForUpload">
     <h1>Upload for Review</h1>
     <form method="POST" action="http://localhost:8000/api/uploadFile" enctype="multipart/form-data">
+      <input type="hidden" name="task" :value="task" />
       <input type="hidden" name="task_id" :value="taskStore.currentTask.id"></input>
+      <input type="hidden" name="workflow_id" :value="taskStore.currentTask.workflow_id" />
+      <input type="hidden" name="status" :value="taskStore.currentTask.status" />
       <input
+        class="fileUpload"
         type="file"
         name="file_upload"
         :value="fileUpload"
       >
-<<<<<<< HEAD
       <input
+        type="button"
+        name="uploadFile"
+        value="Submit"
+        v-on:click="submitMessage('upload-file', 'The artfile has been uploaded!')"
+      />
+      <input
+        class="fileUpload"
         type="submit"
+        id="submitUpload"
         name="submit"
         value="submit"
       ></input>
-=======
-      <div class="action_button" type="button" name="upload" v-on:click="">Upload
+      <div class="action_button" type="button" name="upload" v-on:click="clickUpload()">Upload
         <i class="fa fa-cloud-upload"><i>
       </div>
->>>>>>> origin/master
     </form>
+    <!--
+    <form action="#">
+      <div class="input-file-container">  
+        <input class="input-file" id="my-file" type="file">
+        <label tabindex="0" for="my-file" class="input-file-trigger">Select a file...</label>
+      </div>
+      <p class="file-return"></p>
+    </form>
+    -->
   </div>
   <div v-if="taskStore.currentTask.status === 'approve'" id="submitForApproval">
     <h1>Review Art</h1>

@@ -199,8 +199,8 @@ Route::post('/uploadFile', function (Request $request) {
 		}
 	}*/
 	//Storage::disk('uploads')->put('testing', $request->file('file_upload'));
-	return redirect()->action('TasksController@updateUpload', $request);
-	
+	redirect()->action('TasksController@updateUpload', $request);
+	redirect('http://localhost:8080/tasks/page');
 });
 
 Route::resource('/uploadFile', 'TasksController@updateUpload');

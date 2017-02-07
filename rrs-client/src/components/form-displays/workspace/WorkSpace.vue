@@ -48,7 +48,15 @@
         <div class="formComments">{{taskStore.currentForm.description ? taskStore.currentForm.description : '---'}}</div>
       </div> 
 -->
-      <img :src="image_url" style="width:100%;"></img>
+      <div v-if="currentTask.form_image_url !== null">
+        <img :src="'http://localhost:8000/assets/forms/' + currentTask.form_image_url" style="width:100%;"></img>
+      </div>
+      <div class="uploadsDiv" v-if="currentTask.upload_url !== null">
+        <h1>Uploads</h1>
+        <div v-for="image in currentTask.upload_url">
+            <img :src="'http://localhost:8000/' + image" style="width:100%;"></img>
+        </div>
+      </div>
 <!--
       <div class="artpackFiles">
         <div class="formHeader">Uploads</div>
