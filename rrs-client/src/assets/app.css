@@ -615,11 +615,11 @@ h3 {
 .submitChatButton {
   width: 100px;
   height: 30px;
-  color: #003875;
-  background-color: #4286f4;
+  color: #210035;
+  background-color: #9200e8;
   float: right;
   margin-top: -5px;
-  margin-right: 22px;
+  margin-right: 32px;
   border: 1px solid #e0e0e0;
   border-radius: 4px;
   line-height: 30px;
@@ -627,7 +627,7 @@ h3 {
   box-shadow: 2px 2px 2px black;
   font-family: 'Comfortaa', cursive; }
   .submitChatButton:hover {
-    background-color: #5a95f5;
+    background-color: #a202ff;
     cursor: pointer; }
   .submitChatButton:active {
     margin-top: -4px;

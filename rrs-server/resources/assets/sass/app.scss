@@ -634,11 +634,11 @@ h4 {
 .submitChatButton {
 	width: 100px;
 	height: 30px;
-	color: $active-text;
-	background-color: $active-task;
+	color: darken( $message-color, 30% );
+	background-color: lighten($message-color,5%);
 	float:right;
 	margin-top: -5px;
-	margin-right: 22px;
+	margin-right: 32px;
 	border: 1px solid $light-grey;
 	border-radius: 4px;
 	line-height: 30px;
@@ -647,7 +647,7 @@ h4 {
 	font-family: 'Comfortaa', cursive;
 
 	&:hover {
-		background-color: lighten($active-task, 5%);
+		background-color: lighten($message-color, 10%);
 		cursor: pointer;
 	}
 
