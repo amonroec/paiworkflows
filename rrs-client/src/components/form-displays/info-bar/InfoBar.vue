@@ -1,7 +1,7 @@
 <template>
   <div id="infoBar">
     <div id="infoLeft">
-      <div class="part1">Artpack Request {{taskStore.currentForm.artpack_num}}</div>
+      <div class="part1">Artpack Request {{currentTask.id}}</div>
         <div id="stageBarHolder">
           <div class="nodeHolder" v-for="(step, index) in workflowSteps">
             <div class="stageBox">
@@ -17,10 +17,10 @@
       </div>
     </div>
     <div id="infoMid">
-      <div class="accountName">Acct: {{taskStore.currentForm.account_name}} -  {{taskStore.currentForm.account_num}}</div>
-      <div class="turnTime">Turn Time: {{taskStore.currentForm.turn_time}}</div>
-      <div class="">CSR: {{taskStore.currentForm.submitted_by}}</div>
-      <div class="">Timestamp: {{taskStore.currentForm.timestamp}}</div>
+      <div class="accountName">Acct: {{currentTask.id}} -  {{currentForm.account_num}}</div>
+      <div class="turnTime">Turn Time: {{currentForm.turn_time}}</div>
+      <div class="">CSR: {{currentForm.submitted_by}}</div>
+      <div class="">Timestamp: {{currentForm.timestamp}}</div>
     </div>
     <div id="infoRight">
       <task-step></task-step>

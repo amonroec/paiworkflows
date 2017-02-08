@@ -4,11 +4,6 @@ import {mapState} from 'vuex'
 
 var methods = {}
 
-methods.setTaskId = function () {
-  this.taskId = this.task_id
-  console.log('taskIdboard' + this.taskId)
-}
-
 module.exports = {
   name: 'liveOrders',
   data: function () {
@@ -20,14 +15,14 @@ module.exports = {
   props: {
     task_id: ''
   },
-  watch: {
-    task_id: function (val, oldVal) {
-      this.setTaskId()
-    }
+  currentTask: function () {
+    this.getChat()
   },
   computed: {
     ...mapState({
-      chatStore: state => state.chatStore
+      chatStore: state => state.chatStore,
+      currentTask: state => state.taskStore.currentTask,
+      taskStore: state => state.taskStore
     })
   },
   created: function () {

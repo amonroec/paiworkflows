@@ -5,5 +5,5 @@
   </div>
 </template>
 <script>
-module.exports = require('./js/task-page.js')
+module.exports = require('./js/home.js')
 </script>

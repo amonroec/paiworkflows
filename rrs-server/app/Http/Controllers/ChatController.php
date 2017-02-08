@@ -51,7 +51,7 @@ class ChatController extends Controller
         return;
     }
 
-    protected function checkMessages($taskId){
+    public function checkMessages($taskId){
     	$check = Chat::select('messages')
     				->where('task_id', '=', $taskId)
     				->get();

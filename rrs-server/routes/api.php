@@ -122,7 +122,7 @@ Route::post('/getWholeWorkflow', function (Request $request) {
 
 Route::resource('/getWholeWorkflow', 'WorkflowController@getWholeWorkflow');
 
-Route::post('/getArtpack', function (Request $request) {
+Route::get('/getArtpack', function (Request $request) {
 	return redirect()->action('TasksController@getArtpack');
 });
 
@@ -152,7 +152,7 @@ Route::post('/submitChat', function (Request $request) {
 
 Route::resource('/submitChat', 'ChatController@submitChat');
 
-Route::post('/getMessages', function (Request $request) {
+Route::get('/getMessages', function (Request $request) {
 	return redirect()->action('ChatController@getMessages');
 });
 

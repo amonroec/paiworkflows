@@ -21,7 +21,7 @@ import SingleTask from './pages/SingleTask'
 import LiveRequests from './components/tasks-elements/LiveRequests'
 import ChatBoard from './components/chat/chat-board/ChatBoard'
 import GSignInButton from 'vue-google-signin-button'
-import TaskPage from './pages/TaskPage'
+import Home from './pages/Home'
 import AllTasksPage from './pages/AllTasksPage'
 import SuccessfulSubmit from './pages/SuccessfulSubmit'
 
@@ -32,7 +32,6 @@ Vue.use(Vuex)
 
 Vue.component('app', App)
 Vue.component('chatBoard', ChatBoard)
-
 /* eslint-disable no-new */
 
 const routes = [
@@ -49,7 +48,8 @@ const routes = [
   {path: '/request-form/artpack', component: ArtpackForm, name: 'artpackForm'},
   {path: '/tasks/single', component: SingleTask, name: 'singletask'},
   {path: '/tasks/live', component: LiveRequests, name: 'liverequests'},
-  {path: '/tasks/page', component: TaskPage, name: 'taskpage'},
+  {path: '/home', component: Home, name: 'home'},
+  {path: '/home/:taskId', component: Home, name: 'hometask'},
   {path: '/tasks/all', component: AllTasksPage, name: 'alltaskspage'},
   {path: '/form/success', component: SuccessfulSubmit, name: 'successfulsubmit'}
 ]

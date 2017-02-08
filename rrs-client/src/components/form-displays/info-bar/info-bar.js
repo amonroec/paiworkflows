@@ -1,6 +1,7 @@
 var methods = {}
-import {getWholeWorkflow} from './../../../config'
+import {getWholeWorkflow, getArtpack} from './../../../config'
 import TaskStep from './../../tasks-elements/TaskStep'
+import {mapState} from 'vuex'
 
 methods.getWorkflowSteps = function () {
   const postData = {
@@ -10,6 +11,19 @@ methods.getWorkflowSteps = function () {
     .then(response => {
       if (response === 200) {
         console.log(response)
+      }
+    })
+}
+
+methods.getArtpack = function () {
+  const postData = {
+    task_id: this.currentTask.id
+  }
+  console.log('current form is trying')
+  this.$http.post(getArtpack, postData)
+    .then(response => {
+      if (response.status === 200) {
+        this.$store.dispatch('setCurrentForm', response.data[0])
       }
     })
 }
@@ -26,17 +40,13 @@ module.exports = {
     TaskStep
   },
   methods: methods,
-  props: [
-    'workflow',
-    'currentTask',
-    'taskStore'
-  ],
-  /*
-  computed: mapState({
-    taskStore: state => state.taskStore,
-    stages: state => state.workflowStore.currentWorkflow.stage_num
-  })
-  */
+  computed: {
+    ...mapState({
+      currentForm: state => state.taskStore.currentForm,
+      workflow: state => state.workflowStore.currentWorkflow,
+      currentTask: state => state.taskStore.currentTask
+    })
+  },
   watch: {
     workflow: function () {
       console.log('workflowChanged')
@@ -60,6 +70,7 @@ module.exports = {
         }
         i++
       }
+      this.getArtpack()
     }
   }
 }

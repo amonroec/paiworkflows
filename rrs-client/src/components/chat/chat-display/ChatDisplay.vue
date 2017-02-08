@@ -1,7 +1,7 @@
 <template>
 <div id="chatDisplay">
   <div class="messageHolder">
-    <div class="message" v-for="message in taskStore.currentChat">
+    <div class="message" v-for="message in currentChat">
       <div id="messageImage"><img :src="message.user_picture"></img></div>
       <div class="messageRight">
         <a class="messageName"> {{message.name}} </a>

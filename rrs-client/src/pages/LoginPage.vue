@@ -47,7 +47,7 @@
                   window.sessionStorage.setItem('userDivision', response.body.division)
                   window.sessionStorage.setItem('accessLevel', response.body.access_level)
                   window.sessionStorage.setItem('userName', response.body.name)
-                  this.$router.push({name: 'dashboard'})
+                  this.$router.push({name: 'home'})
                 })
             }
           }, (response) => {

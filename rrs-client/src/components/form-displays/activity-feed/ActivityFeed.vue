@@ -2,7 +2,7 @@
 <div id="activityFeed">
   <div id="activityTop"></div>
   <div id="activityBottom"></div>
-  <chat-board :task_id.sync="taskId"></chat-board>
+  <chat-board :task_id.sync="taskStore.currentTask.id"></chat-board>
 </div>
 </template>
 <script>

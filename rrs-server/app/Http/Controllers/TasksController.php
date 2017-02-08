@@ -185,7 +185,7 @@ class TasksController extends Controller
             ->update(['upload_url' => json_encode($merged)]);
             //$this->submitTaskStep($request);
         }
-        return redirect('http://localhost:8080/tasks/page');
+        return redirect('http://localhost:8080/home/' . $request->input('task_id'));
     }
 
     private function checkUploads($taskId) {

@@ -16,7 +16,6 @@
         this.$http.post(tasksUrl, postData)
           .then(response => {
             if (response.status === 200) {
-              console.log(response.data)
               this.$store.dispatch('setTasksArray', response.data)
             }
           })
@@ -26,7 +25,6 @@
           .then(response => {
             var workflows = response.data
             this.$store.dispatch('setWorkflows', workflows)
-            console.log(workflows)
           })
       }
     },
@@ -43,7 +41,6 @@
         this.$store.dispatch('setUserObject', userObj)
         this.getTasks()
         this.getWorkflows()
-        console.log('I was created')
       }
     }
   }
