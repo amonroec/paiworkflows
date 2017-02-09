@@ -14,6 +14,8 @@ methods.setCurrentTask = function (task) {
   })
   this.getArtpack()
 */
+  console.log(this.$parent)
+  console.log(this)
   this.$router.push('/home/' + task.id)
 }
 

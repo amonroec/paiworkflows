@@ -2,7 +2,11 @@ html, body {
   margin: 0px;
   padding: 0px;
   width: 100vw;
-  height: 100vh; }
+  height: 100vh;
+  overflow: hidden; }
+
+#homeDisplay {
+  background: url("pai-logo-with-tag.png") no-repeat center; }
 
 #live-orders {
   width: 100%;
@@ -15,44 +19,176 @@ html, body {
   text-align: center; }
 
 .task div {
-  width: 100%;
-  height: 60px;
-  background-color: #789f31;
+  width: 245px;
+  height: 75px;
+  background-color: #fff;
   margin-top: 10px;
+  margin-left: 15px;
   font-size: 10px; }
 
 .task-bar {
-  width: 240px;
+  width: 280px;
   height: calc(100vh - 50px);
   float: left;
-  background-color: #000;
+  background-color: #303030;
   overflow: scroll; }
 
+.task-side {
+  background-color: #728f41;
+  width: 15px;
+  height: 100%;
+  margin: 10px; }
+
 #displayForm {
-  width: calc(100vw - 240px);
+  width: calc(100vw - 280px);
+  height: calc(100vh - 50px);
+  float: left;
+  background-color: #fff; }
+
+#displayForm {
+  width: calc(100vw - $task-bar-width);
   height: calc(100vh - 50px);
   float: left; }
 
-#artpackDisplayDiv {
-  width: 100%;
-  height: 100%; }
-
 .activity-feed {
-  width: 30%;
+  width: 300px;
   height: calc(100% - 160px);
+  position: relative;
+  margin-left: 10px;
   float: left; }
 
-#summaryBar {
+#infoBar {
   width: 100%;
-  height: 160px;
-  background-color: grey;
+  height: 120px;
   float: left; }
+
+#taskPage {
+  position: relative;
+  background: url("pai-logo-with-tag.png") no-repeat center;
+  background-size: 40%; }
 
 #workspace {
-  width: 70%;
+  width: calc(100vw - 280px - 300px);
   height: calc(100% - 160px);
-  background-color: #cbb956;
+  float: left;
+  position: relative;
+  overflow: scroll;
+  background: url("pai-logo-with-tag.png") no-repeat center;
+  background-size: 40%; }
+
+.uploadsDiv div {
+  margin-top: 10px; }
+
+.accountInfo {
+  position: relative;
+  padding-top: 22px;
+  height: 170px;
+  width: 820px;
+  background-color: #fff;
+  margin-left: calc((100% - 820px)/2);
+  border-radius: 8px;
+  border: 1px solid black; }
+
+.artpackDetails {
+  margin-top: 25px;
+  margin-left: calc((100% - 820px)/2);
+  position: relative;
+  padding-top: 22px;
+  min-height: 370px;
+  height: 100%;
+  width: 820px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid black; }
+
+.artpackFiles {
+  width: 820px;
+  margin-top: 25px;
+  margin-left: calc((100% - 820px)/2);
+  margin-bottom: 25px;
+  padding-top: 22px;
+  position: relative;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid black;
+  height: 120px; }
+
+.formHeader {
+  position: absolute;
+  top: -17px;
+  left: 15px;
+  text-align: center;
+  width: 200px;
+  height: 38px;
+  line-height: 38px;
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 8px;
+  font-family: 'Comfortaa', cursive; }
+
+.formQuestion {
+  position: relative;
+  display: block;
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 52px;
+  padding-left: 3px;
+  margin-top: 12px;
+  background: white;
   float: left; }
+
+.formAnswer {
+  position: relative;
+  display: block;
+  width: 200px;
+  height: 38px;
+  line-height: 38px;
+  margin-top: 12px;
+  padding-left: 8px;
+  background-color: #fff;
+  float: left;
+  border: 1px solid black;
+  border-radius: 8px; }
+
+.formQuantityType {
+  position: relative;
+  display: block;
+  width: 115px;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 5px;
+  padding-left: 3px;
+  margin-top: 12px;
+  background: white;
+  text-align: left;
+  float: left; }
+
+.formQuantity {
+  position: relative;
+  display: block;
+  width: 60px;
+  height: 38px;
+  line-height: 38px;
+  margin-top: 12px;
+  padding-left: 8px;
+  background-color: #fff;
+  float: left;
+  border: 1px solid black;
+  border-radius: 8px; }
+
+.formComments {
+  position: relative;
+  display: block;
+  width: 585px;
+  min-height: 130px;
+  margin-top: 12px;
+  margin-bottom: 20px;
+  padding-left: 8px;
+  background-color: #fff;
+  float: left;
+  border: 1px solid black;
+  border-radius: 8px; }
 
 #body {
   margin: 0;
@@ -67,7 +203,7 @@ html, body {
   margin-top: 0px;
   position: relative;
   width: 100%;
-  height: calc(100vh - 80px); }
+  height: calc(100vh - 50px); }
 
 #taskBar {
   left: 0px;
@@ -165,43 +301,71 @@ html, body {
   float: left; }
 
 .button-div {
-  float: right; }
+  float: right;
+  margin-top: 10px; }
 
 .subcat-link {
   width: 200px;
+  height: 25px;
   text-decoration: none;
   background-color: grey;
   margin: 2px;
   float: left;
   color: white;
-  font-family: helvetica;
-  text-align: center; }
+  font-family: helvetica; }
 
-#subcat-request:hover #request-dropdown {
+.subcat-link div {
+  position: relative;
+  width: 140px;
+  height: 20px;
+  text-align: center;
+  float: right; }
+
+.subcat-link #topImage {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  float: left;
+  background-color: green; }
+
+.subcat-link img {
+  width: 100%;
+  height: 100%; }
+
+.subcat-link #routerLink {
+  width: calc(100% - 40px);
+  height: 20px;
+  float: left; }
+
+#subcat-request:hover > #request-dropdown {
   display: block;
   visibility: visible;
   float: left;
   width: 100%;
+  height: 200px;
   background-color: #95f9a3;
-  z-index: 100; }
+  z-index: 300; }
 
 .subcat-div a {
-  width: 100%;
-  height: 20px; }
+  width: calc(100% - 50px);
+  height: 20px;
+  margin-top: 15px;
+  float: left; }
 
 #request-dropdown {
   display: none;
   visibility: hidden; }
 
 .button-div a {
-  width: 200px;
+  width: 100%;
   text-decoration: none;
   background-color: grey;
   margin-top: 2px;
   float: left;
   color: white;
   font-size: 18px;
-  font-family: helvetica; }
+  font-family: helvetica;
+  text-align: center; }
 
 .subcat-div {
   width: 100%;
@@ -335,6 +499,9 @@ html, body {
   margin-right: 5px;
   float: left; }
 
+.workflow-bar select {
+  float: left; }
+
 .workflow-name {
   position: absolute;
   width: 20%;
@@ -351,18 +518,42 @@ html, body {
 .fade-enter, .fade-leave {
   opacity: 0; }
 
+h1 {
+  font-size: 25px;
+  width: 100%;
+  text-align: center;
+  font-family: 'Comfortaa', cursive;
+  color: grey; }
+
 h2 {
   color: white;
   width: 100%;
+  text-align: center;
+  font-family: 'Comfortaa', cursive; }
+
+h3 {
+  color: #6d9921;
+  font-size: 15px;
+  width: 100%;
   text-align: center; }
+
+.headers {
+  font-family: 'Comfortaa', cursive;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 35px; }
 
 #assignTask {
   width: 100%;
   text-align: center; }
 
 #assignTask select {
-  width: 200px;
-  height: 60px; }
+  color: black;
+  font-size: 12px;
+  line-height: 30px;
+  height: 32px;
+  width: 122px; }
 
 .displayTable {
   width: 90%;
@@ -370,47 +561,434 @@ h2 {
   margin-right: 5%; }
 
 #activityFeed {
+  float: left;
+  width: 280px;
+  height: calc(100vh - 50px - 160px - 30px);
+  margin-left: 10px;
+  padding-top: 10px;
+  border-radius: 8px;
+  background-color: #545454;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.38); }
+
+#activityTop {
+  float: left;
   width: 100%;
-  height: 100%;
-  background-color: yellow; }
+  height: 50%;
+  background-color: #545454; }
+
+#activityBottom {
+  float: left;
+  width: 100%;
+  height: 50%;
+  background-image: url("./images/watertower-gb.png");
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: bottom 0px right -90px; }
 
 #chatBoardDiv {
   width: 100%;
-  height: 100%;
-  background-color: grey; }
+  height: calc(100vh - 50px - 160px - 10px);
+  background-color: #fff; }
 
 #chatBoard {
-  width: 100%;
-  height: 100%; }
-
-#chatDisplayDiv {
-  width: 96%;
-  margin-left: 3%;
-  height: calc(100% - 200px); }
+  width: 280px;
+  height: 100%;
+  position: absolute; }
 
 #chatDisplay {
   width: 100%;
-  height: 100%;
-  background-color: blue; }
-
-#chatEnterDiv {
-  width: 100%;
-  float: left;
-  height: 120px;
-  min-height: 100px; }
+  height: calc(100vh - 50px - 160px - 230px);
+  overflow: scroll; }
 
 #chatEnter {
-  width: calc(100% - 60px);
+  width: 300px;
   height: 120px;
-  max-height: 200px;
-  margin-left: 55px; }
+  float: left; }
+
+#chatEnter input[type="button"] {
+  float: right;
+  color: blue;
+  border: none;
+  height: 25px;
+  width: 150px; }
 
 #chat-textarea {
-  width: 100%;
+  margin-left: 7px;
+  width: 260px;
+  float: left;
+  height: 80px;
+  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.3); }
+
+.submitChatButton {
+  width: 100px;
+  height: 30px;
+  color: #003875;
+  background-color: #4286f4;
   float: right;
-  height: 120px; }
+  margin-top: -5px;
+  margin-right: 22px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  line-height: 30px;
+  text-align: center;
+  box-shadow: 2px 2px 2px black;
+  font-family: 'Comfortaa', cursive; }
+  .submitChatButton:hover {
+    background-color: #5a95f5;
+    cursor: pointer; }
+  .submitChatButton:active {
+    margin-top: -4px;
+    box-shadow: 1px 1px 1px black; }
+
+#sendChat {
+  font-size: 20px; }
 
 .activeLink {
   background-color: grey; }
+
+.message {
+  position: relative;
+  float: left;
+  font-size: 18px;
+  width: 92%;
+  margin-left: 4%;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px black;
+  margin-bottom: 7px;
+  background-color: #fff; }
+
+#messageImage img {
+  position: relative;
+  margin-top: 4px;
+  margin-left: 4px;
+  margin-bottom: 12px;
+  width: 45px;
+  height: 45px;
+  float: left;
+  border: 1px solid #949494;
+  border-radius: 50%; }
+
+.messageLeft {
+  position: relative;
+  width: 50px;
+  height: 70px;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0; }
+
+.messageRight {
+  position: relative;
+  width: calc( 100% - 60px );
+  float: right; }
+
+.messageName {
+  margin-top: 2px;
+  margin-bottom: 4px;
+  position: relative;
+  float: left;
+  width: 100%;
+  font-size: 14px;
+  font-family: verdana; }
+
+.messageText {
+  position: relative;
+  font-size: 13px;
+  font-family: helvetica;
+  float: left;
+  width: 100%;
+  margin-bottom: 25px; }
+
+.messageTimestamp {
+  position: absolute;
+  bottom: 2px;
+  width: 100%;
+  color: #949494;
+  font-size: 9px;
+  text-align: left;
+  float: bottom;
+  font-family: 'Droid Sans Mono', monospace;
+  margin-top: 10px; }
+
+.messageTag {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  position: absolute;
+  left: 30px;
+  top: 32px;
+  box-shadow: 0px 0px 2px; }
+
+.messageTag a {
+  font-size: 16px;
+  line-height: 25px;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; }
+
+.formSubmitted {
+  color: #fbff32;
+  width: 100%;
+  height: 100%;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%; }
+
+.fileUpload {
+  display: none; }
+
+.formSubmitted {
+  color: #fff;
+  background-color: #fbff32; }
+
+.artDeclined {
+  color: #fff;
+  background-color: #e8122b; }
+
+.artApproved {
+  color: #fff;
+  background-color: #00ce4f; }
+
+.fileUploaded {
+  color: #fff;
+  background-color: #008cff; }
+
+.fileRevised {
+  color: #fff;
+  background-color: #44abff; }
+
+.messageIcon {
+  color: #fff;
+  background-color: #8200ce; }
+
+.requestClosed {
+  color: #fff;
+  background-color: #949494; }
+
+.g-signin-button {
+  /* This is where you control how the button looks. Be creative! */
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background-color: #3c82f7;
+  color: #fff;
+  box-shadow: 0 3px 0 #0f69ff; }
+
+#stageBarHolder {
+  position: relative;
+  float: left;
+  height: 60px;
+  display: flex;
+  margin-left: 10px; }
+
+.nodeHolder {
+  width: 84px;
+  height: 54px; }
+
+.stageBox {
+  width: 44px;
+  height: 44px;
+  margin-left: 25px;
+  margin-right: 25px;
+  float: left;
+  display: block;
+  overflow: hidden;
+  background: transparent;
+  z-index: 2;
+  position: relative; }
+
+.stageOuter {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #949494;
+  border-radius: 50%;
+  float: left;
+  background-color: #e0e0e0;
+  z-index: 2; }
+
+.connectingBar {
+  background-color: #e0e0e0;
+  width: calc( 100% - 108px );
+  height: 10px;
+  border-radius: none;
+  border: 1px solid #949494;
+  position: absolute;
+  top: 16px;
+  margin-left: 50px;
+  z-index: 1; }
+
+.stageComplete {
+  background-color: #00a84e;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  border: 1px solid #949494;
+  margin: 3px;
+  color: #00632e;
+  font-size: 20px;
+  text-align: center;
+  line-height: 32px; }
+
+.stageActive {
+  background-color: #4286f4;
+  height: 31px;
+  width: 32px;
+  border-radius: 50%;
+  border: 1px solid #949494;
+  margin: 3px;
+  padding-top: 1px;
+  color: #003875;
+  font-size: 18px;
+  text-align: center;
+  line-height: 32px; }
+
+.stageNotComplete {
+  background-color: #949494;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  border: 1px solid #949494;
+  margin: 3px;
+  color: #3a3a3a;
+  font-size: 20px;
+  text-align: center;
+  line-height: 32px; }
+
+#infoLeft {
+  width: 50%;
+  float: left;
+  height: 120px; }
+
+#infoRight {
+  width: 280px;
+  height: 120px;
+  position: absolute;
+  right: 10px; }
+
+#infoMid {
+  width: 20%;
+  height: 120px;
+  float: left; }
+
+#infoMid div {
+  float: left;
+  font-size: 14px;
+  line-height: 25px;
+  width: 100%;
+  margin-top: 2px;
+  font-family: verdana; }
+
+.stageText {
+  position: relative;
+  float: left;
+  width: 94px;
+  height: 12px;
+  text-align: center;
+  font-size: 10px;
+  font-family: helvetica; }
+
+@keyframes loading {
+  50% {
+    box-shadow: inset 0px 0px 0px 3px #4286f4, inset 0px 0px 0px 6px #5a95f5, inset 0px 0px 0px 9px #72a5f7, inset 0px 0px 0px 12px #8ab4f8, inset 0px 0px 0px 15px #a2c4fa, inset 0px 0px 0px 18px #bad3fb, inset 0px 0px 0px 21px #d3e3fc, inset 0px 0px 0px 24px #ebf2fe, inset 0px 0px 0px 27px white, inset 0px 0px 0px 30px #2a77f3; } }
+.action_button {
+  height: 30px;
+  width: 120px;
+  font-size: 16px;
+  line-height: 30px;
+  float: left;
+  margin-left: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  line-height: 30px;
+  text-align: center;
+  box-shadow: 2px 2px 2px black;
+  font-family: 'Comfortaa', cursive; }
+  .action_button:hover {
+    background-color: #5a95f5;
+    cursor: pointer; }
+  .action_button:active {
+    margin-top: -4px;
+    box-shadow: 1px 1px 1px black; }
+
+#submitForApproval {
+  position: relative;
+  width: 100%;
+  height: 100%; }
+
+#declineArtReason {
+  position: relative;
+  width: 100%;
+  float: left; }
+
+#declineArtReason div {
+  position: relative;
+  width: 100%;
+  text-align: center; }
+
+#declineArtReason textarea {
+  width: 400px; }
+
+.buttonHolder {
+  position: relative;
+  width: 80%;
+  height: 30px;
+  align-self: center;
+  background-color: grey; }
+
+.buttonHolder input[type="button"] {
+  position: relative; }
+
+.part1 {
+  font-family: helvetica;
+  font-size: 32px;
+  line-height: 60px;
+  padding-left: 32px;
+  height: 50%;
+  width: 100%; }
+
+.input-file-container {
+  position: relative;
+  width: 225px; }
+
+.js .input-file-trigger {
+  display: block;
+  padding: 14px 45px;
+  background: #39D2B4;
+  color: #fff;
+  font-size: 1em;
+  transition: all .4s;
+  cursor: pointer; }
+
+.js .input-file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 225px;
+  opacity: 0;
+  padding: 14px 0;
+  cursor: pointer; }
+
+.js .input-file:hover + .input-file-trigger,
+.js .input-file:focus + .input-file-trigger,
+.js .input-file-trigger:hover,
+.js .input-file-trigger:focus {
+  background: #34495E;
+  color: #39D2B4; }
+
+.file-return {
+  margin: 0; }
+
+.file-return:not(:empty) {
+  margin: 1em 0; }
+
+.js .file-return {
+  font-style: italic;
+  font-size: .9em;
+  font-weight: bold; }
+
+.js .file-return:not(:empty):before {
+  content: "Selected file: ";
+  font-style: normal;
+  font-weight: normal; }
 
 /*# sourceMappingURL=app.css.map */

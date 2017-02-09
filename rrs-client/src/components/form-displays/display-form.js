@@ -10,7 +10,6 @@ methods.setCurrentTask = function (taskId) {
   tasks.forEach(function (task) {
     if (parseInt(task.id) === parseInt(taskId)) {
       that.$store.dispatch('setCurrentTask', task)
-      console.log('current task is set')
     }
   })
   return this.setCurrentWorkflow()
@@ -23,7 +22,6 @@ methods.setCurrentWorkflow = function () {
   workflows.forEach(function (workflow) {
     if (parseInt(workflow.id) === parseInt(workflowId)) {
       that.$store.dispatch('setCurrentWorkflow', workflow)
-      console.log('current workflow is set')
     }
   })
   return 'success'
@@ -53,8 +51,7 @@ module.exports = {
   },
   watch: {
     '$route': function () {
-      var a = this.setCurrentTask(this.$route.params.taskId)
-      console.log(a)
+      this.setCurrentTask(this.$route.params.taskId)
     }
   },
   created: function () {
@@ -66,7 +63,6 @@ module.exports = {
     if (result !== 'home') {
       setTimeout(function () {
         that.setCurrentTask(result)
-        console.log('timeout now')
       }, 2000)
     }
   }

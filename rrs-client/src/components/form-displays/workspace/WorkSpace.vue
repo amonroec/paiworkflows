@@ -54,8 +54,14 @@
       <div class="uploadsDiv" v-if="currentTask.upload_url !== null">
         <h1>Uploads</h1>
         <div v-for="image in currentTask.upload_url">
-            <img :src="'http://localhost:8000/' + image" style="width:100%;"></img>
+            <img class="uploaded_file" :src="'http://localhost:8000/' + image" style="width:80%;"></img>
         </div>
+      </div>
+
+      <div class="image-bar">
+        <a v-for="(image, index) in currentTask.upload_url" href="javascript:void(0)" v-on:click="scrollToFile(index)">
+          <div class="image-link">1</div>
+        </a>
       </div>
 <!--
       <div class="artpackFiles">

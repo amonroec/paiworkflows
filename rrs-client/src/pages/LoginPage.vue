@@ -76,7 +76,7 @@
               authUser.picture = this.profile['w3'].Paa
               window.localStorage.setItem('authUser', JSON.stringify(authUser))
               this.$store.dispatch('setUserObject', authUser)
-              this.$router.push({name: 'dashboard'})
+              this.$router.push('/home')
             } else {
               return 'failed'
             }

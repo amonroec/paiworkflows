@@ -5,6 +5,18 @@ html, body {
   height: 100vh;
   overflow: hidden; }
 
+#homeDisplay {
+  position: relative;
+  width: calc(100vw - 280px);
+  height: calc(100vh - 50px);
+  float: left;
+  background: url("pai-logo-with-tag.png") no-repeat center; }
+
+#clickTask {
+  position: absolute;
+  top: 100px;
+  left: 10px; }
+
 #live-orders {
   width: 100%;
   float: left;
@@ -69,7 +81,26 @@ html, body {
   background-size: 40%; }
 
 .uploadsDiv div {
-  margin-top: 10px; }
+  margin-top: 10px;
+  padding-left: 10%; }
+
+.image-bar {
+  width: 50px;
+  background-color: grey;
+  opacity: .3;
+  position: fixed;
+  top: calc(160px + 50px);
+  left: calc(280px + 2px); }
+
+.image-bar:hover {
+  opacity: 1.0; }
+
+.image-link {
+  width: 100%;
+  height: 20px;
+  margin-top: 2px;
+  background-color: green;
+  float: left; }
 
 .accountInfo {
   position: relative;
@@ -610,7 +641,7 @@ h3 {
   float: left;
   height: 80px;
   margin-bottom: 10px;
-  background-color: rgba(255, 255, 255, 0.9); }
+  background-color: rgba(255, 255, 255, 0.3); }
 
 .submitChatButton {
   width: 100px;
