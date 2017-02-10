@@ -12,9 +12,6 @@ module.exports = {
     }
   },
   methods: methods,
-  props: {
-    task_id: ''
-  },
   currentTask: function () {
     this.getChat()
   },

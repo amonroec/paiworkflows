@@ -37,11 +37,11 @@ class TasksController extends Controller
         return $tasks;
     }
 
-    public function loadTasks(Request $request){
+    public function tasksLoad(Request $request){
     	//$tasks = Task::all();
         $tasks = Task::select()
-                    ->where('app_worker', '=', $request->input('userId'))
-                    ->orwhere('csr_assigned', $request->input('userId'))
+                    ->where('app_worker', $request->postData['userId'])
+                    ->orwhere('csr_assigned', $request->postData['userId'])
                     ->get();
     	return $tasks;
     }
@@ -199,7 +199,7 @@ class TasksController extends Controller
         $task = $request->input('task');
         Task::where('id', $task->id)
             ->update(['app_worker' => $request->input('app_worker')]);
-        $this->submitTaskStep($request);
+        return $this->submitTaskStep($request);
     }
 
     private function getWorkflow($id){

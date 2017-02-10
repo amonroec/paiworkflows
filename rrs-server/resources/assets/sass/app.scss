@@ -10,6 +10,14 @@ html, body {
 	overflow:hidden;
 }
 
+.isLoading{
+	position:relative;
+	float:left;
+	width:calc(100vw - #{$task-bar-width});
+	height:calc(100vh - #{$top-bar-height});
+	background: rgba(114, 114, 114, .3);
+}
+
 #homeDisplay {
 	position:relative;
 	width:calc(100vw - 280px);height:calc(100vh - 50px);float:left;

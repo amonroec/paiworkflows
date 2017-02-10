@@ -119,7 +119,7 @@ class SubmitForm extends Controller
           ]
         );*/
         //$this->getNextTask($id, 'artpacks');
-        return redirect('http://localhost:8080/dashboard');
+        return redirect('http://localhost:8080/home/');
         //return redirect()->action('TasksController@taskSubmit', $id, 'artpacks');
         //return $this->taskSubmit($id)
     }

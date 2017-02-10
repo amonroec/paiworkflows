@@ -63,22 +63,22 @@
         }
         this.$http.post(getUserData, postData)
           .then(response => {
-            if (response.status === 200) {
+            if (response.status === 200 && response.data.length !== 0) {
               console.log(response.data)
               const authUser = {}
               authUser.access_token = this.profile['Zi'].access_token
               authUser.refresh_token = ''
-              authUser.email = response.data[0].email
+              authUser.email = response.data[0].email_address
               authUser.name = response.data[0].name
               authUser.id = response.data[0].id
-              authUser.access_level = response.data[0].access_level
-              authUser.division = response.data[0].division
+              authUser.admin = response.data[0].admin
+              authUser.department = response.data[0].department
               authUser.picture = this.profile['w3'].Paa
               window.localStorage.setItem('authUser', JSON.stringify(authUser))
               this.$store.dispatch('setUserObject', authUser)
               this.$router.push('/home')
             } else {
-              return 'failed'
+              console.log('you dont have an account')
             }
           })
       },
@@ -114,29 +114,12 @@
   </div>
   <div id="login-form">
     <center>
-      <form v-on:submit.prevent="onSignIn()">
-        <div class="login-user-box">
-          <div class="login-emblems"><img src="../assets/dark50/Email.png"></img></div>
-          <input id="login-textbox" type="text" name="email" value="" placeholder="E-mail.."
-            class="form-control"
-            v-model="login.email"
-            v-on:keyup="getDomain()"
-          >
-        </div>
-        <div class="login-user-box">
-          <div class="login-emblems"><img src="../assets/dark50/Key Filled.png"></div>
-          <input id="login-textbox" type="password" name="password" value="" placeholder="Password.."
-            class="form-control"
-            v-model="login.password"
-          >
-        </div>
-        <g-signin-button
-          :params.sync="googleSignInParams"
-          @success="onSignInSuccess"
-          @error="onSignInError">
-          Sign in with Google
-        </g-signin-button>
-      </form>
+      <g-signin-button
+        :params.sync="googleSignInParams"
+        @success="onSignInSuccess"
+        @error="onSignInError">
+        Sign in with Google
+      </g-signin-button>
       <div id="userForgotDiv">
           <router-link
             class="user-link"

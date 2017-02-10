@@ -5,6 +5,13 @@ html, body {
   height: 100vh;
   overflow: hidden; }
 
+.isLoading {
+  position: relative;
+  float: left;
+  width: calc(100vw - 280px);
+  height: calc(100vh - 50px);
+  background: rgba(114, 114, 114, 0.3); }
+
 #homeDisplay {
   position: relative;
   width: calc(100vw - 280px);

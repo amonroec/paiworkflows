@@ -19,8 +19,8 @@
     <div id="infoMid">
       <div class="accountName">Acct: {{currentTask.id}} -  {{currentForm.account_num}}</div>
       <div class="turnTime">Turn Time: {{currentForm.turn_time}}</div>
-      <div class="">CSR: {{currentForm.submitted_by}}</div>
-      <div class="">Timestamp: {{currentForm.timestamp}}</div>
+      <div class="">CSR: {{currentTask.csr_assigned}}</div>
+      <div class="">Timestamp: {{currentTask.created_at}}</div>
     </div>
     <div id="infoRight">
       <task-step></task-step>

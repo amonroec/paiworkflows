@@ -21,7 +21,7 @@
           class="form-control"
           name="tasks"
           href="javascript:void(0)"
-          to="/tasks/page"
+          to="/home"
         >
           <div>
 	          <center>

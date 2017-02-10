@@ -30,9 +30,9 @@ Route::post('/requestuser/submit', function (Request $request) {
 Route::resource('/requestuser/submit', 'RequestUsersController@insertRequest');
 
 Route::post('/getUserData', function (Request $request) {
-	return redirect()->action('RequestUsersController@getUserData', $request->input());
+	return redirect()->action('AccountsController@getUserData', $request->input());
 });
-Route::resource('/getUserData', 'RequestUsersController@getUserData');
+Route::resource('/getUserData', 'AccountsController@getUserData');
 /*
 Route::get('/artpack/list', function (Request $request) {
 	return redirect()->action()
@@ -48,11 +48,11 @@ Route::post('/request-form/embroidery/submit', function (Request $request) {
 });
 Route::resource('/request-form/embroidery/submit', 'SubmitForm@embroiderySubmit');
 
-Route::post('/tasks/load', function (Request $request) {
-	return redirect()->action('TasksController@loadTasks');
+Route::post('/load', function (Request $request) {
+	return redirect()->action('TasksController@tasksLoad');
 });
 
-Route::resource('/tasks/load', 'TasksController@loadTasks');
+Route::resource('/load', 'TasksController@tasksLoad');
 
 Route::get('/task/updated', function (Request $request) {
 	return redirect()->action('TasksController@taskUpdated');

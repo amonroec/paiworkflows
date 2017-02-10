@@ -51,6 +51,7 @@ methods.submitChat = function () {
         this.message.text = ''
         console.log(response.data)
       }
+      console.log(response)
     })
 }
 
