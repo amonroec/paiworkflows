@@ -44,4 +44,9 @@ class AccountsController extends Controller
         //}*/
 >>>>>>> origin/master
     }
+
+    public function getWorkers(Request $request) {
+        $req = Account::all();
+        return $req;
+    }
 }
