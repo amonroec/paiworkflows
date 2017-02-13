@@ -1,4 +1,4 @@
-import {getWorkers, assignTask, submitChat, uploadFile} from './../../config'
+import {getWorkers, assignTask, submitChat, uploadFile, submitTask} from './../../config'
 import {mapState} from 'vuex'
 var methods = {}
 /*
@@ -70,12 +70,22 @@ methods.submitForApproval = function (e) {
 }
 
 methods.approveArt = function () {
-  console.log('approve')
   this.submitMessage('approve-art')
 }
 
 methods.submitDecline = function () {
-  this.submitMessage('decline-art')
+  const postData = {
+    task: this.taskStore.currentTask,
+    action: 'decline-art'
+  }
+  this.$http.post(submitTask, postData)
+    .then(response => {
+      if (response.status === 200) {
+        var task = response.data
+        console.log(this.$emit('task_submitted', task))
+        this.submitMessage('decline-art', this.declineText)
+      }
+    })
 }
 
 methods.clickUpload = function () {
@@ -99,7 +109,6 @@ methods.submitMessage = function (action, text) {
     task_id: this.taskStore.currentTask.id,
     message: this.message
   }
-  console.log(postData)
   this.$http.post(submitChat, postData)
     .then(response => {
       if (response.status === 200) {
@@ -120,6 +129,7 @@ module.exports = {
       selectedWorker: 'assignWorker',
       id: '',
       declineArtValue: 0,
+      declineText: '',
       message: {
         name: '',
         id: '',

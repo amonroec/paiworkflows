@@ -10,8 +10,8 @@
       </div>
       <div class="messageTag">
         <a v-show="message.action == 'submit-form'" class="formSubmitted fa fa-arrow-right"></a>
-        <a v-show="message.action == 'decline-art'" class="artDeclined fa fa-thumb-o-down"></a>
-        <a v-show="message.action == 'approve-art'" class="artApproved fa fa-thumb-o-up"></a>
+        <a v-show="message.action == 'decline-art'" class="artDeclined fa fa-thumbs-o-down"></a>
+        <a v-show="message.action == 'approve-art'" class="artApproved fa fa-thumbs-o-up"></a>
         <a v-show="message.action == 'upload-file'" class="fileUploaded fa fa-upload"></a>
         <a v-show="message.action == 'file-revised'" class="fileRevised fa fa-edit"></a>
         <a v-show="message.action == 'message'" class="messageIcon fa fa-comment-o"></a>

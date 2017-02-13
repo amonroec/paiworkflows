@@ -70,7 +70,7 @@
     ></input>
     <div v-show="declineArtValue === 1" id="declineArtReason">
       <div>
-        <textarea name="reason" id="declineReasonTextarea" v-model="message.text" placeholder="What is your reason for declining this art file?"></textarea>
+        <textarea name="reason" id="declineReasonTextarea" v-model="declineText" placeholder="What is your reason for declining this art file?"></textarea>
       </div>
       <input
         type="button"

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import Vuex from 'vuex'
 import store from './store'
+import VueSocketio from 'vue-socket.io'
 
 import App from './App'
 
@@ -29,13 +30,14 @@ Vue.use(GSignInButton)
 Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(Vuex)
+Vue.use(VueSocketio, 'http://localhost:8890')
 
 Vue.component('app', App)
 Vue.component('chatBoard', ChatBoard)
 /* eslint-disable no-new */
 
 const routes = [
-  {path: '/rrs/', component: LoginPage, name: 'home'},
+  {path: '/', component: LoginPage, name: 'home'},
   {path: '/dashboard', component: DashboardPage, name: 'dashboard'},
   {path: '/profile', component: ProfilePage, name: 'profile'},
   {path: '/calendar', component: CalendarPage, name: 'calendar'},

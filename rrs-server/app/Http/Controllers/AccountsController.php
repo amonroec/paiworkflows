@@ -8,12 +8,13 @@ use App\Account;
 class AccountsController extends Controller
 {
     public function getUserData(Request $request) {
-        /*$name = $request->input('name');
+        $name = $request->input('name');
         $email = $request->input('email');
         $req = Account::select()
                 ->where('email_address', $request->input('email'))
                 ->get();
-        $count = count($req);*/
+        $count = count($req);
+        return $req;
         /*if($count == 0){
             $req = new User;
             $req->name = $request->input('name');
@@ -25,8 +26,8 @@ class AccountsController extends Controller
               ]
             );
             return $this->getUserDataById($id);
-        }else{*/
+        }else{
             return $request;
-        //}
+        //}*/
     }
 }

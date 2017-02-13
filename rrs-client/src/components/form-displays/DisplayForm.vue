@@ -5,7 +5,7 @@
   <activity-feed></activity-feed>
 </div>
 <div class="isLoading" v-else-if="loading">
-  <i class="fa fa-spinner fa-spin" style="font-size:50px;margin-left:45%;margin-top:20%;"></i>
+  <i class="fa fa-spinner fa-spin" style="font-size:50px;margin-left:45%;margin-top:30%;"></i>
 </div>
 </template>
 <script>

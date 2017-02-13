@@ -23,7 +23,7 @@
       <div class="">Timestamp: {{currentTask.created_at}}</div>
     </div>
     <div id="infoRight">
-      <task-step></task-step>
+      <task-step v-on:task_submitted="changeInTask" ></task-step>
     </div>  
   </div>
 </template>

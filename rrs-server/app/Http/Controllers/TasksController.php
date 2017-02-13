@@ -9,19 +9,20 @@ use App\Task;
 use App\Workflow;
 use App\Notifications\TaskUpdated;
 use Illuminate\Notifications\Notifiable;
+use LRedis;
 
 class TasksController extends Controller
 {
 
     use Notifiable;
     /*public function __construct(Task $task, Request $request){
-    	$this->task = $task;
-    	$this->request = $request;
+        $this->task = $task;
+        $this->request = $request;
     }*/
 
     public function index(){
-			$task_order=0;
-	    $task_table=0;
+            $task_order=0;
+        $task_table=0;
     }
 
     public function taskSubmit($order_id, $order){
@@ -38,12 +39,12 @@ class TasksController extends Controller
     }
 
     public function tasksLoad(Request $request){
-    	//$tasks = Task::all();
+        //$tasks = Task::all();
         $tasks = Task::select()
                     ->where('app_worker', $request->postData['userId'])
                     ->orwhere('csr_assigned', $request->postData['userId'])
                     ->get();
-    	return $tasks;
+        return $tasks;
     }
 
     public function getArtpack(Request $request){
@@ -72,18 +73,18 @@ class TasksController extends Controller
     }
 
     public function getForm(Request $request){
-    	/*if($request->table_name == 'artpacks'){
-    		$task = artpack::select()
-    							->where('id', '=', $request->order_id)
-    							->get();
-    		return $task;
-    	}
-    	if($request->table_name == 'embroideries'){
-    		$task = Embroidery::select()
-    							->where('id', '=', $request->order_id)
-    							->get();
-    		return $request->array;
-    	//}*/
+        /*if($request->table_name == 'artpacks'){
+            $task = artpack::select()
+                                ->where('id', '=', $request->order_id)
+                                ->get();
+            return $task;
+        }
+        if($request->table_name == 'embroideries'){
+            $task = Embroidery::select()
+                                ->where('id', '=', $request->order_id)
+                                ->get();
+            return $request->array;
+        //}*/
         $array = [];
         foreach($request->array as $out){
             $otherArray = [];
@@ -106,6 +107,22 @@ class TasksController extends Controller
         return $array;
     }
 
+    public function declineTask(Request $request){
+        $task = $request->input('task');
+        $workflowArray = $this->getWorkflow($task['workflow_id']);
+        $status = $task['status'];
+        $count = 0;
+        $redis = LRedis::connection();
+        $redis->publish('message', $task['id']);
+        foreach($workflowArray as $step){
+            if($status == $step->task_type){
+
+                return $this->goBackStep($task, $workflowArray[$count - 1]);
+            }
+            $count++;
+        }
+    }
+
     public function submitTaskStep(Request $request){
         $task = json_decode($request->input('task'));
         $workflowArray = $this->getWorkflow($task->workflow_id);
@@ -113,20 +130,23 @@ class TasksController extends Controller
         $count = 0;
         foreach($workflowArray as $step){
             if($status == $step->task_type){
-                /*switch ($status) {
+                switch ($status) {
                     case "upload":
-                        $this->checkNextStep($task->id, $workflowArray[$count + 1]);
+                        return $this->checkNextStep($task, $workflowArray[$count + 1]);
                         break;
-                    case "blue":
-                        echo "Your favorite color is blue!";
+                    case "approve":
+                        if($request->input('action') == 'decline-art') {
+                            return $this->goBackStep($task, $workflowArray[$count - 1]);
+                        } elseif($request->input('action') == 'approve-art') {
+                            return $this->checkNextStep($task, $workflowArray[$count + 1]);
+                        }
                         break;
                     case "green":
                         echo "Your favorite color is green!";
                         break;
                     default:
-                        echo "Your favorite color is neither red, blue, nor green!";
-                }*/
-                return $this->checkNextStep($task, $workflowArray[$count + 1]);
+                        return "Your favorite color is neither red, blue, nor green!";
+                }
             }
             $count++;
         }
@@ -151,12 +171,47 @@ class TasksController extends Controller
             case "upload":
                 Task::where('id', $task->id)
                     ->update(['status' => 'upload']);
-                    return;
+                    return 'success';
                 break;
             default:
                 return;
                 break;
         }
+    }
+
+    private function goBackStep($task, $workflow){
+        $taskId = $task['id'];
+        switch ($workflow['task_type']) {
+            case "assign":
+                $this->assignTask($task->id, $workflow->assigner);
+                break;
+            case "approve":
+                if($workflow->approval_type == 'person_who_submit'){
+                    $this->submitForNextStage($taskId, $task->submitted_by, 'approve');
+                }elseif($workflow->approval_type == 'other_person'){
+                    $this->submitForNextStage($taskId, $workflow->approval_person, 'approve');
+                }else{
+                    $this->submitForNextStage($taskId, $task->submitted_by, 'approve');
+                }
+                return redirect('http://localhost:8080/tasks/page');
+                break;
+            case "upload":
+                Task::where('id', $taskId)
+                    ->update(['status' => 'upload']);
+                return $this->getNewTask($taskId);
+                break;
+            default:
+                return;
+                break;
+        }
+
+    }
+
+    public function getNewTask($taskId){
+        $task = Task::select()
+                    ->where('id', $taskId)
+                    ->get();
+        return $task;
     }
 
     public function submitForNextStage($taskId, $person, $taskType){
@@ -202,7 +257,7 @@ class TasksController extends Controller
         return $this->submitTaskStep($request);
     }
 
-    private function getWorkflow($id){
+    public function getWorkflow($id){
       $workflow = Workflow::select()
                 ->where('workflow_name', $id)
                 ->orderBy('id', 'asc')
