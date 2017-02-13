@@ -26,7 +26,6 @@ methods.workflowClick = function (workflow) {
     this.$router.push({name: 'artpackForm'})
   }
   */
-  console.log(workflow)
   window.location = 'http://localhost:8000/asi.php?workflow_id=' + workflow.id
 }
 

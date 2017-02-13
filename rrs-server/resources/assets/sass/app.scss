@@ -10,15 +10,28 @@ html, body {
 	overflow:hidden;
 }
 
+.isLoading{
+	position:relative;
+	float:left;
+	width:calc(100vw - #{$task-bar-width});
+	height:calc(100vh - #{$top-bar-height});
+	background: rgba(114, 114, 114, .3);
+}
+
 #homeDisplay {
 	position:relative;
-	width:calc(100vw - 280px);height:calc(100vh - 50px);float:left;
+	width:calc(100vw - 280px);
+	height:calc(100vh - 50px);
+	float:left;
+	background-color: transparent;
 	background: url("pai-logo-with-tag.png") no-repeat center;
+	opacity: .05;
 }
 #clickTask {
 	position:absolute;
 	top:100px;
 	left:10px;
+	font-family: "Indie Flower", cursive;
 }
 
 //LiveOrders.vue
@@ -79,13 +92,14 @@ html, body {
   float:left;
 }
 #workspace {
-  width:calc(100vw - #{$task-bar-width} - #{$activity-width});
+  width:calc(100vw - #{$task-bar-width} - #{$activity-width} - 16px);
   height:calc(100% - 160px);
   float:left;
   position:relative;
   overflow: scroll;
   background: url("pai-logo-with-tag.png") no-repeat center;
   background-size: 40%;
+  padding:8px;
 }
 .uploadsDiv div {
 	margin-top: 10px;
@@ -229,7 +243,6 @@ html, body {
   margin:0;
   padding:0;
   float:left;
-  background-color: #e0e0e0;
   width:100%;
   height:100%;
 }
@@ -364,21 +377,55 @@ html, body {
 }
 
 //TopMenu.vue
-#topMenuDiv {
-	width:100%;height:100%;float:left;position:absolute;z-index:200;
-}
 #topMenu {
 	position:relative;width:100vw;height:50px;background-color:black;float:left;
 }
+#topMenuDiv {
+	width:100%;height:100%;float:left;position:absolute;z-index:200;
+}
 .button-div {
 	float:right;
-	margin-top:10px;
+	height:100%;
+	position:relative;
 }
-.subcat-link {
-	width:200px;
-	height:25px;
+.menu-link {
+	height: 50px;
+	float: right;
+	padding-left: 20px;
+	padding-right:20px;
+	line-height:50px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 18px;
+	color: $light-grey;
+
+	&:hover {
+		background-color:darken($dark-grey,30%);
+		color: $pai-green;
+	};
+}
+.menu-link img{
+	width: 44px;
+	height: 44px;
+	border-radius:50%;
+	background-color:red;
+	float: left;
+	margin:3px;
+}
+.menu-link a {
 	text-decoration: none;
-	background-color: grey;
+
+	&:visited {
+		color:$light-grey;
+	};
+}
+#routerLink {
+	min-width:100px;
+}
+/*.subcat-link {
+	width:200px;
+	height:45px;
+	text-decoration: none;
+	background-color: yellow;
 	margin: 2px;
 	float:left;
 	color: white;
@@ -386,22 +433,27 @@ html, body {
 }
 .subcat-link div {
 	position:relative;
-	width: 140px;
-	height: 20px;
-	text-align:center;
+	width: 120px;
+	height: 45px;
+	line-height: 45px;
 	float:right;
 }
 .subcat-link #topImage {
-	position:relative;width:25px;height:25px;float:left;background-color:green;
+	position:relative;width:40px;height:40px;float:left;
+	margin:2px;
 }
 .subcat-link img {
-	width:100%;height:100%;
+	width:100%;
+	height:100%;
+	border-radius:50%;
 }
 .subcat-link #routerLink {
-	width: calc(100% - 40px);
-	height: 20px;
+	width: calc(100% - 50px);
+	height: 45px;
+	margin-top: none;
 	float:left;
-}
+	text-align:left;
+}*/
 #subcat-request:hover > #request-dropdown {
 	display: block;
 	visibility: visible;
@@ -411,23 +463,21 @@ html, body {
 	background-color: #95f9a3;
 	z-index: 300;
 }
-.subcat-div a {
+/*.subcat-div a {
 	width: calc(100% - 50px);
-	height: 20px;
+	height: 45px;
 	margin-top: 15px;
 	float:left;
-}
+}*/
 #request-dropdown {
 	display: none;
 	visibility: hidden;
 }
-.button-div a {
+/*.button-div a {
 	width:100%;
 	text-decoration: none;
-	background-color: grey;
-	margin-top: 2px;
 	float:left;
-	color: white;
+	color: black;
 	font-size: 18px;
 	font-family: helvetica;
 	text-align:center;
@@ -436,8 +486,7 @@ html, body {
 	width:100%;
 	float:left;
 	height:100px;
-	background-color: green;
-}
+}*/
 
 
 //LoginPage.vue
@@ -965,15 +1014,10 @@ h4 {
 	line-height: 30px;
 	text-align:center;
 	box-shadow: 2px 2px 2px black;
-	font-family: 'Comfortaa', cursive;
-	
-	&:hover {
-		background-color: lighten($active-task, 5%);
-		cursor: pointer;
-	}
+	font-family: 'Roboto', sans-serif;
 
 	&:active {
-		margin-top: -4px;
+		transform: translateY(1px);
 		box-shadow: 1px 1px 1px black;
 	}
 }

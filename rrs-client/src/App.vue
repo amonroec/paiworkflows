@@ -1,6 +1,6 @@
 <script>
   import {mapState} from 'vuex'
-  import {tasksUrl, getWorkflows} from './config.js'
+  import {tasksUrl, getWorkflows, getHeader} from './config.js'
   import TopMenu from './components/TopMenu'
   import store from './store.js'
   export default {
@@ -13,10 +13,12 @@
         const postData = {
           userId: this.userStore.authUser.id
         }
-        this.$http.post(tasksUrl, postData)
+        console.log(postData)
+        this.$http.post(tasksUrl, {headers: getHeader(), postData})
           .then(response => {
             if (response.status === 200) {
               this.$store.dispatch('setTasksArray', response.data)
+              console.log(response)
             }
           })
       },

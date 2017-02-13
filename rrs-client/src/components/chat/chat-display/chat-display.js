@@ -1,7 +1,6 @@
 import {mapState} from 'vuex'
-import {getMessages} from './../../../config'
 var methods = {}
-
+/*
 methods.getChat = function () {
   const postData = {
     task_id: this.task_id
@@ -23,7 +22,7 @@ methods.getChat = function () {
       }
     })
 }
-
+*/
 module.exports = {
   data: function () {
     return {
@@ -35,14 +34,5 @@ module.exports = {
       currentChat: state => state.taskStore.currentChat,
       userStore: state => state.userStore
     })
-  },
-  props: [
-    'task_id'
-  ],
-  watch: {
-    'task_id': function () {
-      console.log('id has changed')
-      this.getChat()
-    }
   }
 }

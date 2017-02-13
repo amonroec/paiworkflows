@@ -54,24 +54,23 @@
   </div>
   <div v-if="taskStore.currentTask.status === 'approve'" id="submitForApproval">
     <h1>Review Art</h1>
-    <input
+    <div 
+      class="action_button artApproved"
       type="button"
       name="approve_art"
       v-on:click="approveArt"
-      value="Approve"
-      v-show="declineArtValue === 0"
-    ></input>
-    <input
+      v-show="declineArtValue === 0">Approve
+      <i class="fa fa-thumbs-up"></i></div>
+    <div
+      class="action_button artDeclined"
       type="button"
       name="decline_art"
       v-on:click="declineArtValue = 1"
-      value="Decline"
-      v-show="declineArtValue === 0"
-    ></input>
+      v-show="declineArtValue === 0">Decline
+      <i class="fa fa-thumbs-down"></i></div>
     <div v-show="declineArtValue === 1" id="declineArtReason">
       <div>
-        <label for="reason">What is your reason for declining this art file?</label><br /><br />
-        <textarea name="reason" id="declineReasonTextarea" v-model="message.text"></textarea>
+        <textarea name="reason" id="declineReasonTextarea" v-model="message.text" placeholder="What is your reason for declining this art file?"></textarea>
       </div>
       <input
         type="button"

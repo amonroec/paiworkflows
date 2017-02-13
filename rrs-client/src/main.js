@@ -35,7 +35,7 @@ Vue.component('chatBoard', ChatBoard)
 /* eslint-disable no-new */
 
 const routes = [
-  {path: '/', component: LoginPage, name: 'home'},
+  {path: '/rrs/', component: LoginPage, name: 'home'},
   {path: '/dashboard', component: DashboardPage, name: 'dashboard'},
   {path: '/profile', component: ProfilePage, name: 'profile'},
   {path: '/calendar', component: CalendarPage, name: 'calendar'},

@@ -5,17 +5,27 @@ html, body {
   height: 100vh;
   overflow: hidden; }
 
+.isLoading {
+  position: relative;
+  float: left;
+  width: calc(100vw - 280px);
+  height: calc(100vh - 50px);
+  background: rgba(114, 114, 114, 0.3); }
+
 #homeDisplay {
   position: relative;
   width: calc(100vw - 280px);
   height: calc(100vh - 50px);
   float: left;
-  background: url("pai-logo-with-tag.png") no-repeat center; }
+  background-color: transparent;
+  background: url("pai-logo-with-tag.png") no-repeat center;
+  opacity: .05; }
 
 #clickTask {
   position: absolute;
   top: 100px;
-  left: 10px; }
+  left: 10px;
+  font-family: "Indie Flower", cursive; }
 
 #live-orders {
   width: 100%;
@@ -72,13 +82,14 @@ html, body {
   float: left; }
 
 #workspace {
-  width: calc(100vw - 280px - 300px);
+  width: calc(100vw - 280px - 300px - 16px);
   height: calc(100% - 160px);
   float: left;
   position: relative;
   overflow: scroll;
   background: url("pai-logo-with-tag.png") no-repeat center;
-  background-size: 40%; }
+  background-size: 40%;
+  padding: 8px; }
 
 .uploadsDiv div {
   margin-top: 10px;
@@ -217,7 +228,6 @@ html, body {
   margin: 0;
   padding: 0;
   float: left;
-  background-color: #e0e0e0;
   width: 100%;
   height: 100%; }
 
@@ -309,13 +319,6 @@ html, body {
   background: linear-gradient(#ff56eb, #ba00a4);
   box-shadow: inset 0 7em 10em -5em rgba(255, 255, 255, 0.6), 0 0.3em 0.5em -0.2em #ba00a4, 0 1em 2em -0.75em rgba(186, 0, 164, 0.75), 0 1em 3em -0.5em rgba(186, 0, 164, 0.5), 0 2em 3em -0.25em rgba(186, 0, 164, 0.2); }
 
-#topMenuDiv {
-  width: 100%;
-  height: 100%;
-  float: left;
-  position: absolute;
-  z-index: 200; }
-
 #topMenu {
   position: relative;
   width: 100vw;
@@ -323,43 +326,80 @@ html, body {
   background-color: black;
   float: left; }
 
+#topMenuDiv {
+  width: 100%;
+  height: 100%;
+  float: left;
+  position: absolute;
+  z-index: 200; }
+
 .button-div {
   float: right;
-  margin-top: 10px; }
+  height: 100%;
+  position: relative; }
 
-.subcat-link {
-  width: 200px;
-  height: 25px;
-  text-decoration: none;
-  background-color: grey;
-  margin: 2px;
+.menu-link {
+  height: 50px;
+  float: right;
+  padding-left: 20px;
+  padding-right: 20px;
+  line-height: 50px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  color: #e0e0e0; }
+  .menu-link:hover {
+    background-color: #484848;
+    color: #728f41; }
+
+.menu-link img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: red;
   float: left;
-  color: white;
-  font-family: helvetica; }
+  margin: 3px; }
 
+.menu-link a {
+  text-decoration: none; }
+  .menu-link a:visited {
+    color: #e0e0e0; }
+
+#routerLink {
+  min-width: 100px; }
+
+/*.subcat-link {
+	width:200px;
+	height:45px;
+	text-decoration: none;
+	background-color: yellow;
+	margin: 2px;
+	float:left;
+	color: white;
+	font-family: helvetica;
+}
 .subcat-link div {
-  position: relative;
-  width: 140px;
-  height: 20px;
-  text-align: center;
-  float: right; }
-
+	position:relative;
+	width: 120px;
+	height: 45px;
+	line-height: 45px;
+	float:right;
+}
 .subcat-link #topImage {
-  position: relative;
-  width: 25px;
-  height: 25px;
-  float: left;
-  background-color: green; }
-
+	position:relative;width:40px;height:40px;float:left;
+	margin:2px;
+}
 .subcat-link img {
-  width: 100%;
-  height: 100%; }
-
+	width:100%;
+	height:100%;
+	border-radius:50%;
+}
 .subcat-link #routerLink {
-  width: calc(100% - 40px);
-  height: 20px;
-  float: left; }
-
+	width: calc(100% - 50px);
+	height: 45px;
+	margin-top: none;
+	float:left;
+	text-align:left;
+}*/
 #subcat-request:hover > #request-dropdown {
   display: block;
   visibility: visible;
@@ -369,33 +409,30 @@ html, body {
   background-color: #95f9a3;
   z-index: 300; }
 
-.subcat-div a {
-  width: calc(100% - 50px);
-  height: 20px;
-  margin-top: 15px;
-  float: left; }
-
+/*.subcat-div a {
+	width: calc(100% - 50px);
+	height: 45px;
+	margin-top: 15px;
+	float:left;
+}*/
 #request-dropdown {
   display: none;
   visibility: hidden; }
 
-.button-div a {
-  width: 100%;
-  text-decoration: none;
-  background-color: grey;
-  margin-top: 2px;
-  float: left;
-  color: white;
-  font-size: 18px;
-  font-family: helvetica;
-  text-align: center; }
-
+/*.button-div a {
+	width:100%;
+	text-decoration: none;
+	float:left;
+	color: black;
+	font-size: 18px;
+	font-family: helvetica;
+	text-align:center;
+}
 .subcat-div {
-  width: 100%;
-  float: left;
-  height: 100px;
-  background-color: green; }
-
+	width:100%;
+	float:left;
+	height:100px;
+}*/
 #login-wrapper {
   position: absolute;
   margin: 0;
@@ -925,12 +962,9 @@ h3 {
   line-height: 30px;
   text-align: center;
   box-shadow: 2px 2px 2px black;
-  font-family: 'Comfortaa', cursive; }
-  .action_button:hover {
-    background-color: #5a95f5;
-    cursor: pointer; }
+  font-family: 'Roboto', sans-serif; }
   .action_button:active {
-    margin-top: -4px;
+    transform: translateY(1px);
     box-shadow: 1px 1px 1px black; }
 
 #submitForApproval {
