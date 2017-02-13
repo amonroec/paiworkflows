@@ -28,6 +28,12 @@ methods.getArtpack = function () {
     })
 }
 
+methods.changeInTask = function (task) {
+  if (task.id === this.currentTask.id) {
+    console.log('im in change in task')
+  }
+}
+
 module.exports = {
   data: function () {
     return {

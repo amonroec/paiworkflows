@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import Vuex from 'vuex'
 import store from './store'
+import VueSocketio from 'vue-socket.io'
 
 import App from './App'
 
@@ -29,6 +30,7 @@ Vue.use(GSignInButton)
 Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(Vuex)
+Vue.use(VueSocketio, 'http://localhost:8890')
 
 Vue.component('app', App)
 Vue.component('chatBoard', ChatBoard)

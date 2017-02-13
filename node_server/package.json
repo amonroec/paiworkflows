@@ -1,0 +1,19 @@
+{
+  "name": "rrs",
+  "version": "1.0.0",
+  "description": "node socket based app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amonroec/rrs-app.git"
+  },
+  "author": "Austin Coleman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amonroec/rrs-app/issues"
+  },
+  "homepage": "https://github.com/amonroec/rrs-app#readme"
+}

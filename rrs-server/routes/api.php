@@ -129,10 +129,10 @@ Route::get('/getArtpack', function (Request $request) {
 Route::resource('/getArtpack', 'TasksController@getArtpack');
 
 Route::post('/getWorkers', function (Request $request) {
-	return redirect()->action('RequestUsersController@getWorkers');
+	return redirect()->action('AccountsController@getWorkers');
 });
 
-Route::resource('/getWorkers', 'RequestUsersController@getWorkers');
+Route::resource('/getWorkers', 'AccountsController@getWorkers');
 
 Route::post('/assignTask', function (Request $request) {
 	return redirect()->action('TasksController@assignTask');
@@ -145,6 +145,12 @@ Route::post('/submitApproval', function (Request $request) {
 });
 
 Route::resource('/submitApproval', 'TasksController@submitTaskStep');
+
+Route::post('/submitTask', function (Request $request) {
+	return redirect()->action('TasksController@declineTask');
+});
+
+Route::resource('/submitTask', 'TasksController@declineTask');
 
 Route::post('/submitChat', function (Request $request) {
 	return redirect()->action('ChatController@submitChat');
