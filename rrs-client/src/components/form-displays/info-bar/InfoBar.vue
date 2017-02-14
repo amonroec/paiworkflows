@@ -1,13 +1,13 @@
-<template>
+<template v-if="!loading">
   <div id="infoBar">
     <div id="infoLeft">
       <div class="part1">Artpack Request {{currentTask.id}}</div>
         <div id="stageBarHolder">
-          <div class="nodeHolder" v-for="(step, index) in workflowSteps">
+          <div class="nodeHolder" v-if="currentWorkflow" v-for="(step, index) in currentWorkflow">
             <div class="stageBox">
               <div class="stageOuter">
-                <div class="stageActive fa fa-folder-open" v-if="currentTask.status == step.task_type"></div>
-                <div class="stageComplete fa fa-check" v-else-if="stage+1 > index"></div>
+                <div class="stageActive fa fa-refresh fa-spin" v-if="stage === index"></div>
+                <div class="stageComplete fa fa-check" v-else-if="stage > index"></div>
                 <div class="stageNotComplete fa fa-times" v-else></div>
               </div>
             </div>

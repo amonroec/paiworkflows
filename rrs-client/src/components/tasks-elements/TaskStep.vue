@@ -15,7 +15,7 @@
   <div v-if="taskStore.currentTask.status === 'upload'" id="submitForUpload">
     <h1>Upload for Review</h1>
     <form method="POST" action="http://localhost:8000/api/uploadFile" enctype="multipart/form-data">
-      <input type="hidden" name="task" :value="task" />
+      <input type="hidden" name="task" :value="taskStore.currentTask" />
       <input type="hidden" name="task_id" :value="taskStore.currentTask.id"></input>
       <input type="hidden" name="workflow_id" :value="taskStore.currentTask.workflow_id" />
       <input type="hidden" name="status" :value="taskStore.currentTask.status" />
@@ -42,6 +42,7 @@
         <i class="fa fa-cloud-upload"><i>
       </div>
     </form>
+    <input type="button" v-on:click="submitForApproval"></input>
     <!--
     <form action="#">
       <div class="input-file-container">  
@@ -52,13 +53,13 @@
     </form>
     -->
   </div>
-  <div v-if="taskStore.currentTask.status === 'approve'" id="submitForApproval">
+  <div v-if="taskStore.currentTask.status === 'review'" id="submitForApproval">
     <h1>Review Art</h1>
     <div 
       class="action_button artApproved"
       type="button"
       name="approve_art"
-      v-on:click="approveArt"
+      v-on:click="submitReview('approve-art')"
       v-show="declineArtValue === 0">Approve
       <i class="fa fa-thumbs-up"></i></div>
     <div
@@ -70,15 +71,11 @@
       <i class="fa fa-thumbs-down"></i></div>
     <div v-show="declineArtValue === 1" id="declineArtReason">
       <div>
-<<<<<<< HEAD
-        <textarea name="reason" id="declineReasonTextarea" v-model="message.text" placeholder="What is your reason for declining this art file?"></textarea>
-=======
         <textarea name="reason" id="declineReasonTextarea" v-model="declineText" placeholder="What is your reason for declining this art file?"></textarea>
->>>>>>> origin/master
       </div>
       <input
         type="button"
-        v-on:click="submitDecline"
+        v-on:click="submitReview('decline-art')"
         value="Submit Decline"
       >
       <input

@@ -3,6 +3,42 @@ import DisplayForm from './../../components/form-displays/DisplayForm'
 import {mapState} from 'vuex'
 var methods = {}
 
+methods.taskClicked = function (taskId) {
+  this.$store.dispatch('isLoading', true)
+  this.setCurrentTask(taskId)
+}
+
+methods.setCurrentTask = function (taskId) {
+  var tasks = this.taskStore.tasks
+  var that = this
+  tasks.forEach(function (task) {
+    if (parseInt(task.id) === parseInt(taskId)) {
+      var load = that.$store.dispatch('setCurrentTask', task)
+      load.then(function () {
+        that.$emit('taskSet', task)
+      })
+    }
+  })
+}
+
+methods.setCurrentForm = function (task) {
+  var formLoad = this.$store.dispatch('setCurrentForm', task.id)
+  formLoad.then(this.$emit('formSet'))
+}
+
+methods.setCurrentWorkflow = function (task) {
+  var workflows = this.workflowStore.workflows
+  var that = this
+  workflows.forEach(function (workflow) {
+    if (parseInt(workflow.id) === parseInt(task.workflow_id)) {
+      var load = that.$store.dispatch('setCurrentWorkflow', workflow.id)
+      load.then(function () {
+        that.$emit('workflowSet')
+      })
+    }
+  })
+}
+
 module.exports = {
   data: function () {
     return {
@@ -10,37 +46,22 @@ module.exports = {
     }
   },
   methods: methods,
-  events: function () {
-    return {
-      taskclicked: ''
-    }
-  },
   components: {
     TaskBar,
     DisplayForm
   },
   computed: {
     ...mapState({
-      currentTask: state => state.taskStore.currentTask
+      taskStore: state => state.taskStore,
+      loading: state => state.taskStore.loading,
+      workflowStore: state => state.workflowStore
     })
   },
-  watch: {
-    currentTask: function () {
-      if (this.currentTask === '') {
-        this.display = 'home'
-      } else {
-        this.display = 'task'
-      }
-    }
-  },
   created: function () {
-    var str = window.location.href
-    var n = str.lastIndexOf('/')
-    var result = str.substring(n + 1)
-    if (result === 'home') {
-      this.display = 'home'
-    } else {
-      this.display = 'task'
-    }
+    var that = this
+    this.$on('taskSet', function (task) {
+      that.setCurrentForm(task)
+      that.setCurrentWorkflow(task)
+    })
   }
 }

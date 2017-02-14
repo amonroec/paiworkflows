@@ -30,7 +30,7 @@ Vue.use(GSignInButton)
 Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(Vuex)
-Vue.use(VueSocketio, 'http://localhost:8890')
+Vue.use(VueSocketio, 'http://localhost:6379')
 
 Vue.component('app', App)
 Vue.component('chatBoard', ChatBoard)
