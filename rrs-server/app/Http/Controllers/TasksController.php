@@ -39,11 +39,6 @@ class TasksController extends Controller
     }
 
     public function tasksLoad(Request $request){
-<<<<<<< HEAD
-    	//$tasks = Task::all();
-=======
-        //$tasks = Task::all();
->>>>>>> origin/master
         $tasks = Task::select()
                     ->where('app_worker', $request->postData['userId'])
                     ->orwhere('csr_assigned', $request->postData['userId'])
