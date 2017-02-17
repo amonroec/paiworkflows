@@ -1,3 +1,5 @@
+import Vue from 'vue'
+import {getWorkflows, getWholeWorkflow} from './config'
 const state = {
   currentWorkflow: {},
   workflows: {}
@@ -14,10 +16,20 @@ const mutations = {
 
 const actions = {
   setCurrentWorkflow: ({commit}, obj) => {
-    commit('SET_CURRENT_WORKFLOW', obj)
+    const postData = {
+      workflow_id: obj
+    }
+    Vue.http.post(getWholeWorkflow, postData)
+      .then(response => {
+        commit('SET_CURRENT_WORKFLOW', response.data)
+        return 'success'
+      })
   },
   setWorkflows: ({commit}, obj) => {
-    commit('SET_WORKFLOWS', obj)
+    Vue.http.post(getWorkflows)
+      .then(response => {
+        commit('SET_WORKFLOWS', response.data)
+      })
   }
 }
 

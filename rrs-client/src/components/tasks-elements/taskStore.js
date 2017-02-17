@@ -1,11 +1,13 @@
-import {getMessages} from './../../config'
+import {getMessages, getHeader, tasksUrl, getArtpack} from './../../config'
 import Vue from 'vue'
 const state = {
   currentTask: '',
   tasks: null,
   currentForm: {},
   currentChat: {},
-  loading: ''
+  loading: '',
+  alert: '',
+  stage: ''
 }
 
 const mutations = {
@@ -14,7 +16,6 @@ const mutations = {
   },
   SET_CURRENT_TASK (state, obj) {
     state.currentTask = obj
-    console.log(state.currentTask)
   },
   SET_CURRENT_FORM (state, obj) {
     state.currentForm = obj
@@ -24,15 +25,29 @@ const mutations = {
   },
   SET_LOADING (state, obj) {
     state.loading = obj
+  },
+  SET_ALERT (state, obj) {
+    state.alert = obj
+  },
+  SET_STAGE (state, obj) {
+    state.stage = obj
   }
 }
 
 const actions = {
   setTasksArray: ({commit}, obj) => {
-    commit('SET_TASKS_ARRAY', obj)
+    const postData = {
+      userId: obj
+    }
+    console.log(postData)
+    Vue.http.post(tasksUrl, {headers: getHeader(), postData})
+      .then(response => {
+        if (response.status === 200) {
+          commit('SET_TASKS_ARRAY', response.data)
+        }
+      })
   },
   setCurrentTask: ({commit}, obj) => {
-    commit('SET_LOADING', true)
     commit('SET_CURRENT_TASK', obj)
     const postData = {
       task_id: obj.id
@@ -52,17 +67,36 @@ const actions = {
         } else {
           commit('SET_CURRENT_CHAT', response.data[0].messages)
         }
-        commit('SET_LOADING', false)
       })
   },
   setCurrentForm: ({commit}, obj) => {
-    commit('SET_CURRENT_FORM', obj)
+    const postData = {
+      task_id: obj
+    }
+    Vue.http.post(getArtpack, postData)
+      .then(response => {
+        if (response.status === 200) {
+          commit('SET_CURRENT_FORM', response.data[0])
+        }
+      })
   },
   setCurrentChat: ({commit}, obj) => {
     commit('SET_CURRENT_CHAT', obj)
   },
-  startLoading: ({commit}, obj) => {
+  isLoading: ({commit}, obj) => {
+    console.log(obj)
     commit('SET_LOADING', obj)
+  },
+  setAlert: ({commit}, obj) => {
+    var object = obj
+    commit('SET_ALERT', object)
+    setTimeout(function () {
+      commit('SET_ALERT', '')
+      commit('SET_CURRENT_TASK', '')
+    }, 3000)
+  },
+  setStage: ({commit}, obj) => {
+    commit('SET_STAGE', obj)
   }
 }
 

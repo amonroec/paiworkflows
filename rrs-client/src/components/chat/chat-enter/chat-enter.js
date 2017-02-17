@@ -12,7 +12,6 @@ methods.getNameId = function () {
   this.message.name = this.userStore.authUser.name
   this.message.id = this.userStore.authUser.id
   this.message.user_picture = this.userStore.authUser.picture
-  console.log(this.message)
 }
 
 methods.incomingChat = function (chatMessage) {
@@ -39,7 +38,6 @@ methods.submitChat = function () {
     console.log('incoming chat boyssss')
   })
 */
-  console.log(this.message.user_picture)
   const postData = {
     task_id: this.taskStore.currentTask.id,
     message: this.message
@@ -49,9 +47,7 @@ methods.submitChat = function () {
     .then(response => {
       if (response.status === 200) {
         this.message.text = ''
-        console.log(response.data)
       }
-      console.log(response)
     })
 }
 

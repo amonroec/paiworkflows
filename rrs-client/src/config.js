@@ -25,7 +25,8 @@ export const getUserData = apiDomain + 'api/getUserData'
 export const getLiveTask = apiDomain + 'api/tasks/getTask'
 export const submitApproval = apiDomain + 'api/submitApproval'
 export const submitForm = apiDomain + 'api/asi/submitForm'
-export const submitTask = apiDomain + 'api/submitTask'
+export const submitForApproval = apiDomain + 'api/submitForApproval'
+export const submitReview = apiDomain + 'api/submitReview'
 
 export const getHeader = function () {
   const tokenData = JSON.parse(window.localStorage.getItem('authUser'))

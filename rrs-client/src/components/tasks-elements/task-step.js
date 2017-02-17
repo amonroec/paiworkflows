@@ -1,4 +1,4 @@
-import {getWorkers, assignTask, submitChat, uploadFile, submitTask} from './../../config'
+import {getWorkers, assignTask, submitChat, submitForApproval, submitReview} from './../../config'
 import {mapState} from 'vuex'
 var methods = {}
 /*
@@ -37,35 +37,33 @@ methods.getWorkers = function () {
     .then(response => {
       if (response.status === 200) {
         this.workers = response.data
-        console.log(response.data)
-      } else {
-        console.log('falieddddd')
       }
     })
 }
 
 methods.assignTask = function () {
   const postData = {
-    task: JSON.stringify(this.taskStore.currentTask),
+    task: this.taskStore.currentTask,
     app_worker: this.selectedWorker
   }
-  console.log(postData)
   this.$http.post(assignTask, postData)
     .then(response => {
       if (response.status === 200) {
-        console.log(response.data)
-        this.submitMessage('assign', 'Assigned')
+        this.submitMessage('assign', 'This task has been assigned')
       }
+      console.log(response)
     })
 }
 
-methods.submitForApproval = function (e) {
+methods.submitForApproval = function (el) {
   const postData = {
-    task_id: this.taskStore.currentTask.id
+    task: this.taskStore.currentTask
   }
-  this.$http.post(uploadFile, postData)
+  this.$http.post(submitForApproval, postData)
     .then(response => {
-      console.log(response)
+      if (response.data === 'success') {
+        this.submitMessage('submit-for-approval', 'Submitted for Approval')
+      }
     })
 }
 
@@ -73,18 +71,21 @@ methods.approveArt = function () {
   this.submitMessage('approve-art')
 }
 
-methods.submitDecline = function () {
+methods.submitReview = function (action) {
   const postData = {
     task: this.taskStore.currentTask,
-    action: 'decline-art'
+    action: action
   }
-  this.$http.post(submitTask, postData)
+  this.$http.post(submitReview, postData)
     .then(response => {
       if (response.status === 200) {
-        var task = response.data
-        console.log(this.$emit('task_submitted', task))
-        this.submitMessage('decline-art', this.declineText)
+        if (action === 'approve-art') {
+          this.submitMessage(action, 'File has been approved!')
+        } else {
+          this.submitMessage(action, this.declineText)
+        }
       }
+      console.log(response)
     })
 }
 
@@ -104,7 +105,6 @@ methods.submitMessage = function (action, text) {
   this.message.date = n
   this.message.action = action
   this.message.user_picture = this.userStore.authUser.picture
-  console.log(this.taskStore.currentTask)
   const postData = {
     task_id: this.taskStore.currentTask.id,
     message: this.message
@@ -116,7 +116,8 @@ methods.submitMessage = function (action, text) {
           var submitButton = document.querySelector('#submitUpload')
           submitButton.click()
         }
-        console.log(response.data)
+        this.$store.dispatch('setAlert', action)
+        this.$store.dispatch('setTasksArray', this.userStore.authUser.id)
       }
     })
 }
@@ -147,7 +148,8 @@ module.exports = {
     ...mapState({
       taskStore: state => state.taskStore,
       workflowStore: state => state.workflowStore,
-      userStore: state => state.userStore
+      userStore: state => state.userStore,
+      alert: state => state.taskStore.alert
     })
   },
   created: function () {

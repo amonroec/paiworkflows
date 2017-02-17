@@ -20,6 +20,15 @@ html, body {
 	background: rgba(114, 114, 114, .3);
 }
 
+.alert {
+	position:relative;
+	float:left;
+	width:calc(100vw - #{$task-bar-width});
+	height:calc(100vh - #{$top-bar-height});
+	background: rgba(122, 244, 66, .3);
+	z-index: 100;
+}
+
 #homeDisplay {
 	position:relative;
 	width:calc(100vw - 280px);
@@ -437,6 +446,7 @@ html, body {
 }
 #routerLink {
 	min-width:100px;
+	max-width:200px;
 }
 /*.subcat-link {
 	width:200px;
@@ -471,14 +481,26 @@ html, body {
 	float:left;
 	text-align:left;
 }*/
+#subcat-request {
+	position:relative;
+	padding-left: 20px;
+	padding-right:20px;
+	float:right;
+	line-height: 50px;
+}
 #subcat-request:hover > #request-dropdown {
 	display: block;
 	visibility: visible;
-	float: left;
-	width: 100%;
-	height:200px;
+	float: bottom;
 	background-color: #95f9a3;
-	z-index: 300;
+	z-index: 400;
+}
+#request-dropdown a {
+	float:left;
+	width: 150px;
+	padding-left: 20px;
+	padding-right:20px;
+	background-color: #95f9a3;
 }
 /*.subcat-div a {
 	width: calc(100% - 50px);
@@ -1038,13 +1060,21 @@ h4 {
 		box-shadow: 1px 1px 1px black;
 	}
 }
+#submitApproval {
+	width: 250px;
+	margin-top: 3px;
+}
+#uploadButtonsDiv {
+	width: 100%;
+	float:left;
+}
 #submitForApproval {
 	position:relative;
 	width:100%;
 	height:100%;
 }
-#submitForApproval input[type="button"] {
-
+#submitForUpload form {
+	margin-top: -15px;
 }
 #declineArtReason {
 	position: relative;

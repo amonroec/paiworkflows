@@ -7,7 +7,7 @@ use App\artpack;
 use App\Embroidery;
 use App\Task;
 use App\Workflow;
-use App\Http\Controllers\WorkflowController;
+use App\Http\Controllers;
 
 class SubmitForm extends Controller
 {
@@ -74,7 +74,8 @@ class SubmitForm extends Controller
         $form_image_url = $request->input('form_image_src');
         $submit = 1;//$request->input('submitted_by');
         $csr = $request->input('csr_name');
-        $task_id = $this->newTaskSubmit($workflow_id, $submit, 'artpack', $csr, $form_image_url);
+        $turn_time = $request->input('turn_time');
+        $task_id = $this->newTaskSubmit($workflow_id, $submit, 'artpack', $csr, $form_image_url, $turn_time);
 		$req = new artpack;
         //$req->artpack_num = $request->input('artpack_num');
         $req->task_id = $task_id;
@@ -119,6 +120,7 @@ class SubmitForm extends Controller
           ]
         );*/
         //$this->getNextTask($id, 'artpacks');
+        redirect('/api/submitChat', $task_id);
         return redirect('http://localhost:8080/home/');
         //return redirect()->action('TasksController@taskSubmit', $id, 'artpacks');
         //return $this->taskSubmit($id)
@@ -133,7 +135,7 @@ class SubmitForm extends Controller
         return;
     }
 
-    public function newTaskSubmit($id, $person, $table, $csr, $form_image){
+    public function newTaskSubmit($id, $person, $table, $csr, $form_image, $turn_time){
       $workflow = $this->getWorkflow($id);
       if($workflow[1]->needs_assigned == 1){
         $column = 'app_worker';
@@ -146,6 +148,7 @@ class SubmitForm extends Controller
           $status = $workflow[2]->task_type;
         }
       }
+        $timestamp = date("Y-m-d h:i:s");
       $req = new Task;
       $req->workflow_id = $id;
       $req->submitted_by = $person;
@@ -159,7 +162,9 @@ class SubmitForm extends Controller
           'csr_assigned' => $csr,
           'submitted_by' => $req->submitted_by,
           $column => $value,
-          'status' => $status
+          'status' => $status,
+          'turn_time' => $turn_time,
+          'created_at' => $timestamp
         ]
       );
       //Get the base-64 string from data

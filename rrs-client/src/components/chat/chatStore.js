@@ -14,17 +14,13 @@ const mutations = {
 const actions = {
   setChatMessages: ({commit}, messageList) => {
     var id = 10
-    console.log('iddddd')
-    console.log(id)
     const postData = {
       task_id: id
     }
     return Vue.http.post(getMessages, postData)
       .then(response => {
-        console.log(response)
         if (response.status === 200) {
           commit('SET_CHAT_MESSAGES', response.body.data)
-          console.log(response.body.data)
           return response.body.data
         }
       })

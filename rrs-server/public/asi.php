@@ -44,6 +44,7 @@
         <input type="hidden" id="form_image_src" name="form_image_src" value=""></input>
 
         <input type="hidden" name="workflow_id" value="<?php echo $workflowId; ?>"></input>
+        <input type="hidden" name="message" value="submit-form"></input>
 
         <legend>Account Information</legend>
 

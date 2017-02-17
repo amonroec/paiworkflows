@@ -4,53 +4,6 @@ import WorkSpace from './workspace/WorkSpace'
 import {mapState} from 'vuex'
 var methods = {}
 
-methods.setCurrentTask = function (taskId) {
-  var tasks = this.taskStore.tasks
-  var that = this
-  tasks.forEach(function (task) {
-    if (parseInt(task.id) === parseInt(taskId)) {
-      that.$store.dispatch('setCurrentTask', task)
-    }
-  })
-  return this.setCurrentWorkflow()
-}
-
-methods.setCurrentWorkflow = function () {
-  var workflows = this.workflowStore.workflows
-  var workflowId = this.taskStore.currentTask.workflow_id
-  var that = this
-  workflows.forEach(function (workflow) {
-    if (parseInt(workflow.id) === parseInt(workflowId)) {
-      var load = that.$store.dispatch('setCurrentWorkflow', workflow)
-      load.then(that.loading = false)
-      console.log(that.loading)
-    }
-  })
-  return 'success'
-}
-
-methods.checkForTasks = function () {
-  var str = window.location.href
-  var n = str.lastIndexOf('/')
-  var result = str.substring(n + 1)
-  var that = this
-  console.log(result)
-  console.log(this.loading)
-  if (result !== 'home') {
-    setTimeout(function () {
-      if (that.taskStore.tasks !== null) {
-        that.setCurrentTask(result)
-      } else {
-        that.checkForTasks()
-      }
-    }, 1000)
-  }
-}
-
-methods.fetchData = function () {
-  this.setCurrentTask(this.$route.params.taskId)
-}
-
 module.exports = {
   name: 'artpack-display',
   data: function () {
@@ -67,16 +20,31 @@ module.exports = {
     ...mapState({
       taskStore: state => state.taskStore,
       workflowStore: state => state.workflowStore,
-      loading: state => state.taskStore.loading
+      loading: state => state.taskStore.loading,
+      alert: state => state.taskStore.alert,
+      currentTask: state => state.taskStore.currentTask,
+      stage: state => state.taskStore.stage
     })
   },
   watch: {
-    '$route': function () {
-      this.setCurrentTask(this.$route.params.taskId)
+    'workflowStore.currentWorkflow': function () {
+      var currentStep = this.currentTask.status
+      var workflows = this.workflowStore.currentWorkflow
+      var i = 0
+      var that = this
+      workflows.forEach(function (workflow) {
+        if (workflow.task_type === currentStep) {
+          that.$store.dispatch('setStage', i)
+          that.$store.dispatch('isLoading', false)
+        }
+        i++
+      })
     }
   },
   created: function () {
-    this.$store.dispatch('startLoading', true)
-    this.checkForTasks()
+    var that = this
+    this.$watch('alert', function () {
+      that.$router.push('/home')
+    })
   }
 }

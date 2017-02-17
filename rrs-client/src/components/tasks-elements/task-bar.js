@@ -12,11 +12,9 @@ methods.setCurrentTask = function (task) {
       that.$store.dispatch('setCurrentWorkflow', workflow)
     }
   })
-  this.getArtpack()
+  this.getArtpack()this.$router.push('/home/' + task.id)
 */
-  console.log(this.$parent)
-  console.log(this)
-  this.$router.push('/home/' + task.id)
+  this.$emit('task_clicked', task.id)
 }
 
 methods.setCurrentTaskOther = function (taskId) {

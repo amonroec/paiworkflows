@@ -106,23 +106,62 @@ class TasksController extends Controller
         return $array;
     }
 
-    public function declineTask(Request $request){
-        $task = $request->input('task');
+    public function declineTask($task){
         $workflowArray = $this->getWorkflow($task['workflow_id']);
         $status = $task['status'];
         $count = 0;
-        $redis = LRedis::connection();
-        $redis->publish('message', $task['id']);
+        
+        /*$redis = LRedis::connection();
+        $redis->publish('message', $task['id']);*/
         foreach($workflowArray as $step){
             if($status == $step->task_type){
-
                 return $this->goBackStep($task, $workflowArray[$count - 1]);
             }
             $count++;
         }
     }
 
-    public function submitTaskStep(Request $request){
+    public function submitTaskStep($task){
+        $taskId = $task['id'];
+        $workflowId = $task['workflow_id'];
+        $workflowArray = $this->getWorkflow($workflowId);
+        $status = $task['status'];
+        $count = 0;
+        foreach($workflowArray as $step){
+            if($status == $step->task_type){
+                /*switch ($status) {
+                    case "upload":
+                        return $this->checkNextStep($task, $workflowArray[$count + 1]);
+                        break;
+                    case "review":
+                        if($request->input('action') == 'decline-art') {
+                            return $this->goBackStep($task, $workflowArray[$count - 1]);
+                        } elseif($request->input('action') == 'approve-art') {
+                            return $this->checkNextStep($task, $workflowArray[$count + 1]);
+                        }
+                        break;
+                    case "assign":
+                        return "in assign sonnnn";
+                        break;
+                    case "claim":
+
+                        break;
+                    case "close":
+
+                        break;
+                    case "form_submit":
+
+                        break;
+                    default:
+                        return "Your favorite color is neither red, blue, nor green!";
+                }*/
+                return $this->checkNextStep($task, $workflowArray[$count + 1]);
+            }
+            $count++;
+        }
+    }
+
+    public function submitOtherTaskStep(Request $request){
         $task = json_decode($request->input('task'));
         $workflowArray = $this->getWorkflow($task->workflow_id);
         $status = $task->status;
@@ -151,26 +190,61 @@ class TasksController extends Controller
         }
     }
 
-    private function checkNextStep($task, $workflow){
+    private function checkOtherNextStep($task, $workflow){
         $taskId = $task->id;
         switch ($workflow->task_type) {
-            case "assign":
-                $this->assignTask($task->id, $workflow->assigner);
+            case "upload":
+                return $this->checkNextStep($task, $workflowArray[$count + 1]);
                 break;
-            case "approve":
-                if($workflow->approval_type == 'person_who_submit'){
-                    $this->submitForNextStage($taskId, $task->submitted_by, 'approve');
-                }elseif($workflow->approval_type == 'other_person'){
-                    $this->submitForNextStage($taskId, $workflow->approval_person, 'approve');
-                }else{
-                    $this->submitForNextStage($taskId, $task->submitted_by, 'approve');
+            case "review":
+                if($request->input('action') == 'decline-art') {
+                    return $this->goBackStep($task, $workflowArray[$count - 1]);
+                } elseif($request->input('action') == 'approve-art') {
+                    return $this->checkNextStep($task, $workflowArray[$count + 1]);
                 }
-                return redirect('http://localhost:8080/tasks/page');
+                break;
+            case "assign":
+                return "in assign sonnnn";
+                break;
+            case "claim":
+
+                break;
+            case "close":
+
+                break;
+            case "form_submit":
+
+                break;
+            default:
+                return "Your favorite color is neither red, blue, nor green!";
+        }
+    }
+
+    private function checkNextStep($task, $workflow){
+        $taskId = $task['id'];
+        switch ($workflow->task_type) {
+            case "assign":
+                $this->assignTask($taskId, $workflow->assigner);
+                break;
+            case "review":
+                if($workflow->approval_type == 'person_who_submit'){
+                    $this->submitForNextStage($taskId, $task['submitted_by'], 'review');
+                }elseif($workflow->approval_type == 'other_person'){
+                    $this->submitForNextStage($taskId, $workflow->approval_person, 'review');
+                }else{
+                    $this->submitForNextStage($taskId, $task['submitted_by'], 'review');
+                }
+                return 'success';
                 break;
             case "upload":
-                Task::where('id', $task->id)
+                Task::where('id', $taskId)
                     ->update(['status' => 'upload']);
-                    return 'success';
+                    redirect('http://localhost:8080/home/' . $taskId);
+                break;
+            case "closed":
+                Task::where('id', $taskId)
+                    ->update(['status' => 'closed', 'app_worker' => 0]);
+                    return $workflow;
                 break;
             default:
                 return;
@@ -182,7 +256,7 @@ class TasksController extends Controller
         $taskId = $task['id'];
         switch ($workflow['task_type']) {
             case "assign":
-                $this->assignTask($task->id, $workflow->assigner);
+                $this->setAssigner($task->id, $workflow->assigner);
                 break;
             case "approve":
                 if($workflow->approval_type == 'person_who_submit'){
@@ -249,11 +323,35 @@ class TasksController extends Controller
         return $uploadUrl;
     }
 
+    //Submitting the uploads for approval to the correct person
+    public function submitForApproval(Request $request) {
+        $task = $request->input('task');
+        return $this->submitTaskStep($task);
+    }
+
+    //Assigns task to the appointed worker from the Assigner
     public function assignTask(Request $request){
         $task = $request->input('task');
-        Task::where('id', $task->id)
+        Task::where('id', $task['id'])
             ->update(['app_worker' => $request->input('app_worker')]);
-        return $this->submitTaskStep($request);
+        return $this->submitTaskStep($task);
+    }
+
+    //Looks at the review that was submitted and determines if it is delcine or approve
+    public function submitReview(Request $request){
+        $task = $request->input('task');
+        $action = $request->input('action');
+        if($action == 'approve-art'){
+            return $this->submitTaskStep($task);
+        }else{
+            return $this->declineTask($task);
+        }
+    }
+
+    public function setAssigner($taskId, $assigner){
+        Task::where('id', $taskId)
+            ->update(['app_worker' => $assigner]);
+        return;
     }
 
     public function getWorkflow($id){

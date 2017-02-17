@@ -146,11 +146,17 @@ Route::post('/submitApproval', function (Request $request) {
 
 Route::resource('/submitApproval', 'TasksController@submitTaskStep');
 
-Route::post('/submitTask', function (Request $request) {
-	return redirect()->action('TasksController@declineTask');
+Route::post('/submitReview', function (Request $request) {
+	return redirect()->action('TasksController@submitReview');
 });
 
-Route::resource('/submitTask', 'TasksController@declineTask');
+Route::resource('/submitReview', 'TasksController@submitReview');
+
+Route::post('/submitForApproval', function (Request $request) {
+	return redirect()->action('TasksController@submitForApproval');
+});
+
+Route::resource('/submitForApproval', 'TasksController@submitForApproval');
 
 Route::post('/submitChat', function (Request $request) {
 	return redirect()->action('ChatController@submitChat');
@@ -206,7 +212,6 @@ Route::post('/uploadFile', function (Request $request) {
 	}*/
 	//Storage::disk('uploads')->put('testing', $request->file('file_upload'));
 	redirect()->action('TasksController@updateUpload', $request);
-	redirect('http://localhost:8080/tasks/page');
 });
 
 Route::resource('/uploadFile', 'TasksController@updateUpload');

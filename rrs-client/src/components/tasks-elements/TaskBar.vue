@@ -22,6 +22,8 @@
               <tbody>
                 <tr>
                   <td>{{ task.id }}</td>
+                  <td>{{ task.turn_time }}</td>
+                  <td>{{ task.created_at }}</td>
                   <td>Art Pack Request</td>
                 </tr>
               </tbody>
