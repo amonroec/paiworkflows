@@ -77,10 +77,11 @@ html, body {
   float: left; }
 
 .activity-feed {
-  width: 300px;
+  width: calc($activity-width - 10px);
   height: calc(100% - 160px);
   position: relative;
   margin-left: 10px;
+  margin-right: 10px;
   float: left; }
 
 #infoBar {
@@ -89,7 +90,7 @@ html, body {
   float: left; }
 
 #workspace {
-  width: calc(100vw - 280px - 300px - 16px);
+  width: calc(100vw - 280px - 280px - 16px);
   height: calc(100% - 160px);
   float: left;
   position: relative;
@@ -634,7 +635,7 @@ h3 {
 
 #activityFeed {
   float: left;
-  width: 280px;
+  width: 260px;
   height: calc(100vh - 50px - 160px - 30px);
   margin-left: 10px;
   padding-top: 10px;
@@ -663,7 +664,7 @@ h3 {
   background-color: #fff; }
 
 #chatBoard {
-  width: 280px;
+  width: 260px;
   height: 100%;
   position: absolute; }
 
@@ -673,7 +674,7 @@ h3 {
   overflow: scroll; }
 
 #chatEnter {
-  width: 300px;
+  width: 280px;
   height: 120px;
   float: left; }
 
@@ -686,7 +687,7 @@ h3 {
 
 #chat-textarea {
   margin-left: 7px;
-  width: 260px;
+  width: 240px;
   float: left;
   height: 80px;
   margin-bottom: 10px;

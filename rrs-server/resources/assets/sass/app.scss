@@ -87,10 +87,11 @@ html, body {
 	float:left;
 }
 .activity-feed {
-  width: $activity-width;
+  width: calc($activity-width - 10px);
   height:calc(100% - 160px);
   position:relative;
   margin-left:10px;
+  margin-right:10px;
   float:left;
 }
 #infoBar {
@@ -720,7 +721,7 @@ h4 {
 }
 #chat-textarea {
 	margin-left:7px;
-	width: 260px;
+	width: 240px;
 	float: left;
 	height: 80px;
 	margin-bottom: 10px;
