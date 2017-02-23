@@ -239,7 +239,7 @@ class TasksController extends Controller
             case "upload":
                 Task::where('id', $taskId)
                     ->update(['status' => 'upload']);
-                    redirect('http://localhost:8080/home/' . $taskId);
+                    redirect('http://localhost:8080/home/');
                 break;
             case "closed":
                 Task::where('id', $taskId)
@@ -266,7 +266,7 @@ class TasksController extends Controller
                 }else{
                     $this->submitForNextStage($taskId, $task->submitted_by, 'approve');
                 }
-                return redirect('http://localhost:8080/tasks/page');
+                return redirect('http://localhost:8080/home');
                 break;
             case "upload":
                 Task::where('id', $taskId)
@@ -313,7 +313,7 @@ class TasksController extends Controller
             ->update(['upload_url' => json_encode($merged)]);
             //$this->submitTaskStep($request);
         }
-        return redirect('http://localhost:8080/home/' . $request->input('task_id'));
+        return redirect('http://localhost:8080/home/');
     }
 
     private function checkUploads($taskId) {

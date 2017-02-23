@@ -1,5 +1,9 @@
 <?php
-  $workflowId = $_GET['workflow_id'];
+  $workflowId = $_POST['workflow_id'];
+  $email = $_POST['email'];
+  $submit_name = $_POST['name'];
+  $picture = $_POST['picture'];
+  $id = $_POST['id'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,21 +16,13 @@
 <link rel="stylesheet" href="assets/css/bootstrap-select.css" type="text/css">
 <link rel="stylesheet" href="assets/css/pai.css" type="text/css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script src="assets/js/bootstrap-select.js"></script>
-<script src="assets/js/html2canvas.js"></script>
 
-
-<script src="//code.jquery.com/jquery-latest.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
-<script type="text/javascript" src="assets/js/jquery.plugin.html2canvas.js"></script>
 <!-- AJAX Form Submit   <script src="assets/js/jquery.jigowatt.js"></script>   -->
 
 <!--[if IE]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
+
 
 </head>
 <body>
@@ -44,6 +40,10 @@
         <input type="hidden" id="form_image_src" name="form_image_src" value=""></input>
 
         <input type="hidden" name="workflow_id" value="<?php echo $workflowId; ?>"></input>
+        <input type="hidden" name="submit_name" value="<?php echo $submit_name; ?>"></input>
+        <input type="hidden" name="submitted_by" value="<?php echo $email; ?>"></input>
+        <input type="hidden" name="picture" value="<?php echo $picture; ?>"></input>
+        <input type="hidden" name="id" value="<?php echo $id; ?>"></input>
         <input type="hidden" name="message" value="submit-form"></input>
 
         <legend>Account Information</legend>
@@ -70,8 +70,10 @@
 
         <div class="half">
           <label for="csr_name" accesskey="S">CSR Name</label>
-          <div class="col-2">
-            <select id="csr_name" name="csr_name" class="selectpicker show-tick form-control" data-live-search="true" multiple data-max-options="1" required="required" />
+          <div class="col-2" id="csr_select">
+            <!--<select id="csr_name" name="csr_name" class="selectpicker show-tick form-control" data-live-search="true" multiple data-max-options="1" required="required" />
+
+
                             <option value="Joey Knight">
                                   Joey Knight
                             </option>
@@ -120,7 +122,7 @@
                             <option value="Unassigned">
                   (Unassigned)
                 </option>   
-            </select>
+            </select>-->
           </div>
         </div>
 
@@ -244,8 +246,8 @@
           <label for="logo_manip" accesskey="L" class="toggle-check">Logo Manipulation</label>
           <div class="checkarea" style="width:auto !important; margin:8px 0;">
                  <div>
-                    <input id="manipulate_logo" class="cmn-toggle cmn-toggle-yes-no" type="checkbox">
-                    <label for="logo_manip" data-on="Yes" data-off="No"></label>
+                    <input id="manipulate_logo" class="cmn-toggle cmn-toggle-yes-no" type="checkbox" onclick="Javascript:manipulateLogo()">
+                    <label for="logo_manip" id="logo_manip" data-on="Yes" data-off="No"></label>
             </div>
           </div>
         </div>
@@ -258,7 +260,7 @@
       </fieldset>
 
       <input type="button" class="submit" id="submit" value="submit" onclick="save()" />
-      <input type="submit" id="submitButton" value="Actual Submit" />
+      <input type="submit" id="submitButton" style="display:hidden;" value="Actual Submit" />
       
 
     </form>
@@ -269,7 +271,51 @@
 
 <img id="canvasimg"></img>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="assets/js/bootstrap-select.js"></script>
+  <script src="assets/js/html2canvas.js"></script>
+
+
+  <script src="//code.jquery.com/jquery-latest.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.plugin.html2canvas.js"></script>
   <script type="text/javascript">
+
+  window.onload = function () {
+    var that = this;
+    var newSelect=document.createElement('select');
+    newSelect.setAttribute('id', 'csr_name');
+    newSelect.setAttribute('name', 'csr_name');
+    newSelect.setAttribute('class', 'show-tick form-control');
+    newSelect.setAttribute('data-live-search', 'true');
+    newSelect.setAttribute('style', 'width:210px;');
+    var o = document.createElement("option");
+     o.value= '';
+     o.innerHTML = 'Select CSR'; // whatever property it has
+     newSelect.appendChild(o);
+    $.ajax({
+      type: 'post',
+      url: 'http://server.paiworkflows.com/api/getCsr',//'http://localhost:8000/api/getCsr' when on localhost
+      data: {
+        csr_div: 'ASI'
+      },
+      success: function (response) {
+        //document.getElementById('test3').value = response;
+        response.forEach(function (csr) {
+          
+            var opt = document.createElement("option");
+           opt.value= csr.id;
+           opt.innerHTML = csr.name; // whatever property it has
+           newSelect.appendChild(opt);
+           // then append it to the select element
+            
+        });
+      },
+    });
+    document.getElementById('csr_select').appendChild(newSelect);
+  }
 
   // sort list
   var my_options = $("#csr_name option");
@@ -280,6 +326,7 @@
   })
   $("#csr_name").empty().append(my_options);
   // run chosen plugin
+  // run chosen plugiÿ
 
   function save() {
     /*html2canvas(document.getElementById('container'), {
@@ -297,6 +344,16 @@
             $("#submitButton").click();
         }
     });
+  }
+
+  function manipulateLogo() {
+    console.log('manipulate');
+    var logo = document.getElementById('manipulate_logo');
+    if(logo.checked === false) {
+      document.getElementById('logo_manip').innerHTML = 'No';
+    }else{
+      document.getElementById('logo_manip').innerHTML = 'Yes';
+    }
   }
 
   function convertCanvasToImage(canvas) {

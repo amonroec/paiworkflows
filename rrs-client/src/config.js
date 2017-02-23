@@ -27,12 +27,17 @@ export const submitApproval = apiDomain + 'api/submitApproval'
 export const submitForm = apiDomain + 'api/asi/submitForm'
 export const submitForApproval = apiDomain + 'api/submitForApproval'
 export const submitReview = apiDomain + 'api/submitReview'
+export const claimTask = apiDomain + 'api/claimTask'
 
 export const getHeader = function () {
   const tokenData = JSON.parse(window.localStorage.getItem('authUser'))
   const headers = {
     'Accept': 'application/json',
-    'Authorization': 'Bearer ' + tokenData.access_token
+    'Authorization': 'Bearer ' + tokenData.access_token,
+    'Origin': 'http://paiworkflows.com',
+    'Host': 'paiworkflows.com',
+    'Access-Control-Request-Method': 'POST',
+    'Access-Control-Request-Headers': 'X-Custom-Header'
   }
   return headers
 }

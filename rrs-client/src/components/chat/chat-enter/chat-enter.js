@@ -38,11 +38,14 @@ methods.submitChat = function () {
     console.log('incoming chat boyssss')
   })
 */
+  var date = new Date()
+  var n = date.toLocaleString()
+  this.message.date = n
   const postData = {
     task_id: this.taskStore.currentTask.id,
     message: this.message
   }
-  this.getDate()
+  console.log(postData)
   this.$http.post(submitChat, postData)
     .then(response => {
       if (response.status === 200) {

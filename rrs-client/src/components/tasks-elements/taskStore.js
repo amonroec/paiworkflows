@@ -1,4 +1,4 @@
-import {getMessages, getHeader, tasksUrl, getArtpack} from './../../config'
+import {getMessages, tasksUrl, getArtpack} from './../../config'
 import Vue from 'vue'
 const state = {
   currentTask: '',
@@ -7,12 +7,14 @@ const state = {
   currentChat: {},
   loading: '',
   alert: '',
-  stage: ''
+  stage: '',
+  tasksLoading: ''
 }
 
 const mutations = {
   SET_TASKS_ARRAY (state, obj) {
     state.tasks = obj
+    return
   },
   SET_CURRENT_TASK (state, obj) {
     state.currentTask = obj
@@ -22,6 +24,7 @@ const mutations = {
   },
   SET_CURRENT_CHAT (state, obj) {
     state.currentChat = obj
+    state.loading = false
   },
   SET_LOADING (state, obj) {
     state.loading = obj
@@ -31,43 +34,59 @@ const mutations = {
   },
   SET_STAGE (state, obj) {
     state.stage = obj
+  },
+  SET_TASKS_LOADING (state, obj) {
+    state.tasksLoading = obj
   }
 }
 
 const actions = {
   setTasksArray: ({commit}, obj) => {
+    commit('SET_TASKS_LOADING', true)
     const postData = {
-      userId: obj
+      userId: obj.user_id,
+      groups: 'ASI Artpack'
     }
-    console.log(postData)
-    Vue.http.post(tasksUrl, {headers: getHeader(), postData})
+    Vue.http.post(tasksUrl, postData)
       .then(response => {
         if (response.status === 200) {
           commit('SET_TASKS_ARRAY', response.data)
+          commit('SET_TASKS_LOADING', false)
         }
       })
   },
   setCurrentTask: ({commit}, obj) => {
     commit('SET_CURRENT_TASK', obj)
-    const postData = {
-      task_id: obj.id
-    }
-    Vue.http.post(getMessages, postData)
-      .then(response => {
-        if (response.data.length === 0) {
-          var array = []
-          var mes = {
-            name: '',
-            text: 'No Messages',
-            date: '',
-            action: ''
+    if (obj !== '') {
+      const postData = {
+        task_id: obj
+      }
+      Vue.http.post(getArtpack, postData)
+        .then(response => {
+          if (response.status === 200) {
+            commit('SET_CURRENT_FORM', response.data[0])
+            const postData = {
+              task_id: obj.id
+            }
+            Vue.http.post(getMessages, postData)
+              .then(response => {
+                if (response.data.length === 0) {
+                  var array = []
+                  var mes = {
+                    name: '',
+                    text: 'No Messages',
+                    date: '',
+                    action: ''
+                  }
+                  array.push(mes)
+                  commit('SET_CURRENT_CHAT', array)
+                } else {
+                  commit('SET_CURRENT_CHAT', response.data[0].messages)
+                }
+              })
           }
-          array.push(mes)
-          commit('SET_CURRENT_CHAT', array)
-        } else {
-          commit('SET_CURRENT_CHAT', response.data[0].messages)
-        }
-      })
+        })
+    }
   },
   setCurrentForm: ({commit}, obj) => {
     const postData = {
@@ -84,7 +103,6 @@ const actions = {
     commit('SET_CURRENT_CHAT', obj)
   },
   isLoading: ({commit}, obj) => {
-    console.log(obj)
     commit('SET_LOADING', obj)
   },
   setAlert: ({commit}, obj) => {
@@ -97,6 +115,9 @@ const actions = {
   },
   setStage: ({commit}, obj) => {
     commit('SET_STAGE', obj)
+  },
+  taskLoading: ({commit}, obj) => {
+    commit('SET_TASKS_LOADING', obj)
   }
 }
 

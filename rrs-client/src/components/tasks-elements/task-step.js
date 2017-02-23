@@ -1,4 +1,4 @@
-import {getWorkers, assignTask, submitChat, submitForApproval, submitReview} from './../../config'
+import {getWorkers, assignTask, submitChat, submitForApproval, submitReview, claimTask} from './../../config'
 import {mapState} from 'vuex'
 var methods = {}
 /*
@@ -29,6 +29,7 @@ methods.startFunction = function () {
 }
 */
 methods.getWorkers = function () {
+  this.loading = true
   const postData = {
     division: 3,
     accessLevel: 3
@@ -42,6 +43,7 @@ methods.getWorkers = function () {
 }
 
 methods.assignTask = function () {
+  this.loading = true
   const postData = {
     task: this.taskStore.currentTask,
     app_worker: this.selectedWorker
@@ -56,6 +58,7 @@ methods.assignTask = function () {
 }
 
 methods.submitForApproval = function (el) {
+  this.loading = true
   const postData = {
     task: this.taskStore.currentTask
   }
@@ -72,6 +75,7 @@ methods.approveArt = function () {
 }
 
 methods.submitReview = function (action) {
+  this.loading = true
   const postData = {
     task: this.taskStore.currentTask,
     action: action
@@ -89,11 +93,25 @@ methods.submitReview = function (action) {
     })
 }
 
+methods.claimTask = function () {
+  this.loading = true
+  const postData = {
+    task: this.taskStore.currentTask,
+    user_id: this.userStore.authUser.id
+  }
+  this.$http.post(claimTask, postData)
+    .then(response => {
+      if (response.status === 200) {
+        this.submitMessage('claim-task', 'This task has been claimed')
+      }
+      console.log(response)
+    })
+}
+
 methods.clickUpload = function () {
   var uploadButton = document.querySelector('.fileUpload')
   uploadButton.click()
   this.task = JSON.stringify(this.taskStore.currentTask)
-  console.log(this.task)
 }
 
 methods.submitMessage = function (action, text) {
@@ -109,17 +127,33 @@ methods.submitMessage = function (action, text) {
     task_id: this.taskStore.currentTask.id,
     message: this.message
   }
+  console.log(postData)
   this.$http.post(submitChat, postData)
     .then(response => {
       if (response.status === 200) {
         if (action === 'upload-file') {
-          var submitButton = document.querySelector('#submitUpload')
+          var submitButton = document.querySelector('#submitUploadForm')
+          console.log(submitButton)
           submitButton.click()
+        } else {
+          this.$store.dispatch('setAlert', action)
+          const post = {
+            user_id: this.userStore.authUser.id,
+            user_groups: this.userStore.groups
+          }
+          this.$store.dispatch('setTasksArray', post)
+          this.$store.dispatch('setCurrentTask', '')
+          this.loading = false
         }
-        this.$store.dispatch('setAlert', action)
-        this.$store.dispatch('setTasksArray', this.userStore.authUser.id)
       }
     })
+}
+
+methods.fileInputLoaded = function () {
+  document.querySelector('#uploadButton').disabled = false
+  document.querySelector('#uploadButton').style.color = 'white'
+  document.querySelector('#uploadButton').style.backgroundColor = 'green'
+  console.log(document.querySelector('#submitUploadForm'))
 }
 
 module.exports = {
@@ -140,10 +174,17 @@ module.exports = {
         user_picture: ''
       },
       task: '',
-      fileUpload: ''
+      fileUpload: '',
+      fileUploaded: false,
+      loading: ''
     }
   },
   methods: methods,
+  watch: {
+    'workers': function () {
+      this.loading = false
+    }
+  },
   computed: {
     ...mapState({
       taskStore: state => state.taskStore,

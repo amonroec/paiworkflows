@@ -201,6 +201,12 @@ Route::post('/submitForm', function (Request $request) {
 
 Route::resource('/submitForm', 'SubmitForm@artPack');
 
+Route::post('/getCsr', function (Request $request) {
+	return redirect()->action('AccountsController@getCsr', $request->input());
+});
+
+Route::resource('/getCsr', 'AccountsController@getCsr');
+
 Route::post('/uploadFile', function (Request $request) {
 	/*foreach ($request->image as $image) {
 		$imagename = time() . $image->getClientOriginalName();

@@ -19,22 +19,32 @@ html, body {
   float: left;
   width: calc(100vw - 280px);
   height: calc(100vh - 50px);
-  background: rgba(122, 244, 66, 0.3);
-  z-index: 100; }
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  text-align: center;
+  padding-top: 30%;
+  font-size: 30px;
+  color: #fff;
+  font-family: 'Roboto', sans-serif; }
 
 #homeDisplay {
   position: relative;
   width: calc(100vw - 280px);
   height: calc(100vh - 50px);
-  float: left;
-  background-color: transparent;
-  background: url("pai-logo-with-tag.png") no-repeat center;
-  opacity: .05; }
+  float: left; }
+
+#homeDisplay img {
+  position: absolute;
+  left: 2px;
+  top: 140px;
+  transform: rotate(45deg);
+  width: 75px; }
 
 #clickTask {
   position: absolute;
-  top: 100px;
-  left: 10px;
+  top: 110px;
+  left: 30px;
+  font-size: 25px;
   font-family: "Indie Flower", cursive; }
 
 #live-orders {
@@ -54,18 +64,92 @@ html, body {
   margin-top: 10px;
   margin-left: 15px;
   font-size: 10px;
-  box-shadow: 2px 2px 2px black; }
-
-.task-side div {
-  box-shadow: 2px 2px 2px black; }
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+  position: relative; }
+  .task div .assign {
+    background-color: #fcff4c;
+    border: 1px solid #fcff49;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    line-height: 35px;
+    text-align: center;
+    position: absolute;
+    right: 5px;
+    top: 25px;
+    font-size: 25px;
+    float: right;
+    color: #949494;
+    z-index: 500; }
+  .task div .review {
+    background-color: #00ce4f;
+    border: 1px solid #00cb4e;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    line-height: 35px;
+    text-align: center;
+    position: absolute;
+    right: 5px;
+    top: 25px;
+    font-size: 25px;
+    float: right;
+    color: white;
+    z-index: 500; }
+  .task div .upload {
+    background-color: #008cff;
+    border: 1px solid #008bfc;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    line-height: 35px;
+    text-align: center;
+    position: absolute;
+    right: 5px;
+    top: 25px;
+    font-size: 25px;
+    float: right;
+    color: white;
+    z-index: 500; }
+  .task div .assign_group {
+    background-color: #ffb74c;
+    border: 1px solid #ffb649;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    line-height: 35px;
+    text-align: center;
+    position: absolute;
+    right: 5px;
+    top: 25px;
+    font-size: 25px;
+    float: right;
+    color: white;
+    z-index: 500; }
 
 .task-bar {
   width: 280px;
   height: calc(100vh - 50px);
   float: left;
-  background-color: rgba(48, 48, 48, 0.65);
+  background-color: rgba(114, 143, 65, 0.7);
   overflow: scroll;
-  box-shadow: 2px 2px 2px black; }
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6); }
+  .task-bar .activeTask {
+    background-color: #f9f213;
+    position: relative;
+    float: left;
+    margin-left: 5px;
+    width: 10px;
+    height: 75px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6); }
+  .task-bar .notActiveTask {
+    background-color: #303030;
+    position: relative;
+    float: left;
+    margin-left: 5px;
+    width: 10px;
+    height: 75px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6); }
 
 .task-side {
   background-color: #728f41;
@@ -73,11 +157,17 @@ html, body {
   height: 100%;
   margin: 10px; }
 
+.artpack-table {
+  position: relative;
+  width: 100%;
+  height: 100%; }
+  .artpack-table tr {
+    text-align: left; }
+
 #displayForm {
   width: calc(100vw - 280px);
   height: calc(100vh - 50px);
-  float: left;
-  background-color: rgba(255, 255, 255, 0.3); }
+  float: left; }
 
 #displayForm {
   width: calc(100vw - $task-bar-width);
@@ -91,12 +181,11 @@ html, body {
   margin-left: 10px;
   float: left; }
 
-#infoBar {
-  width: 100%;
-  height: 120px;
-  float: left; }
-
 #workspace {
+  padding-top: 6px;
+  padding-right: 15px; }
+
+.activity-show #workspace {
   width: calc(100vw - 280px - 300px - 16px);
   height: calc(100% - 160px);
   float: left;
@@ -106,6 +195,24 @@ html, body {
   background-size: 40%;*/
   padding-left: 16px;
   padding-right: 8px; }
+
+.activity-hide #workspace {
+  width: calc(100vw - 280px - 16px);
+  height: calc(100% - 160px);
+  float: left;
+  position: relative;
+  overflow: scroll;
+  /*background: url("pai-logo-with-tag.png") no-repeat center;
+  background-size: 40%;*/
+  padding-left: 16px;
+  padding-right: 8px; }
+
+#infoBar {
+  width: 100%;
+  height: 120px;
+  float: left;
+  padding-bottom: 5px;
+  background-color: rgba(255, 255, 255, 0.2); }
 
 #workspace img {
   box-shadow: 2px 2px 2px black; }
@@ -255,12 +362,14 @@ html, body {
   margin-top: 0px;
   position: relative;
   width: 100%;
-  height: calc(100vh - 50px); }
+  height: calc(100vh - 50px);
+  background-color: rgba(255, 255, 255, 0.6); }
 
 #taskBar {
   left: 0px;
   width: 240px;
-  float: left; }
+  float: left;
+  background-color: rgba(114, 143, 65, 0.5); }
 
 #tasksPage {
   width: 100%;
@@ -369,15 +478,21 @@ html, body {
   color: #e0e0e0; }
   .menu-link:hover {
     background-color: #484848;
-    color: #728f41; }
+    color: #728f41;
+    cursor: pointer; }
+
+#subcat-request:hover .subcat-div {
+  display: block;
+  visibility: visible; }
 
 .menu-link img {
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background-color: red;
   float: left;
-  margin: 3px; }
+  margin-top: 6px;
+  margin-right: 3px; }
 
 .menu-link a {
   text-decoration: none; }
@@ -386,7 +501,10 @@ html, body {
 
 #routerLink {
   min-width: 100px;
-  max-width: 200px; }
+  max-width: 200px;
+  color: #e0e0e0; }
+  #routerLink:visited {
+    color: #e0e0e0; }
 
 /*.subcat-link {
 	width:200px;
@@ -421,6 +539,9 @@ html, body {
 	float:left;
 	text-align:left;
 }*/
+#requestForm {
+  width: 100px; }
+
 #subcat-request {
   position: relative;
   padding-left: 20px;
@@ -428,19 +549,17 @@ html, body {
   float: right;
   line-height: 50px; }
 
-#subcat-request:hover > #request-dropdown {
-  display: block;
-  visibility: visible;
-  float: bottom;
-  background-color: #95f9a3;
-  z-index: 400; }
-
-#request-dropdown a {
+.subcat-div input {
   float: left;
-  width: 150px;
-  padding-left: 20px;
-  padding-right: 20px;
-  background-color: #95f9a3; }
+  width: 100%;
+  font-size: 17px;
+  background-color: #e0e0e0;
+  border: none;
+  color: #728f41;
+  margin-top: 2px;
+  margin-bottom: 2px; }
+  .subcat-div input:hover {
+    cursor: pointer; }
 
 /*.subcat-div a {
 	width: calc(100% - 50px);
@@ -448,9 +567,17 @@ html, body {
 	margin-top: 15px;
 	float:left;
 }*/
-#request-dropdown {
+.subcat-div {
   display: none;
-  visibility: hidden; }
+  visibility: visible;
+  position: absolute;
+  width: 150px;
+  top: 50px;
+  left: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #454545;
+  z-index: 400; }
 
 /*.button-div a {
 	width:100%;
@@ -656,27 +783,28 @@ h3 {
 #activityFeed {
   float: left;
   width: 280px;
-  height: calc(100vh - 50px - 160px - 30px);
+  height: calc(100vh - 50px - 160px - 35px);
   margin-left: 10px;
   padding-top: 10px;
-  border-radius: 8px;
-  background-color: #545454;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.38); }
+  margin-top: 30px;
+  background-color: rgba(84, 84, 84, 0.6); }
+
+#activityFeedToggle {
+  background-color: rgba(84, 84, 84, 0.6);
+  width: 280px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center; }
 
 #activityTop {
   float: left;
   width: 100%;
-  height: 50%;
-  background-color: #545454; }
+  height: 50%; }
 
 #activityBottom {
   float: left;
   width: 100%;
-  height: 50%;
-  background-image: url("./images/watertower-gb.png");
-  background-size: auto 100%;
-  background-repeat: no-repeat;
-  background-position: bottom 0px right -90px; }
+  height: 50%; }
 
 #chatBoardDiv {
   width: 100%;
@@ -692,6 +820,14 @@ h3 {
   width: 100%;
   height: calc(100vh - 50px - 160px - 230px);
   overflow: scroll; }
+
+.minimize {
+  position: absolute;
+  z-index: 500;
+  right: 2px;
+  bottom: 5px; }
+  .minimize:hover {
+    cursor: pointer; }
 
 #chatEnter {
   width: 300px;
@@ -828,7 +964,8 @@ h3 {
   border-radius: 50%; }
 
 .fileUpload {
-  display: none; }
+  display: none;
+  visibility: hidden; }
 
 .formSubmitted {
   color: #fff;
@@ -999,10 +1136,20 @@ h3 {
   .action_button:active {
     transform: translateY(1px);
     box-shadow: 1px 1px 1px black; }
+  .action_button:hover {
+    cursor: pointer; }
+
+#claimTask {
+  background-color: #ffb74c;
+  width: 250px; }
+
+#chooseFile {
+  background-color: #fff; }
 
 #submitApproval {
   width: 250px;
-  margin-top: 3px; }
+  margin-top: 3px;
+  background-color: #008cff; }
 
 #uploadButtonsDiv {
   width: 100%;

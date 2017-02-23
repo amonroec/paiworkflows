@@ -24,13 +24,15 @@ methods.setCurrentTaskOther = function (taskId) {
 module.exports = {
   data: function () {
     return {
+      userId: ''
     }
   },
   methods: methods,
   computed: {
     ...mapState({
       taskStore: state => state.taskStore,
-      workflowStore: state => state.workflowStore
+      workflowStore: state => state.workflowStore,
+      userStore: state => state.userStore
     })
   },
   created: function () {
@@ -40,5 +42,6 @@ module.exports = {
     if (result !== 'home') {
       this.setCurrentTaskOther(result)
     }
+    this.userId = this.userStore.authUser.id
   }
 }

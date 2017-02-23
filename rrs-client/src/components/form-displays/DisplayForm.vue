@@ -1,20 +1,14 @@
 <template>
-<div id="displayForm" v-if="!loading && alert === ''">
+<div :class="activityToggle" id="displayForm">
   <info-bar :stage.async="stage" :loading.async="loading" :currentWorkflow.async="workflowStore.currentWorkflow" :currentTask.async="currentTask"></info-bar>
   <work-space></work-space>
-  <activity-feed></activity-feed>
-</div>
-<div class="isLoading" v-else-if="loading">
-  <i class="fa fa-circle-o-notch fa-spin" style="font-size:50px;margin-left:45%;margin-top:30%;"></i>
-</div>
-<div class="alert" id="assigned" v-else-if="!loading && alert === 'assign'">
-  <p>This has been assigned! Great Job</p>
-</div>
-<div class="alert" id="assigned" v-else-if="!loading && alert === 'approve-art'">
-  <p>This task has been approved</p>
-</div>
-<div class="alert" id="assigned" v-else-if="!loading && alert === 'submit-for-approval'">
-  <p>This task has been submitted for approval</p>
+  <activity-feed v-show="activityFeedShow"></activity-feed>
+  <div v-show="activityFeedShow" class="minimize" type="button" id="activityFeedToggle" v-on:click="activityFeedToggle(false, 'activity-hide')">
+    <i class="fa fa-arrow-down"><i>  Hide Feed
+  </div>
+  <div v-show="!activityFeedShow" class="minimize" type="button" id="activityFeedToggle" v-on:click="activityFeedToggle(true, 'activity-show')">
+    <i class="fa fa-arrow-up"><i>  Show Feed
+  </div>
 </div>
 </template>
 <script>

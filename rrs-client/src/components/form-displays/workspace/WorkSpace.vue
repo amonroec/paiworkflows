@@ -49,21 +49,22 @@
       </div> 
 -->
       <div v-if="currentTask.form_image_url !== null">
-        <img :src="'http://localhost:8000/assets/forms/' + currentTask.form_image_url" style="width:100%;"></img>
+        <img :src="'http://paiworkflows.com/server/workflows_server/public/assets/forms/' + currentTask.form_image_url" style="width:90%;padding-left:10%;"></img>
       </div>
       <div class="uploadsDiv" v-if="currentTask.upload_url !== null">
         <h1>Uploads</h1>
         <div v-for="image in currentTask.upload_url">
-            <img class="uploaded_file" :src="'http://localhost:8000/' + image" style="width:80%;"></img>
+            <img v-show="image.substr(image.length - 3) !== 'pdf'" class="uploaded_file" :src="'http://paiworkflows.com/server/workflows_server/public/' + image" style="width:90%;"></img>
+            <iframe v-show="image.substr(image.length - 3) === 'pdf'" style="width:90%;height:400px;" :src="'http://paiworkflows.com/server/workflows_server/public/' + image"></iframe>
         </div>
       </div>
-
+<!--
       <div class="image-bar">
         <a v-for="(image, index) in currentTask.upload_url" href="javascript:void(0)" v-on:click="scrollToFile(index)">
           <div class="image-link">1</div>
         </a>
       </div>
-<!--
+
       <div class="artpackFiles">
         <div class="formHeader">Uploads</div>
         <div class="formQuestion">Uploaded Files</div>

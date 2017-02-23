@@ -7,9 +7,10 @@
         <router-link id="routerLink" :to="{ name: 'profile' }" append>  {{userStore.authUser.name}}</router-link>
       </div>
       <div class="menu-link">
-        <i class="fa fa-th-list"></i>
-        <router-link :to="{ name: 'dashboard' }" append>  Tasks</router-link>
+        <i class="fa fa-home"></i>
+        <router-link :to="{ name: 'home' }" append> Home</router-link>
       </div>
+<!--
       <div class="menu-link">
         <i class="fa fa-line-chart"></i>
         <router-link id="routerLink" :to="{ name: '' }" append>  Data</router-link>
@@ -22,13 +23,22 @@
         <i class="fa fa-wrench"></i>
         <router-link id="routerLink" :to="{ name: '' }" append>  Admin</router-link>
       </div>
+-->
       <div class="menu-link" id="subcat-request">
         <i class="fa fa-file-text"></i>
-        <a name="requestForm" id="requestForm">  Forms</a>
+        <a name="requestForm" id="requestForm" style="text-decoration:none;color:#fff;">  Forms</a>
         <div class="subcat-div" id="request-dropdown">
-          <a href="javascript:void(0)" v-for="workflow in workflows" v-on:click="workflowClick(workflow)">{{workflow.workflow_name}}</a>
+          <form method="POST" v-for="workflow in workflows" action="http://server.paiworkflows.com/asi.php">
+            <input type="hidden" name="workflow_id" :value="workflow.id" />
+            <input type="hidden" name="email" :value="userStore.authUser.email" />
+            <input type="hidden" name="name" :value="userStore.authUser.name" />
+            <input type="hidden" name="picture" :value="userStore.authUser.pictured" />
+            <input type="hidden" name="id" :value="userStore.authUser.id" />
+            <input type="submit" :value="workflow.workflow_name"></input>
+          </form>
         </div>
       </div>
+      
 
     </div>
   </div>

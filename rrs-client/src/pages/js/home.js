@@ -5,6 +5,7 @@ var methods = {}
 
 methods.taskClicked = function (taskId) {
   this.$store.dispatch('isLoading', true)
+  window.localStorage.setItem('currentTask', taskId)
   this.setCurrentTask(taskId)
 }
 
@@ -54,13 +55,28 @@ module.exports = {
     ...mapState({
       taskStore: state => state.taskStore,
       loading: state => state.taskStore.loading,
-      workflowStore: state => state.workflowStore
+      workflowStore: state => state.workflowStore,
+      alert: state => state.taskStore.alert
     })
+  },
+  watch: {
+    'workflowStore.currentWorkflow': function () {
+      var currentStep = this.taskStore.currentTask.status
+      var workflows = this.workflowStore.currentWorkflow
+      var i = 0
+      var that = this
+      workflows.forEach(function (workflow) {
+        if (workflow.task_type === currentStep) {
+          that.$store.dispatch('setStage', i)
+          that.$store.dispatch('isLoading', false)
+        }
+        i++
+      })
+    }
   },
   created: function () {
     var that = this
     this.$on('taskSet', function (task) {
-      that.setCurrentForm(task)
       that.setCurrentWorkflow(task)
     })
   }

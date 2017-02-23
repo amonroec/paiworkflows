@@ -25,8 +25,13 @@ html, body {
 	float:left;
 	width:calc(100vw - #{$task-bar-width});
 	height:calc(100vh - #{$top-bar-height});
-	background: rgba(122, 244, 66, .3);
+	background: rgba(0,0,0, .3);
 	z-index: 100;
+	text-align:center;
+	padding-top: 30%;
+	font-size: 30px;
+	color: #fff;
+	font-family: 'Roboto', sans-serif;
 }
 
 #homeDisplay {
@@ -34,14 +39,19 @@ html, body {
 	width:calc(100vw - 280px);
 	height:calc(100vh - 50px);
 	float:left;
-	background-color: transparent;
-	background: url("pai-logo-with-tag.png") no-repeat center;
-	opacity: .05;
+}
+#homeDisplay img {
+	position: absolute;
+	left:2px;
+	top: 140px;
+	transform: rotate(45deg);
+	width: 75px;
 }
 #clickTask {
 	position:absolute;
-	top:100px;
-	left:10px;
+	top:110px;
+	left:30px;
+	font-size: 25px;
 	font-family: "Indie Flower", cursive;
 }
 
@@ -63,18 +73,106 @@ html, body {
   margin-top: 10px;
   margin-left: 15px;
   font-size: 10px;
-  box-shadow: 2px 2px 2px black;
-}
-.task-side div {
-  box-shadow: 2px 2px 2px black;
+  box-shadow: 2px 2px 2px rgba(0,0,0,.6);
+  position: relative;
+
+  .assign {
+			background-color:$assign-color;
+			border: 1px solid darken($assign-color, .5);
+		  width: 35px;
+		  height: 35px;
+		  border-radius: 50%;
+		  line-height: 35px;
+		  text-align: center;
+		  position: absolute;
+		  right: 5px;
+		  top: 25px;
+		  font-size:25px;
+		  float:right;
+		  color: $dark-grey;
+		  z-index:500;
+		};
+
+		.review {
+			background-color:$approve-color;
+			border: 1px solid darken($approve-color, .5);
+		  width: 35px;
+		  height: 35px;
+		  border-radius: 50%;
+		  line-height: 35px;
+		  text-align: center;
+		  position: absolute;
+		  right: 5px;
+		  top: 25px;
+		  font-size:25px;
+		  float:right;
+		  color: white;
+		  z-index:500;
+		};
+
+		.upload {
+			background-color:$upload-color;
+			border: 1px solid darken($upload-color, .5);
+		  width: 35px;
+		  height: 35px;
+		  border-radius: 50%;
+		  line-height: 35px;
+		  text-align: center;
+		  position: absolute;
+		  right: 5px;
+		  top: 25px;
+		  font-size:25px;
+		  float:right;
+		  color: white;
+		  z-index:500;
+		};
+
+		.assign_group {
+			background-color:$claim-color;
+			border: 1px solid darken($claim-color, .5);
+		  width: 35px;
+		  height: 35px;
+		  border-radius: 50%;
+		  line-height: 35px;
+		  text-align: center;
+		  position: absolute;
+		  right: 5px;
+		  top: 25px;
+		  font-size:25px;
+		  float:right;
+		  color: white;
+		  z-index:500;
+		};
 }
 .task-bar {
   width:$task-bar-width;
   height: calc(100vh - 50px);
   float:left;
-  background-color: rgba(48,48,48,.65);
+  background-color: rgba(114, 143, 65,.70);
   overflow: scroll;
-  box-shadow: 2px 2px 2px black;
+  box-shadow: 2px 2px 2px rgba(0,0,0,.6);
+
+  .activeTask {
+  	background-color: $active-task-tab;
+  	position: relative;
+  	float:left;
+  	margin-left: 5px;
+  	width: 10px;
+	  height: 75px;
+  	box-shadow: 2px 2px 2px rgba(0,0,0,.6);
+  };
+
+  .notActiveTask {
+  	background-color: $darkest-grey;
+  	position: relative;
+  	float:left;
+  	margin-left: 5px;
+  	width: 10px;
+	  height: 75px;
+  	box-shadow: 2px 2px 2px rgba(0,0,0,.6);
+  };
+
+  
 }
 .task-side {
   background-color: $pai-green;
@@ -82,11 +180,19 @@ html, body {
   height: 100%;
   margin: 10px;
 }
+.artpack-table {
+	position: relative;
+	width: 100%;
+	height:100%;
+
+	tr {
+		text-align: left;
+	};
+}
 #displayForm {
 	width:calc(100vw - #{$task-bar-width});
 	height:calc(100vh - 50px);
 	float:left;
-	background-color: rgba(255,255,255,.3);
 }
 
 //DisplayForm.vue
@@ -102,13 +208,12 @@ html, body {
   margin-left:10px;
   float:left;
 }
-#infoBar {
-  width:100%;
-  height:120px;
-  float:left;
-}
 #workspace {
-  width:calc(100vw - #{$task-bar-width} - #{$activity-width} - 16px);
+	padding-top:6px;
+	padding-right:15px;
+}
+.activity-show #workspace{
+	width:calc(100vw - #{$task-bar-width} - #{$activity-width} - 16px);
   height:calc(100% - 160px);
   float:left;
   position:relative;
@@ -117,6 +222,24 @@ html, body {
   background-size: 40%;*/
   padding-left:16px;
   padding-right:8px;
+}
+.activity-hide #workspace {
+	width:calc(100vw - #{$task-bar-width} - 16px);
+  height:calc(100% - 160px);
+  float:left;
+  position:relative;
+  overflow: scroll;
+  /*background: url("pai-logo-with-tag.png") no-repeat center;
+  background-size: 40%;*/
+  padding-left:16px;
+  padding-right:8px;
+}
+#infoBar {
+  width:100%;
+  height:120px;
+  float:left;
+  padding-bottom:5px;
+  background-color: rgba(255,255,255, .2);
 }
 #workspace img {
 	box-shadow: 2px 2px 2px black;
@@ -272,11 +395,13 @@ html, body {
   position:relative;
   width: 100%;
   height:calc(100vh - 50px);
+	background-color: rgba(255,255,255,.6);
 }
 #taskBar {
   left: 0px;
   width: 240px;
   float:left;
+  background-color: rgba(114, 143, 65, .5);
 }
 #tasksPage {
   width:100%;
@@ -426,15 +551,21 @@ html, body {
 	&:hover {
 		background-color:darken($dark-grey,30%);
 		color: $pai-green;
+		cursor: pointer;
 	};
 }
+#subcat-request:hover .subcat-div {
+	display: block;
+	visibility: visible;
+}
 .menu-link img{
-	width: 44px;
-	height: 44px;
+	width: 38px;
+	height: 38px;
 	border-radius:50%;
 	background-color:red;
 	float: left;
-	margin:3px;
+	margin-top:6px;
+	margin-right:3px;
 }
 .menu-link a {
 	text-decoration: none;
@@ -446,6 +577,11 @@ html, body {
 #routerLink {
 	min-width:100px;
 	max-width:200px;
+	color: $light-grey;
+
+	&:visited {
+		color:$light-grey;
+	};
 }
 /*.subcat-link {
 	width:200px;
@@ -480,6 +616,9 @@ html, body {
 	float:left;
 	text-align:left;
 }*/
+#requestForm {
+	width: 100px;
+}
 #subcat-request {
 	position:relative;
 	padding-left: 20px;
@@ -487,19 +626,19 @@ html, body {
 	float:right;
 	line-height: 50px;
 }
-#subcat-request:hover > #request-dropdown {
-	display: block;
-	visibility: visible;
-	float: bottom;
-	background-color: #95f9a3;
-	z-index: 400;
-}
-#request-dropdown a {
+.subcat-div input {
 	float:left;
-	width: 150px;
-	padding-left: 20px;
-	padding-right:20px;
-	background-color: #95f9a3;
+	width: 100%;
+	font-size: 17px;
+	background-color: #e0e0e0;
+	border:none;
+	color: $pai-green;
+	margin-top: 2px;
+	margin-bottom: 2px;
+
+	&:hover {
+		cursor: pointer;
+	};
 }
 /*.subcat-div a {
 	width: calc(100% - 50px);
@@ -507,9 +646,17 @@ html, body {
 	margin-top: 15px;
 	float:left;
 }*/
-#request-dropdown {
+.subcat-div {
 	display: none;
-	visibility: hidden;
+	visibility: visible;
+	position: absolute;
+	width: 150px;
+	top:50px;
+	left: 0px;
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: #454545;
+	z-index: 400;
 }
 /*.button-div a {
 	width:100%;
@@ -689,27 +836,28 @@ h4 {
 #activityFeed {
 	float: left;
     width:$activity-width - 20px;
-    height:calc(100vh - #{$top-bar-height} - #{$summary-bar-height} - 30px);
+    height:calc(100vh - #{$top-bar-height} - #{$summary-bar-height} - 35px);
     margin-left:10px;
     padding-top:10px;
-    border-radius: 8px;
-    background-color:#545454;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.38);
+    margin-top:30px;
+		background-color:rgba(84, 84, 84,.6);
+}
+#activityFeedToggle {
+	background-color: rgba(84, 84, 84, .6);
+	width:$activity-width - 20px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
 }
 #activityTop {
 	float:left;
 	width:100%;
 	height:50%;
-	background-color:#545454;
 }
 #activityBottom {
 	float:left;
 	width:100%;
 	height:50%;
-	background-image: url("./images/watertower-gb.png");
-    background-size: auto 100%;
-    background-repeat: no-repeat;
-    background-position: bottom 0px right -90px;
 }
 
 //Chat
@@ -727,6 +875,16 @@ h4 {
 	width: 100%;
 	height: calc(100vh - #{$top-bar-height} - #{$summary-bar-height} - 230px);
 	overflow: scroll;
+}
+.minimize {
+	position: absolute;
+	z-index: 500;
+	right: 2px;
+	bottom: 5px;
+
+	&:hover {
+		cursor: pointer;
+	};
 }
 #chatEnter {
 	width: $activity-width;
@@ -867,7 +1025,8 @@ h4 {
 	border-radius: 50%;
 }
 .fileUpload {
-	display: none;
+	display:none;
+	visibility: hidden;
 }
 .formSubmitted {
 	color: #fff;
@@ -1057,11 +1216,23 @@ h4 {
 	&:active {
 		transform: translateY(1px);
 		box-shadow: 1px 1px 1px black;
-	}
+	};
+
+	&:hover {
+		cursor: pointer;
+	};
+}
+#claimTask {
+		background-color: $claim-color;
+		width: 250px;
+}
+#chooseFile {
+	background-color: #fff;
 }
 #submitApproval {
 	width: 250px;
 	margin-top: 3px;
+	background-color: $upload-color;
 }
 #uploadButtonsDiv {
 	width: 100%;

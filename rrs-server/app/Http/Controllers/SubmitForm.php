@@ -99,8 +99,7 @@ class SubmitForm extends Controller
         $req->num_designs = $request->input('design_num');
         $req->description = $request->input('description_box');
         $req->threads = $request->input('threads');
-        $req->save();
-        /*$id = artpack::insertGetId(
+        $artpack_id = artpack::insertGetId(
           [
             'task_id' => $task_id,
             'rep_name' => $req->rep_name,
@@ -110,6 +109,12 @@ class SubmitForm extends Controller
             'customer_name' => $req->customer_name,
             'reference_tapes' => $req->reference_tapes,
             'package_type' => $req->package_type,
+            'package_domestic' => $req->package_domestic,
+            'package_q30' => $req->package_q30,
+            'package_c60' => $req->package_c60,
+            'package_full_custom' => $req->package_full_custom,
+            'package_core_24' => $req->package_core_24,
+            'package_total' => $req->package_total,
             'style_preference' => $req->style_preference,
             'course_location' => $req->course_location,
             'submitted_by' => $req->submitted_by,
@@ -118,10 +123,31 @@ class SubmitForm extends Controller
             'description' => $req->description,
             'threads' => $req->threads
           ]
-        );*/
+        );
+
+        //Get the base-64 string from data
+        $filteredData=substr($_POST['form_image_src'], strpos($_POST['form_image_src'], ",")+1);
+ 
+        //Decode the string
+        $unencodedData=base64_decode($filteredData);
+        //file_put_contents('img.png', $unencodedData);
+
+        $image = base64_decode($filteredData);
+        $image_name= $task_id . 'task.png';
+        $path = public_path() . "/assets/forms/" . $image_name;
+         
+        //Save the image
+        file_put_contents($path, $unencodedData);
+
+        $r = Task::where('id', $task_id)
+            ->update(['form_num' => $artpack_id, 'form_image_url' => $image_name]);
         //$this->getNextTask($id, 'artpacks');
-        redirect('/api/submitChat', $task_id);
-        return redirect('http://localhost:8080/home/');
+        if(!$r){
+
+        }else{
+            return redirect('http://paiworkflows.com/home/');
+        }
+        
         //return redirect()->action('TasksController@taskSubmit', $id, 'artpacks');
         //return $this->taskSubmit($id)
     }
@@ -167,22 +193,7 @@ class SubmitForm extends Controller
           'created_at' => $timestamp
         ]
       );
-      //Get the base-64 string from data
-        $filteredData=substr($_POST['form_image_src'], strpos($_POST['form_image_src'], ",")+1);
- 
-        //Decode the string
-        $unencodedData=base64_decode($filteredData);
-        //file_put_contents('img.png', $unencodedData);
-
-        $image = base64_decode($filteredData);
-        $image_name= $task_id . 'task.png';
-        $path = public_path() . "/assets/forms/" . $image_name;
-         
-        //Save the image
-        file_put_contents($path, $unencodedData);
-
-      Task::where('id', $task_id)
-            ->update(['form_image_url' => $image_name]);
+      
       return $task_id;
     }
 

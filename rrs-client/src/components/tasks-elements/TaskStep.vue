@@ -1,5 +1,5 @@
 <template>
-<div id="taskStep">
+<div v-if="!loading && taskStore.currentTask.app_worker == userStore.authUser.id || taskStore.currentTask.app_group === 'ASI Artpack'" id="taskStep" >
   <div v-if="taskStore.currentTask.status === 'assign'" id="assignTask">
     <h1>Needs Assigned</h1>
     <select class="action_button" v-if="workers.length > 0" v-model="selectedWorker">
@@ -12,9 +12,9 @@
       <i class="fa fa-share"><i>
     </div>
   </div>
-  <div v-if="taskStore.currentTask.status === 'upload'" id="submitForUpload">
+  <div v-else-if="taskStore.currentTask.status === 'upload'" id="submitForUpload">
     <h1>Upload for Review</h1>
-    <form method="POST" action="http://localhost:8000/api/uploadFile" enctype="multipart/form-data">
+    <form method="POST" action="http://server.paiworkflows.com/api/uploadFile" enctype="multipart/form-data">
       <input type="hidden" name="task" :value="taskStore.currentTask" />
       <input type="hidden" name="task_id" :value="taskStore.currentTask.id"></input>
       <input type="hidden" name="workflow_id" :value="taskStore.currentTask.workflow_id" />
@@ -24,25 +24,33 @@
         type="file"
         name="file_upload"
         :value="fileUpload"
+        v-on:change="fileInputLoaded()"
       >
-      <input
-        type="button"
-        name="uploadFile"
-        value="Submit"
-        v-on:click="submitMessage('upload-file', 'The artfile has been uploaded!')"
-      />
-      <input
-        class="fileUpload"
-        type="submit"
-        id="submitUpload"
-        name="submit"
-        value="submit"
-      ></input>
-      <div class="action_button" type="button" name="upload" v-on:click="clickUpload()">Upload
-        <i class="fa fa-cloud-upload"><i>
+      <div id="uploadButtonsDiv">
+        <input
+          class="fileUpload"
+          type="submit"
+          id="submitUploadForm"
+          name="submit"
+          value="submit"
+        ></input>
+        <input
+          type="button"
+          name="uploadFile"
+          class="action_button"
+          v-on:click="submitMessage('upload-file', 'The artfile has been uploaded!')"
+          id="uploadButton"
+          value="Upload"
+          disabled
+        ></input>
+        <div class="action_button" id="chooseFile" type="button" name="submitForApproval" v-on:click="clickUpload()">Choose File 
+          <i class="fa fa-folder"></i>
+        </div>
+      </div>
+      <div v-show="taskStore.currentTask.upload_url !== null" class="action_button" id="submitApproval" type="button" name="upload" v-on:click="submitForApproval()">Submit For Approval 
+        <i class="fa fa-paper-plane"><i>
       </div>
     </form>
-    <input type="button" v-on:click="submitForApproval"></input>
     <!--
     <form action="#">
       <div class="input-file-container">  
@@ -53,7 +61,7 @@
     </form>
     -->
   </div>
-  <div v-if="taskStore.currentTask.status === 'review'" id="submitForApproval">
+  <div v-else-if="taskStore.currentTask.status === 'review'" id="submitForApproval">
     <h1>Review Art</h1>
     <div 
       class="action_button artApproved"
@@ -85,6 +93,15 @@
       >
     </div>
   </div>
+  <div v-else-if="taskStore.currentTask.status === 'assign_group'" id="claimDiv">
+    <h1>This task is waiting to be claimed</h1>
+    <div class="action_button" id="claimTask" type="button" v-on:click="claimTask()">Add To My Queue 
+      <i class="fa fa-plus-square"></i>
+    </div>
+  </div>
+</div>
+<div style="width:100%;height:100%;" v-else>
+  <i class="fa fa-spinner fa-pulse" style="font-size:35px;margin-left:45%;margin-top:10%;color:green;"></i>
 </div>
 </template>
 <script>

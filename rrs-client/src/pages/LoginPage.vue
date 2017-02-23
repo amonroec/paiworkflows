@@ -99,6 +99,12 @@
     },
     components: {
       GSignInButton
+    },
+    created: function () {
+      const userObj = JSON.parse(window.localStorage.getItem('authUser'))
+      if (userObj !== null) {
+        this.$router.push('/home')
+      }
     }
   }
 </script>

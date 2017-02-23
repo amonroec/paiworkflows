@@ -18,6 +18,10 @@ methods.getWorkflows = function () {
   })
 }
 
+methods.toggleSubcat = function (val) {
+  this.subcat = val
+}
+
 methods.workflowClick = function (workflow) {
   /*
   this.$store.dispatch('setCurrentWorkflow', workflow)
@@ -26,7 +30,7 @@ methods.workflowClick = function (workflow) {
     this.$router.push({name: 'artpackForm'})
   }
   */
-  window.location = 'http://localhost:8000/asi.php?workflow_id=' + workflow.id
+  window.location = 'http://server.paiworkflows.com/asi.php?workflow_id=' + workflow.id
 }
 
 module.exports = {
@@ -34,7 +38,8 @@ module.exports = {
   data: function () {
     return {
       name: '',
-      workflows: []
+      workflows: [],
+      subcat: 'no'
     }
   },
   methods: methods,
