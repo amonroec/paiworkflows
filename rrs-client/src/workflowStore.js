@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import {getWorkflows, getWholeWorkflow} from './config'
 const state = {
-  currentWorkflow: {},
+  currentWorkflow: null,
   workflows: {}
 }
 
@@ -16,14 +16,17 @@ const mutations = {
 
 const actions = {
   setCurrentWorkflow: ({commit}, obj) => {
-    const postData = {
-      workflow_id: obj
-    }
-    Vue.http.post(getWholeWorkflow, postData)
-      .then(response => {
-        commit('SET_CURRENT_WORKFLOW', response.data)
-        return 'success'
-      })
+    return new Promise((resolve, reject) => {
+      const postData = {
+        workflow_id: obj
+      }
+      Vue.http.post(getWholeWorkflow, postData)
+        .then(response => {
+          window.localStorage.setItem('currentWorkflow', obj)
+          commit('SET_CURRENT_WORKFLOW', response.data)
+          resolve(response.status)
+        })
+    })
   },
   setWorkflows: ({commit}, obj) => {
     Vue.http.post(getWorkflows)

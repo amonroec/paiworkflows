@@ -2,7 +2,6 @@
   import {mapState} from 'vuex'
   import TopMenu from './components/TopMenu'
   import store from './store.js'
-  import Pusher from 'pusher-js'
   export default {
     components: {
       TopMenu
@@ -10,14 +9,29 @@
     store,
     methods: {
       getTasks () {
+        this.$store.dispatch('setTasksLoading', true)
         const postData = {
-          user_id: this.userStore.authUser.id,
+          user: this.userStore.authUser,
           user_groups: this.userStore.groups
         }
         this.$store.dispatch('setTasksArray', postData)
       },
       getWorkflows () {
         this.$store.dispatch('setWorkflows')
+      },
+      clearStorage () {
+        window.localStorage.removeItem('authUser')
+        window.localStorage.removeItem('currentTask')
+        window.localStorage.removeItem('currentWorkflow')
+      },
+      setSession () {
+        console.log('setting session')
+        if (window.sessionStorage.getItem('SessionName')) {
+          console.log('its set')
+        } else {
+          console.log('it needs set')
+          this.$router.push({name: 'login'})
+        }
       }
     },
     computed: {
@@ -27,6 +41,14 @@
         taskStore: state => state.taskStore
       })
     },
+    watch: {
+      'userStore.authUser': function () {
+        if (this.userStore.authUser !== null) {
+          this.getTasks()
+          this.getWorkflows()
+        }
+      }
+    },
     created () {
       const userObj = JSON.parse(window.localStorage.getItem('authUser'))
       var that = this
@@ -34,32 +56,24 @@
         this.$router.push({name: 'login'})
       } else {
         this.$store.dispatch('isLoading', true)
-        this.$store.dispatch('setUserObject', userObj).then(function () {
-          that.$emit('user-set')
+        this.$store.dispatch('setUserObject', userObj).then(response => {
+          if (response === 'user_set') {
+            that.$emit('user-set')
+          }
         })
         this.$on('user-set', function () {
           that.getTasks()
           that.getWorkflows()
         })
       }
-      this.pusher = new Pusher('9ca3eda463882645ca10', {
-        encrypted: true,
-        cluster: 'mt1'
-      })
-      this.channel = this.pusher.subscribe('task_channel')
-      this.channel.bind('task_change', function (data) {
-        that.$emit('task_has_changed', data)
-      })
-      this.$on('task_has_changed', function (data) {
-        console.log('task has changed', data)
-      })
+      // window.addEventListener('onload', this.setSession())
     }
   }
 </script>
 <template>
 <div id="body">
   <div id="topMenu">
-    <top-menu></top-menu>
+    <top-menu v-if="userStore.authUser !== null"></top-menu>
   </div>
   <div class="routerView">
     <router-view></router-view>

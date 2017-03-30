@@ -10,19 +10,12 @@ import LoginPage from './pages/LoginPage'
 import DashboardPage from './pages/DashboardPage'
 import ProfilePage from './pages/ProfilePage'
 import CalendarPage from './pages/CalendarPage'
-import GroupPage from './pages/GroupPage'
 import WorkflowPage from './pages/WorkflowPage'
-import SettingsPage from './pages/SettingsPage'
-import MessagesPage from './pages/MessagesPage'
 import RequestUser from './pages/RequestUser'
-import EmbroideryForm from './forms/EmbroideryForm'
-import ArtpackForm from './forms/ArtpackForm'
-import SingleTask from './pages/SingleTask'
-import LiveRequests from './components/tasks-elements/LiveRequests'
 import ChatBoard from './components/chat/chat-board/ChatBoard'
 import GSignInButton from 'vue-google-signin-button'
 import Home from './pages/Home'
-import AllTasksPage from './pages/AllTasksPage'
+import SearchPage from './pages/SearchPage'
 import SuccessfulSubmit from './pages/SuccessfulSubmit'
 
 Vue.use(GSignInButton)
@@ -39,18 +32,10 @@ const routes = [
   {path: '/dashboard', component: DashboardPage, name: 'dashboard'},
   {path: '/profile', component: ProfilePage, name: 'profile'},
   {path: '/calendar', component: CalendarPage, name: 'calendar'},
-  {path: '/group', component: GroupPage, name: 'group'},
   {path: '/workflow', component: WorkflowPage, name: 'workflow'},
-  {path: '/settings', component: SettingsPage, name: 'settings'},
-  {path: '/messages', component: MessagesPage, name: 'messages'},
   {path: '/request-user', component: RequestUser, name: 'request-user'},
-  {path: '/request-form/embroidery', component: EmbroideryForm, name: 'embroideryForm'},
-  {path: '/request-form/artpack', component: ArtpackForm, name: 'artpackForm'},
-  {path: '/tasks/single', component: SingleTask, name: 'singletask'},
-  {path: '/tasks/live', component: LiveRequests, name: 'liverequests'},
-  {path: '/home', component: Home, name: 'home'},
-  {path: '/home/:taskId', component: Home, name: 'hometask'},
-  {path: '/tasks/all', component: AllTasksPage, name: 'alltaskspage'},
+  {path: '/home', component: Home, name: 'home', auth: true},
+  {path: '/search', component: SearchPage, name: 'searchpage'},
   {path: '/form/success', component: SuccessfulSubmit, name: 'successfulsubmit'}
 ]
 
@@ -60,7 +45,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to)
   if (to.meta.requiresAuth) {
     const authUser = JSON.parse(window.localStorage.getItem('authUser'))
     if (authUser && authUser.access_token) {

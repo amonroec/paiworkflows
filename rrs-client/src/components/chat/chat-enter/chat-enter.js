@@ -1,6 +1,5 @@
 import {submitChat} from './../../../config.js'
 import {mapState} from 'vuex'
-import Pusher from 'pusher-js'
 
 var methods = {}
 
@@ -14,14 +13,8 @@ methods.getNameId = function () {
   this.message.user_picture = this.userStore.authUser.picture
 }
 
-methods.incomingChat = function (chatMessage) {
-  if (chatMessage.task_id === this.taskStore.currentTask.id) {
-    this.$store.dispatch('setCurrentChat', chatMessage.messages[0].messages)
-  }
-  document.getElementById('chatDisplay').scrollBottom = document.getElementById('chatDisplay').scrollHeight
-}
-
 methods.submitChat = function () {
+  this.loading = true
 /*
   Pusher.logToConsole = true
   this.pusher = new Pusher('9ca3eda463882645ca10', {
@@ -38,18 +31,30 @@ methods.submitChat = function () {
     console.log('incoming chat boyssss')
   })
 */
+  if (parseInt(this.taskStore.currentTask.app_artist) === parseInt(this.userStore.authUser.id)) {
+    this.receiver = this.taskStore.currentTask.csr_assigned
+  } else {
+    if (this.taskStore.currentTask.status === 'assign_group') {
+      this.receiver = this.taskStore.currentTask.csr_assigned
+    } else {
+      this.receiver = this.taskStore.currentTask.app_artist
+    }
+  }
+  console.log(this.receiver)
   var date = new Date()
   var n = date.toLocaleString()
   this.message.date = n
   const postData = {
     task_id: this.taskStore.currentTask.id,
-    message: this.message
+    message: this.message,
+    receiver: parseInt(this.receiver)
   }
-  console.log(postData)
   this.$http.post(submitChat, postData)
     .then(response => {
       if (response.status === 200) {
+        console.log(response)
         this.message.text = ''
+        this.loading = false
       }
     })
 }
@@ -74,9 +79,10 @@ module.exports = {
         date: '',
         action: 'message'
       },
+      receiver: '',
       taskId: '',
       pusher: '',
-      channel: ''
+      loading: false
     }
   },
   methods: methods,
@@ -87,18 +93,6 @@ module.exports = {
     })
   },
   created: function () {
-    this.pusher = new Pusher('9ca3eda463882645ca10', {
-      encrypted: true,
-      cluster: 'mt1'
-    })
-    let that = this
-    this.channel = this.pusher.subscribe('chat_channel')
-    this.channel.bind('chat_entered', function (data) {
-      that.$emit('incoming_chat', data)
-    })
-    this.$on('incoming_chat', function (chatMessage) {
-      this.incomingChat(chatMessage)
-    })
     this.getNameId()
     this.getDate()
   }

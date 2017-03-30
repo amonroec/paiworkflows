@@ -15,11 +15,13 @@
           hosted_domain: 'paifashion.com',
           prompt: 'select_account'
         },
-        profile: ''
+        profile: '',
+        loading: false
       }
     },
     methods: {
       handleLoginFormSubmit () {
+        this.loading = true
         const postData = {
           grant_type: 'password',
           client_id: clientId,
@@ -55,6 +57,8 @@
           })
       },
       onSignInSuccess (googleUser) {
+        window.localStorage.removeItem('currentTask')
+        window.localStorage.removeItem('currentWorkflow')
         this.profile = googleUser
         console.log(this.profile)
         const postData = {
@@ -63,6 +67,7 @@
         }
         this.$http.post(getUserData, postData)
           .then(response => {
+            console.log(response.data)
             if (response.status === 200 && response.data.length !== 0) {
               console.log(response.data)
               const authUser = {}
@@ -75,21 +80,32 @@
               authUser.department = response.data[0].department
               authUser.picture = this.profile['w3'].Paa
               window.localStorage.setItem('authUser', JSON.stringify(authUser))
-              this.$store.dispatch('setUserObject', authUser)
-              this.$router.push('/home')
+              /* window.sessionStorage.SessionName = 'SessionData'
+              window.sessionStorage.getItem('SessionName')
+              window.sessionStorage.setItem('SessionName', authUser) */
+              var that = this
+              this.$store.dispatch('setUserObject', authUser).then(response => {
+                if (response === 'user_set') {
+                  that.$router.push('/home')
+                }
+              })
             } else {
-              console.log('you dont have an account')
+              window.alert('You do not have an account. Please contact acoleman@paifashion.com')
             }
           })
       },
       onSignInError (error) {
-        console.log('OH NOES', error)
+        window.alert('something went wrong. Please contact acoleman@paifashion.com' + error)
       },
       getDomain () {
         var domain = this.login.email
         domain = domain.slice(-14)
         this.googleSignInParams.hosted_domain = domain
         console.log(domain)
+      },
+      setLoading (googleUser) {
+        this.loading = true
+        this.$nextTick(this.onSignInSuccess(googleUser))
       }
     },
     computed: {
@@ -101,17 +117,13 @@
       GSignInButton
     },
     created: function () {
-      const userObj = JSON.parse(window.localStorage.getItem('authUser'))
-      if (userObj !== null) {
-        this.$router.push('/home')
-      }
     }
   }
 </script>
 <template>
 <div id="login-wrapper">
 <center>
-<div class="login-box">
+<div v-if="!loading" class="login-box">
   <div class="login-header">
     <center>
       <img src="./../assets/pai-logo.png" id="pai-logo-login"></img><br />
@@ -122,10 +134,11 @@
     <center>
       <g-signin-button
         :params.sync="googleSignInParams"
-        @success="onSignInSuccess"
+        @success="setLoading"
         @error="onSignInError">
         Sign in with Google
       </g-signin-button>
+      <!--
       <div id="userForgotDiv">
           <router-link
             class="user-link"
@@ -139,9 +152,13 @@
           >
             Request Access
           </router-link>
-        </div>
+      </div>
+      -->
     </center>
   </div>
+</div>
+<div class="isLoading" v-else="loading" style="width: 100%;">
+  <i class="fa fa-spinner fa-pulse" style="font-size:50px;margin-left:45%;margin-top:30%;color:rgba(0,0,0,.5);"></i>
 </div>
 </center>
 </div>

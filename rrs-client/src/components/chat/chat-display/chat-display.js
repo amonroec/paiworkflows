@@ -23,6 +23,12 @@ methods.getChat = function () {
     })
 }
 */
+methods.scrollBottom = function (time) {
+  setTimeout(function () {
+    var div = document.querySelector('#chatDisplay')
+    div.scrollTop = div.scrollHeight
+  }, time)
+}
 module.exports = {
   data: function () {
     return {
@@ -31,8 +37,17 @@ module.exports = {
   methods: methods,
   computed: {
     ...mapState({
-      currentChat: state => state.taskStore.currentChat,
-      userStore: state => state.userStore
+      currentTask: state => state.taskStore.currentTask.messages,
+      userStore: state => state.userStore,
+      loading: state => state.taskStore.loading
     })
+  },
+  watch: {
+    'currentTask': function () {
+      this.scrollBottom(2000)
+    }
+  },
+  created: function () {
+    this.scrollBottom(1000)
   }
 }

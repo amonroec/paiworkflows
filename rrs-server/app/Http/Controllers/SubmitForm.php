@@ -145,7 +145,7 @@ class SubmitForm extends Controller
         if(!$r){
 
         }else{
-            return redirect('http://paiworkflows.com/home/');
+            return redirect('http://localhost:8080/home');
         }
         
         //return redirect()->action('TasksController@taskSubmit', $id, 'artpacks');

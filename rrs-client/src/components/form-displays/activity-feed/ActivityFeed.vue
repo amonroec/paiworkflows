@@ -1,7 +1,5 @@
 <template>
 <div id="activityFeed">
-  <div id="activityTop"></div>
-  <div id="activityBottom"></div>
   <chat-board></chat-board>
 </div>
 </template>

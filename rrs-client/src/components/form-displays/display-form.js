@@ -27,9 +27,20 @@ module.exports = {
     ...mapState({
       taskStore: state => state.taskStore,
       workflowStore: state => state.workflowStore,
-      loading: state => state.taskStore.loading,
+      taskLoading: state => state.taskStore.taskLoading,
       currentTask: state => state.taskStore.currentTask,
       stage: state => state.taskStore.stage
+    })
+  },
+  created: function () {
+    var currentStep = this.taskStore.currentTask.status
+    var i = 0
+    var that = this
+    this.workflowStore.currentWorkflow.forEach(function (workflow) {
+      if (workflow.task_type === currentStep) {
+        that.$store.dispatch('setStage', i)
+      }
+      i++
     })
   }
 }

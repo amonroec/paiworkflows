@@ -22,9 +22,6 @@ module.exports = {
       taskStore: state => state.taskStore
     })
   },
-  created: function () {
-    this.$store.dispatch('setChatMessages')
-  },
   components: {
     ChatEnter,
     ChatDisplay

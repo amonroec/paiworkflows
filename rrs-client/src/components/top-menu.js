@@ -1,4 +1,4 @@
-import {getWorkflows} from './../config'
+import {getWorkflows, apiDomain} from './../config'
 import {mapState} from 'vuex'
 
 var methods = {}
@@ -14,7 +14,6 @@ methods.getWorkflows = function () {
     /*
     this.$store.dispatch('setWorkflows', this.workflows)
     */
-    console.log(this.workflows)
   })
 }
 
@@ -22,15 +21,19 @@ methods.toggleSubcat = function (val) {
   this.subcat = val
 }
 
-methods.workflowClick = function (workflow) {
-  /*
-  this.$store.dispatch('setCurrentWorkflow', workflow)
-  console.log(workflow)
-  if (workflow.form_name === 'artpack') {
-    this.$router.push({name: 'artpackForm'})
-  }
-  */
-  window.location = 'http://server.paiworkflows.com/asi.php?workflow_id=' + workflow.id
+methods.goToHome = function () {
+  this.$store.dispatch('setCurrentTask', '')
+  window.localStorage.removeItem('currentTask')
+  window.localStorage.removeItem('currentWorkflow')
+  this.$router.push({name: 'home'})
+}
+
+methods.logout = function () {
+  window.localStorage.removeItem('authUser')
+  window.localStorage.removeItem('currentTask')
+  window.localStorage.removeItem('currentWorkflow')
+  this.$store.dispatch('logout').then(this.$router.push({name: 'login'}))
+  console.log('logout')
 }
 
 module.exports = {
@@ -39,7 +42,8 @@ module.exports = {
     return {
       name: '',
       workflows: [],
-      subcat: 'no'
+      subcat: 'no',
+      domain: apiDomain
     }
   },
   methods: methods,

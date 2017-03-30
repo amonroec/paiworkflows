@@ -2,23 +2,19 @@ import TaskBar from './../../components/tasks-elements/TaskBar'
 import DisplayForm from './../../components/form-displays/DisplayForm'
 import {mapState} from 'vuex'
 var methods = {}
-
+/*
 methods.taskClicked = function (taskId) {
   this.$store.dispatch('isLoading', true)
   window.localStorage.setItem('currentTask', taskId)
   this.setCurrentTask(taskId)
 }
 
-methods.setCurrentTask = function (taskId) {
-  var tasks = this.taskStore.tasks
+methods.setCurrentTask = function (task) {
+  this.$store.dispatch('isLoading', true)
+  var load = this.$store.dispatch('setCurrentTask', task)
   var that = this
-  tasks.forEach(function (task) {
-    if (parseInt(task.id) === parseInt(taskId)) {
-      var load = that.$store.dispatch('setCurrentTask', task)
-      load.then(function () {
-        that.$emit('taskSet', task)
-      })
-    }
+  load.then(function () {
+    that.$emit('taskSet', task)
   })
 }
 
@@ -39,6 +35,7 @@ methods.setCurrentWorkflow = function (task) {
     }
   })
 }
+*/
 
 module.exports = {
   data: function () {
@@ -54,30 +51,19 @@ module.exports = {
   computed: {
     ...mapState({
       taskStore: state => state.taskStore,
-      loading: state => state.taskStore.loading,
+      taskLoading: state => state.taskStore.taskLoading,
+      tasksLoading: state => state.taskStore.tasksLoading,
       workflowStore: state => state.workflowStore,
       alert: state => state.taskStore.alert
     })
   },
-  watch: {
-    'workflowStore.currentWorkflow': function () {
-      var currentStep = this.taskStore.currentTask.status
-      var workflows = this.workflowStore.currentWorkflow
-      var i = 0
-      var that = this
-      workflows.forEach(function (workflow) {
-        if (workflow.task_type === currentStep) {
-          that.$store.dispatch('setStage', i)
-          that.$store.dispatch('isLoading', false)
-        }
-        i++
-      })
-    }
-  },
   created: function () {
+    var cTask = window.localStorage.getItem('currentTask')
+    var cWorkflow = window.localStorage.getItem('currentWorkflow')
     var that = this
-    this.$on('taskSet', function (task) {
-      that.setCurrentWorkflow(task)
-    })
+    if (cTask !== null) {
+      that.$store.dispatch('setCurrentTask', JSON.parse(cTask))
+      that.$store.dispatch('setCurrentWorkflow', cWorkflow)
+    }
   }
 }

@@ -4,73 +4,27 @@
     <task-step></task-step>
     -->
     <div id="form">
-      <!--<h2>Artpack Number Request</h2>
-      <div class="accountInfo">
-        <div class="formHeader">Account Info</div>
-        <div class="formQuestion">Customer Name</div>
-        <div class="formAnswer">{{taskStore.currentForm.customer_name ? taskStore.currentForm.customer_name : '---'}}</div>
-        <div class="formQuestion">Rep Name</div>
-        <div class="formAnswer">{{taskStore.currentForm.rep_name ? taskStore.currentForm.rep_name : '---'}}</div>
-        <div class="formQuestion">Account Name</div>
-        <div class="formAnswer">{{taskStore.currentForm.account_name ? taskStore.currentForm.account_name : '---'}}</div>
-        <div class="formQuestion">Account Num</div>
-        <div class="formAnswer">{{taskStore.currentForm.account_num ? taskStore.currentForm.account_num : '---'}}</div>
-        <div class="formQuestion">CSR Name</div>
-        <div class="formAnswer">{{taskStore.currentForm.person_requesting ? taskStore.currentForm.persron_requesting : '---'}}</div>
-        <div class="formQuestion">Turn Time</div>
-        <div class="formAnswer">{{taskStore.currentForm.turn_time ? taskStore.currentForm.turn_time : '---'}}</div>
-      </div> 
-      <div class="artpackDetails">
-        <div class="formHeader">Artpack Details</div>
-        <div class="formQuestion">Artpack Name</div>
-        <div class="formAnswer">{{taskStore.currentForm.artpack_name ? taskStore.currentForm.artpack_name : '---'}}</div>
-        <div class="formQuestion">Reference Art</div>
-        <div class="formAnswer">{{taskStore.currentForm.account_name ? taskStore.currentForm.account_name : '---'}}</div>
-        <div class="formQuestion">Package Type</div>
-        <div class="formQuantity">{{taskStore.currentForm.package_domestic ? taskStore.currentForm.package_domestic : '---'}}</div>
-        <div class="formQuantityType">Domestic</div>
-        <div class="formQuantity">{{taskStore.currentForm.package_q30 ? taskStore.currentForm.package_q30 : '---'}}</div>
-        <div class="formQuantityType">Q30</div>
-        <div class="formQuantity">{{taskStore.currentForm.package_c60 ? taskStore.currentForm.package_c60 : '---'}}</div>
-        <div class="formQuantityType">C60</div>
-        <div class="formQuestion"></div>
-        <div class="formQuantity">{{taskStore.currentForm.package_full_custom ? taskStore.currentForm.package_full_custom : '---'}}</div>
-        <div class="formQuantityType">Custom</div>
-        <div class="formQuantity">{{taskStore.currentForm.package_core20 ? taskStore.currentForm.package_core20 : '---'}}</div>
-        <div class="formQuantityType">Core 24</div>
-        <div class="formQuantity">{{taskStore.currentForm.package_total ? taskStore.currentForm.package_total : '---'}}</div>
-        <div class="formQuantityType">Total Designs</div>
-        <div class="formQuestion">Style Preference</div>
-        <div class="formAnswer">{{taskStore.currentForm.style_preference ? taskStore.currentForm.style_preference : '---'}}</div>
-        <div class="formQuestion">Logo Manip.</div>
-        <div class="formAnswer">{{taskStore.currentForm.manipulate_logo ? taskStore.currentForm.manipulate_logo : '---'}}</div>
-        <div class="formQuestion">Comments</div>
-        <div class="formComments">{{taskStore.currentForm.description ? taskStore.currentForm.description : '---'}}</div>
-      </div> 
--->
-      <div v-if="currentTask.form_image_url !== null">
-        <img :src="'http://paiworkflows.com/server/workflows_server/public/assets/forms/' + currentTask.form_image_url" style="width:90%;padding-left:10%;"></img>
+      <div style="position: relative;" v-if="currentTask.form_image_url !== null">
+        <img :src="formDomain + currentTask.form_image_url" style="width:90%;margin-left:5%;"></img>
+        <textarea class="form_description" :value="currentTask.form.description" disabled></textarea>
       </div>
       <div class="uploadsDiv" v-if="currentTask.upload_url !== null">
         <h1>Uploads</h1>
         <div v-for="image in currentTask.upload_url">
-            <img v-show="image.substr(image.length - 3) !== 'pdf'" class="uploaded_file" :src="'http://paiworkflows.com/server/workflows_server/public/' + image" style="width:90%;"></img>
-            <iframe v-show="image.substr(image.length - 3) === 'pdf'" style="width:90%;height:400px;" :src="'http://paiworkflows.com/server/workflows_server/public/' + image"></iframe>
+          <div v-if="image.substr(image.length - 3) !== 'zip'">
+            <img v-show="image.substr(image.length - 3) !== 'pdf'" class="uploaded_file" :src="uploadDomain + image" style="width:90%;" />
+            <iframe v-show="image.substr(image.length - 3) === 'pdf'" style="width:90%;height:400px;" :src="uploadDomain + image"></iframe>
+          </div>
+          <div class="zip_holder" v-else> 
+            <div class="zip" type="button" v-on:click="downloadZip(image)">Download Zip
+              <i class="fa fa-cloud-download"></i>
+            </div>
+            <div v-if="image.lastIndexOf('/') === 14" style="position:relative;width:100%;height:30px;float:left;text-align:center;">{{ image.substring(15) }}</div>
+            <div v-else style="position:relative;float:left;width:100%;height:100%;text-align:center;">{{ image }}</div>
+          </div>
         </div>
+        <a href="" id="downloadZip" style="display:none;"></a>
       </div>
-<!--
-      <div class="image-bar">
-        <a v-for="(image, index) in currentTask.upload_url" href="javascript:void(0)" v-on:click="scrollToFile(index)">
-          <div class="image-link">1</div>
-        </a>
-      </div>
-
-      <div class="artpackFiles">
-        <div class="formHeader">Uploads</div>
-        <div class="formQuestion">Uploaded Files</div>
-        <div class="formUploads"></div>
-      </div>
--->
     </div>
   </div>
 </template>
